@@ -123,3 +123,29 @@ Public Function ShellExecuteCapture(sCommandLine As String, Optional bShowWindow
     Call CloseHandle(lhwndReadPipe)
     Call CloseHandle(lhwndWritePipe)
 End Function
+
+Public Function ShellRun(sCmd As String, Timeout As Long) As String
+
+Dim dStart As String
+Dim sLine As String
+Dim objShell As Object
+Dim objExec As Object
+Dim oOutput As Object
+
+dStart = Now()
+Set objShell = CreateObject("WScript.Shell")
+Set objExec = objShell.Exec(sCmd)
+Set oOutput = objExec.StdOut
+    While Not oOutput.AtEndOfStream
+        sLine = oOutput.ReadLine
+        If sLine <> "" Then ShellRun = ShellRun & sLine & vbCrLf
+        If (Now() >= DateAdd("s", Timeout, dStart)) Then
+           objExec.Terminate
+           ShellRun = "serror"
+           Exit Function
+        End If
+    Wend
+Form1.txtOutputs.Text = Form1.txtOutputs.Text & vbNewLine & ShellRun & vbNewLine
+Form1.txtOutputs.SelStart = Len(Form1.txtOutputs.Text)
+
+End Function

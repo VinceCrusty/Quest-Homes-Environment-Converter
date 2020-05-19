@@ -3,19 +3,19 @@ Begin VB.Form Form1
    BackColor       =   &H0025221F&
    BorderStyle     =   1  'Fest Einfach
    Caption         =   "Enviroment Converter"
-   ClientHeight    =   8925
+   ClientHeight    =   9030
    ClientLeft      =   45
    ClientTop       =   375
    ClientWidth     =   14415
    Icon            =   "Form1.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
-   ScaleHeight     =   8925
+   ScaleHeight     =   9030
    ScaleWidth      =   14415
    StartUpPosition =   3  'Windows-Standard
    Begin VB.Timer Timer2 
       Left            =   11880
-      Top             =   8160
+      Top             =   8400
    End
    Begin VB.PictureBox Boarder1 
       BackColor       =   &H00404040&
@@ -75,22 +75,24 @@ Begin VB.Form Form1
       End
       Begin VB.PictureBox Picture2 
          Appearance      =   0  '2D
+         AutoRedraw      =   -1  'True
          BackColor       =   &H00404040&
          BorderStyle     =   0  'Kein
          ForeColor       =   &H80000008&
          Height          =   375
-         Left            =   120
+         Left            =   110
+         Picture         =   "Form1.frx":838B
          ScaleHeight     =   375
          ScaleWidth      =   375
          TabIndex        =   47
-         Top             =   120
+         Top             =   60
          Width           =   375
       End
       Begin VB.Label Label21 
          BackColor       =   &H00404040&
          Caption         =   "Environment Converter and Builder"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
+            Name            =   "Arial"
             Size            =   12
             Charset         =   0
             Weight          =   700
@@ -100,18 +102,18 @@ Begin VB.Form Form1
          EndProperty
          ForeColor       =   &H00FFFFFF&
          Height          =   375
-         Left            =   480
+         Left            =   520
          TabIndex        =   46
-         Top             =   95
+         Top             =   110
          Width           =   5295
       End
    End
    Begin Projekt1.DropList DropList1 
       Height          =   315
-      Left            =   5640
+      Left            =   5520
       TabIndex        =   21
-      Top             =   2940
-      Width           =   735
+      Top             =   2910
+      Width           =   710
       _ExtentX        =   1296
       _ExtentY        =   556
    End
@@ -122,7 +124,7 @@ Begin VB.Form Form1
       Height          =   2775
       Left            =   240
       OLEDropMode     =   1  'Manuell
-      Picture         =   "Form1.frx":838B
+      Picture         =   "Form1.frx":8BA5
       ScaleHeight     =   2745
       ScaleWidth      =   2850
       TabIndex        =   19
@@ -141,8 +143,8 @@ Begin VB.Form Form1
       CapAlign        =   2
       BackStyle       =   5
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Name            =   "Arial"
+         Size            =   9
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -160,21 +162,22 @@ Begin VB.Form Form1
       cBack           =   4210752
    End
    Begin Projekt1.lvButtons_H Command1 
-      Height          =   1095
+      Height          =   855
       Left            =   240
       TabIndex        =   14
-      Top             =   4560
+      ToolTipText     =   "Start Converter"
+      Top             =   4200
       Width           =   2895
       _ExtentX        =   5106
-      _ExtentY        =   1931
-      Caption         =   "Start"
+      _ExtentY        =   1508
+      Caption         =   "Start Converter"
       CapAlign        =   2
       BackStyle       =   5
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   18
+         Name            =   "Arial"
+         Size            =   14.25
          Charset         =   0
-         Weight          =   400
+         Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
@@ -192,6 +195,15 @@ Begin VB.Form Form1
    Begin VB.Frame Frame2 
       BackColor       =   &H0025221F&
       Caption         =   "Enviroment Builder ( Create Environment with Blender and Build )"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   2055
       Left            =   3480
@@ -199,19 +211,19 @@ Begin VB.Form Form1
       Top             =   4080
       Width           =   7695
       Begin Projekt1.lvButtons_H Command5 
-         Height          =   495
+         Height          =   510
          Left            =   5685
          TabIndex        =   17
          ToolTipText     =   "Creates WinterLodge/ Classic Home and SpaceStation with Audio and the same with silent Audio"
          Top             =   1440
          Width           =   1905
          _ExtentX        =   3360
-         _ExtentY        =   873
+         _ExtentY        =   900
          Caption         =   "Create 6 releases with and without Audio"
          CapAlign        =   2
          BackStyle       =   5
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
+            Name            =   "Arial"
             Size            =   8.25
             Charset         =   0
             Weight          =   400
@@ -230,18 +242,18 @@ Begin VB.Form Form1
          cBack           =   4210752
       End
       Begin Projekt1.lvButtons_H Command4 
-         Height          =   495
+         Height          =   510
          Left            =   5685
          TabIndex        =   16
          Top             =   240
          Width           =   1905
          _ExtentX        =   3360
-         _ExtentY        =   873
+         _ExtentY        =   900
          Caption         =   "Open Build folder"
          CapAlign        =   2
          BackStyle       =   5
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
+            Name            =   "Arial"
             Size            =   8.25
             Charset         =   0
             Weight          =   400
@@ -272,8 +284,8 @@ Begin VB.Form Form1
          CapAlign        =   2
          BackStyle       =   5
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Arial"
+            Size            =   9
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -446,7 +458,7 @@ Begin VB.Form Form1
          Height          =   255
          Left            =   3360
          TabIndex        =   49
-         ToolTipText     =   "Automatically detects when Blender exports new files to .\Build"
+         ToolTipText     =   "Install Build over WiFi"
          Top             =   1200
          Width           =   255
          _ExtentX        =   450
@@ -478,7 +490,7 @@ Begin VB.Form Form1
          Height          =   255
          Left            =   3360
          TabIndex        =   64
-         ToolTipText     =   "Automatically detects when Blender exports new files to .\Build"
+         ToolTipText     =   "Current textures are saved and copied back with every build"
          Top             =   1560
          Width           =   255
          _ExtentX        =   450
@@ -507,19 +519,18 @@ Begin VB.Form Form1
          cBack           =   8421504
       End
       Begin Projekt1.lvButtons_H Command12 
-         Height          =   495
+         Height          =   510
          Left            =   5685
          TabIndex        =   68
-         ToolTipText     =   "Creates WinterLodge/ Classic Home and SpaceStation with Audio and the same with silent Audio"
          Top             =   840
          Width           =   1905
          _ExtentX        =   3360
-         _ExtentY        =   873
+         _ExtentY        =   900
          Caption         =   "    Delete all Files in      Build Folder"
          CapAlign        =   2
          BackStyle       =   5
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
+            Name            =   "Arial"
             Size            =   8.25
             Charset         =   0
             Weight          =   400
@@ -541,7 +552,7 @@ Begin VB.Form Form1
          BackColor       =   &H0025221F&
          Caption         =   "Texture Protection"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
+            Name            =   "Arial"
             Size            =   9.75
             Charset         =   0
             Weight          =   400
@@ -561,7 +572,7 @@ Begin VB.Form Form1
          BackColor       =   &H0025221F&
          Caption         =   "WiFi Install Build"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
+            Name            =   "Arial"
             Size            =   9.75
             Charset         =   0
             Weight          =   400
@@ -581,7 +592,7 @@ Begin VB.Form Form1
          BackColor       =   &H0025221F&
          Caption         =   "SpaceStation"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
+            Name            =   "Arial"
             Size            =   9.75
             Charset         =   0
             Weight          =   400
@@ -600,7 +611,7 @@ Begin VB.Form Form1
          BackColor       =   &H0025221F&
          Caption         =   "Auto Build and Install"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
+            Name            =   "Arial"
             Size            =   9.75
             Charset         =   0
             Weight          =   400
@@ -620,7 +631,7 @@ Begin VB.Form Form1
          BackColor       =   &H0025221F&
          Caption         =   "Auto Install after build"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
+            Name            =   "Arial"
             Size            =   9.75
             Charset         =   0
             Weight          =   400
@@ -640,7 +651,7 @@ Begin VB.Form Form1
          BackColor       =   &H0025221F&
          Caption         =   "ClassicHome"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
+            Name            =   "Arial"
             Size            =   9.75
             Charset         =   0
             Weight          =   400
@@ -659,7 +670,7 @@ Begin VB.Form Form1
          BackColor       =   &H0025221F&
          Caption         =   "WinterLodge"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
+            Name            =   "Arial"
             Size            =   9.75
             Charset         =   0
             Weight          =   400
@@ -678,14 +689,14 @@ Begin VB.Form Form1
    Begin VB.Timer Timer1 
       Interval        =   1000
       Left            =   12480
-      Top             =   8160
+      Top             =   8400
    End
    Begin VB.TextBox txtOutputs 
       Appearance      =   0  '2D
       BackColor       =   &H80000008&
       BorderStyle     =   0  'Kein
       ForeColor       =   &H00FF80FF&
-      Height          =   2415
+      Height          =   2535
       Left            =   240
       Locked          =   -1  'True
       MultiLine       =   -1  'True
@@ -696,18 +707,18 @@ Begin VB.Form Form1
    End
    Begin Projekt1.lvButtons_H lvButtons_H 
       Height          =   315
-      Left            =   5640
+      Left            =   5520
       TabIndex        =   20
-      Top             =   2640
-      Width           =   735
+      Top             =   2610
+      Width           =   710
       _ExtentX        =   1296
       _ExtentY        =   556
       Caption         =   "19"
       CapAlign        =   2
       BackStyle       =   5
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Name            =   "Arial"
+         Size            =   9
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -848,7 +859,7 @@ Begin VB.Form Form1
       Height          =   255
       Left            =   240
       TabIndex        =   34
-      Top             =   3915
+      Top             =   3675
       Width           =   255
       _ExtentX        =   450
       _ExtentY        =   450
@@ -1036,7 +1047,7 @@ Begin VB.Form Form1
       CapAlign        =   2
       BackStyle       =   5
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
+         Name            =   "Arial"
          Size            =   8.25
          Charset         =   0
          Weight          =   700
@@ -1055,10 +1066,10 @@ Begin VB.Form Form1
       cBack           =   4210752
    End
    Begin Projekt1.lvButtons_H Command7 
-      Height          =   520
+      Height          =   525
       Left            =   11880
       TabIndex        =   55
-      Top             =   1440
+      Top             =   1320
       Width           =   2055
       _ExtentX        =   3625
       _ExtentY        =   926
@@ -1066,7 +1077,7 @@ Begin VB.Form Form1
       CapAlign        =   2
       BackStyle       =   5
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
+         Name            =   "Arial"
          Size            =   8.25
          Charset         =   0
          Weight          =   700
@@ -1085,10 +1096,10 @@ Begin VB.Form Form1
       cBack           =   4210752
    End
    Begin Projekt1.lvButtons_H Command8 
-      Height          =   520
+      Height          =   525
       Left            =   11880
       TabIndex        =   56
-      Top             =   3600
+      Top             =   3120
       Width           =   2055
       _ExtentX        =   3625
       _ExtentY        =   926
@@ -1096,7 +1107,7 @@ Begin VB.Form Form1
       CapAlign        =   2
       BackStyle       =   5
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
+         Name            =   "Arial"
          Size            =   8.25
          Charset         =   0
          Weight          =   700
@@ -1118,7 +1129,7 @@ Begin VB.Form Form1
       Height          =   375
       Left            =   13080
       TabIndex        =   57
-      Top             =   8280
+      Top             =   8400
       Width           =   855
       _ExtentX        =   1508
       _ExtentY        =   661
@@ -1126,7 +1137,7 @@ Begin VB.Form Form1
       CapAlign        =   2
       BackStyle       =   5
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
+         Name            =   "Arial"
          Size            =   8.25
          Charset         =   0
          Weight          =   700
@@ -1145,10 +1156,10 @@ Begin VB.Form Form1
       cBack           =   4210752
    End
    Begin Projekt1.lvButtons_H Command10 
-      Height          =   520
+      Height          =   525
       Left            =   11880
       TabIndex        =   58
-      Top             =   2160
+      Top             =   1920
       Width           =   2055
       _ExtentX        =   3625
       _ExtentY        =   926
@@ -1156,7 +1167,7 @@ Begin VB.Form Form1
       CapAlign        =   2
       BackStyle       =   5
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
+         Name            =   "Arial"
          Size            =   8.25
          Charset         =   0
          Weight          =   700
@@ -1175,10 +1186,10 @@ Begin VB.Form Form1
       cBack           =   4210752
    End
    Begin Projekt1.lvButtons_H Command11 
-      Height          =   520
+      Height          =   525
       Left            =   11880
       TabIndex        =   59
-      Top             =   2880
+      Top             =   2520
       Width           =   2055
       _ExtentX        =   3625
       _ExtentY        =   926
@@ -1186,7 +1197,7 @@ Begin VB.Form Form1
       CapAlign        =   2
       BackStyle       =   5
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
+         Name            =   "Arial"
          Size            =   8.25
          Charset         =   0
          Weight          =   700
@@ -1209,7 +1220,7 @@ Begin VB.Form Form1
       Height          =   255
       Left            =   11880
       TabIndex        =   60
-      Top             =   5040
+      Top             =   4440
       Width           =   255
       _ExtentX        =   450
       _ExtentY        =   450
@@ -1239,7 +1250,7 @@ Begin VB.Form Form1
       Height          =   255
       Left            =   11880
       TabIndex        =   63
-      Top             =   5640
+      Top             =   5040
       Width           =   255
       _ExtentX        =   450
       _ExtentY        =   450
@@ -1269,7 +1280,7 @@ Begin VB.Form Form1
       Height          =   255
       Left            =   11880
       TabIndex        =   66
-      Top             =   6240
+      Top             =   5640
       Width           =   255
       _ExtentX        =   450
       _ExtentY        =   450
@@ -1299,7 +1310,7 @@ Begin VB.Form Form1
       Height          =   255
       Left            =   11880
       TabIndex        =   69
-      Top             =   6840
+      Top             =   6240
       Width           =   255
       _ExtentX        =   450
       _ExtentY        =   450
@@ -1329,7 +1340,7 @@ Begin VB.Form Form1
       Height          =   255
       Left            =   11880
       TabIndex        =   71
-      Top             =   7440
+      Top             =   6840
       Width           =   255
       _ExtentX        =   450
       _ExtentY        =   450
@@ -1359,7 +1370,7 @@ Begin VB.Form Form1
       Height          =   525
       Left            =   11880
       TabIndex        =   73
-      Top             =   4320
+      Top             =   3720
       Width           =   2055
       _ExtentX        =   3625
       _ExtentY        =   926
@@ -1367,7 +1378,7 @@ Begin VB.Form Form1
       CapAlign        =   2
       BackStyle       =   5
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
+         Name            =   "Arial"
          Size            =   8.25
          Charset         =   0
          Weight          =   700
@@ -1387,18 +1398,18 @@ Begin VB.Form Form1
    End
    Begin Projekt1.lvButtons_H Command14 
       Height          =   375
-      Left            =   9720
+      Left            =   9360
       TabIndex        =   74
       Top             =   720
-      Width           =   375
+      Width           =   855
       _ExtentX        =   1508
       _ExtentY        =   661
-      Caption         =   "?"
+      Caption         =   "Help"
       CapAlign        =   2
       BackStyle       =   5
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Name            =   "Arial"
+         Size            =   9
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -1415,11 +1426,142 @@ Begin VB.Form Form1
       Value           =   0   'False
       cBack           =   4210752
    End
+   Begin Projekt1.lvButtons_H Check17 
+      Height          =   255
+      Left            =   11880
+      TabIndex        =   77
+      Top             =   7440
+      Width           =   255
+      _ExtentX        =   450
+      _ExtentY        =   450
+      CapAlign        =   2
+      BackStyle       =   5
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      cFore           =   16777215
+      cFHover         =   16777215
+      cFDown          =   4194368
+      cBhover         =   4194368
+      Focus           =   0   'False
+      LockHover       =   1
+      cGradient       =   4210752
+      Mode            =   1
+      Value           =   -1  'True
+      cBack           =   8421504
+   End
+   Begin Projekt1.lvButtons_H Check18 
+      Height          =   255
+      Left            =   11880
+      TabIndex        =   78
+      Top             =   8040
+      Width           =   255
+      _ExtentX        =   450
+      _ExtentY        =   450
+      CapAlign        =   2
+      BackStyle       =   5
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      cFore           =   16777215
+      cFHover         =   16777215
+      cFDown          =   4194368
+      cBhover         =   4194368
+      Focus           =   0   'False
+      LockHover       =   1
+      cGradient       =   4210752
+      Mode            =   1
+      Value           =   -1  'True
+      cBack           =   8421504
+   End
+   Begin Projekt1.lvButtons_H Command15 
+      Height          =   855
+      Left            =   240
+      TabIndex        =   79
+      ToolTipText     =   "Start Converter"
+      Top             =   5280
+      Width           =   2895
+      _ExtentX        =   5106
+      _ExtentY        =   1508
+      Caption         =   "Panorama Builder"
+      CapAlign        =   2
+      BackStyle       =   5
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Arial"
+         Size            =   14.25
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      cFore           =   16777215
+      cFHover         =   16777215
+      cBhover         =   4194368
+      Focus           =   0   'False
+      LockHover       =   1
+      cGradient       =   4210752
+      Mode            =   0
+      Value           =   0   'False
+      cBack           =   4210752
+   End
+   Begin VB.Label Label30 
+      BackColor       =   &H0025221F&
+      Caption         =   "WiFi Auto Connect"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00FFFFFF&
+      Height          =   255
+      Left            =   12240
+      TabIndex        =   76
+      ToolTipText     =   "Automatically connects to the Quest via WiFi when the converter is started"
+      Top             =   8040
+      Width           =   3135
+   End
+   Begin VB.Label Label29 
+      BackColor       =   &H0025221F&
+      Caption         =   "Pack all 6 releases to zip file"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00FFFFFF&
+      Height          =   495
+      Left            =   12240
+      TabIndex        =   75
+      ToolTipText     =   "Untick if you don´t want to zip the releases"
+      Top             =   7320
+      Width           =   1695
+   End
    Begin VB.Label Label28 
       BackColor       =   &H0025221F&
       Caption         =   "Kill ADB Server on Exit"
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1431,15 +1573,15 @@ Begin VB.Form Form1
       Height          =   495
       Left            =   12240
       TabIndex        =   72
-      ToolTipText     =   "Only change the audio file and not the environment"
-      Top             =   7320
+      ToolTipText     =   "Useful if you want to save time and keep the adb connection"
+      Top             =   6720
       Width           =   1695
    End
    Begin VB.Label Label27 
       BackColor       =   &H0025221F&
       Caption         =   "Auto delete Files in ..\Build after Build"
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1451,15 +1593,14 @@ Begin VB.Form Form1
       Height          =   495
       Left            =   12240
       TabIndex        =   70
-      ToolTipText     =   "Only change the audio file and not the environment"
-      Top             =   6720
+      Top             =   6120
       Width           =   1695
    End
    Begin VB.Label Label26 
       BackColor       =   &H0025221F&
       Caption         =   "Delete protected Textures on exit"
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1471,15 +1612,15 @@ Begin VB.Form Form1
       Height          =   495
       Left            =   12240
       TabIndex        =   67
-      ToolTipText     =   "Only change the audio file and not the environment"
-      Top             =   6120
+      ToolTipText     =   "Delete folder with protected textures (only for builder)"
+      Top             =   5520
       Width           =   1695
    End
    Begin VB.Label Label24 
       BackColor       =   &H0025221F&
       Caption         =   "Store Button state"
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1491,15 +1632,15 @@ Begin VB.Form Form1
       Height          =   255
       Left            =   12240
       TabIndex        =   62
-      ToolTipText     =   "Only change the audio file and not the environment"
-      Top             =   5640
+      ToolTipText     =   "Stres the state of all check boxes/Buttons"
+      Top             =   5040
       Width           =   3135
    End
    Begin VB.Label Label23 
       BackColor       =   &H0025221F&
       Caption         =   "Store Window Position on exit"
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1511,15 +1652,14 @@ Begin VB.Form Form1
       Height          =   495
       Left            =   12240
       TabIndex        =   61
-      ToolTipText     =   "Only change the audio file and not the environment"
-      Top             =   4920
+      Top             =   4320
       Width           =   1695
    End
    Begin VB.Label Label20 
       BackColor       =   &H0025221F&
       Caption         =   "SpaceStation"
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1538,7 +1678,7 @@ Begin VB.Form Form1
       BackColor       =   &H0025221F&
       Caption         =   "ClassicHome"
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1557,7 +1697,7 @@ Begin VB.Form Form1
       BackColor       =   &H0025221F&
       Caption         =   "WinterLodge"
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1574,9 +1714,9 @@ Begin VB.Form Form1
    End
    Begin VB.Label Label12 
       BackColor       =   &H0025221F&
-      Caption         =   "Install Environment-APK      after conversion"
+      Caption         =   "Install Environment-APK         after conversion"
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   700
@@ -1588,7 +1728,7 @@ Begin VB.Form Form1
       Height          =   495
       Left            =   660
       TabIndex        =   12
-      Top             =   3810
+      Top             =   3570
       Width           =   2490
    End
    Begin VB.Line Line1 
@@ -1620,7 +1760,7 @@ Begin VB.Form Form1
       BackColor       =   &H0025221F&
       Caption         =   "Encode OGG Audio File (lower filesize)"
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1639,7 +1779,7 @@ Begin VB.Form Form1
    Begin VB.Label Label9 
       BackColor       =   &H00404040&
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1647,6 +1787,7 @@ Begin VB.Form Form1
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+      ForeColor       =   &H00C0C0C0&
       Height          =   255
       Left            =   4560
       TabIndex        =   8
@@ -1656,7 +1797,7 @@ Begin VB.Form Form1
    Begin VB.Label Label8 
       BackColor       =   &H00404040&
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1664,6 +1805,7 @@ Begin VB.Form Form1
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+      ForeColor       =   &H00C0C0C0&
       Height          =   255
       Left            =   4560
       TabIndex        =   7
@@ -1674,7 +1816,7 @@ Begin VB.Form Form1
       BackColor       =   &H0025221F&
       Caption         =   "Audio:"
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1693,7 +1835,7 @@ Begin VB.Form Form1
       BackColor       =   &H0025221F&
       Caption         =   "APK   :"
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1712,7 +1854,7 @@ Begin VB.Form Form1
       BackColor       =   &H0025221F&
       Caption         =   "Replace audio with silent audio file"
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1732,7 +1874,7 @@ Begin VB.Form Form1
       BackColor       =   &H0025221F&
       Caption         =   "Replace audio with default audio file"
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1752,7 +1894,7 @@ Begin VB.Form Form1
       BackColor       =   &H0025221F&
       Caption         =   "Replace only Audio"
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1772,7 +1914,7 @@ Begin VB.Form Form1
       BackColor       =   &H0025221F&
       Caption         =   "Switch WinterLodge/ ClassicHome/ SpaceStation (and audio)"
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1790,9 +1932,9 @@ Begin VB.Form Form1
    End
    Begin VB.Label Label1 
       BackColor       =   &H0025221F&
-      Caption         =   "Decrase volume by                    dB (19 recommned)"
+      Caption         =   "Decrase volume by             dB (19 recommned)"
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1849,10 +1991,33 @@ Option Explicit
 '*Msgbox durch neue Message funktion tauschen
 '*Neuen audio codec Testen ob speed/Pitch auf bei -8db ok ist
 
-'Todo:
+'v1.7.1 fertig:
+'*logo kaputt unter win10
+'Msgbox in timer löschen und Wifi connect grün fertigstellen
+'WiFi connect freeze problem lösen
+'tooltips reparieren
+'tcp einbauen und standart port auf 5555
+'Connect als fehlermeldung (cannot connect to) aufnehmen
+'Wifi Auto connect bei start option
+'ADB WiFi active when adb is running at start
+'New freeze free command window for adb connect
+'default audio file wird silent bei release
+'Create 6 releases without zip them (option)
+'InputBox("Pure APK-Filename tauschen durch neue Box
+'Create 6 releases ende ohne deaktivierung des tools
+'delete gltf before open create
+'Rahmen Form7 anpassen und farben Checkbox anpassen
+'Rahmenposition anpassen
 'Pano Builder mit möglicher Rotation
+'Audio Spiegeln Panobuilder
+'Neuer Font (Arial)
+'Help Button (Form5)
+
+'Todo:
+
+
+'Next Release:
 'JPG compression und png conversion mit modul in autinstall
-'Help Button
 
 Private Type BrowseInfo
     lngHwnd        As Long
@@ -1867,7 +2032,7 @@ End Type
 Private Const BIF_RETURNONLYFSDIRS = 1
 Private Const MAX_PATH = 260
 Private Declare Sub CoTaskMemFree Lib "ole32.dll" (ByVal hMem As Long)
-Private Declare Function lstrcat Lib "kernel32" Alias "lstrcatA" (ByVal lpString1 As String, ByVal lpString2 As String) As Long
+Private Declare Function lstrcat Lib "Kernel32" Alias "lstrcatA" (ByVal lpString1 As String, ByVal lpString2 As String) As Long
 Private Declare Function SHBrowseForFolder Lib "shell32" (lpBI As BrowseInfo) As Long
 Private Declare Function SHGetPathFromIDList Lib "shell32" (ByVal pidList As Long, ByVal lpBuffer As String) As Long
 
@@ -1901,7 +2066,7 @@ Private Const OFN_OVERWRITEPROMPT = &H2
 Private Const OFN_PATHMUSTEXIST = &H800
 Private Declare Function GetSaveFileName Lib "comdlg32.dll" Alias "GetSaveFileNameA" (lpofn As OPENFILENAME) As Long
 
-Private Declare Function PlaySound Lib "winmm.dll" Alias "PlaySoundA" (ByVal lpszName As String, ByVal hModule As Long, ByVal dwFlags As Long) As Long
+Private Declare Function PlaySound Lib "winmm.dll" Alias "PlaySoundA" (ByVal lpszName As String, ByVal hModule As Long, ByVal dwflags As Long) As Long
 
 Private Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hwnd As Long, ByVal lpOperation As String, _
                          ByVal lpFile As String, ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
@@ -1930,11 +2095,8 @@ Attribute Combo1.VB_VarHelpID = -1
 Private snd As Long
 Private ogg As String
 Private pack As String
-Private pataud As String
 Private patapk As String
 Private J As String
-Private u As String
-Private aud As String
 Private java As String
 Private za As Long
 Private qw As Integer
@@ -1944,17 +2106,39 @@ Private fn As String
 Private fsx As Object
 Private oFile As Object
 Private t1 As String
-Private idr2 As String
 Private fin2 As String
 Private s As Long
 Private storedx As Integer
 Private storedy As Integer
 Private dra As Integer
-Private BuildPath As String
 Private tp As Boolean
 Private qip As String
 Private wcon As Boolean
 Private za2 As Long
+Private com3_Self As Boolean
+Private out_text As Boolean
+Private start_adb As Boolean
+Private wifi_auto As Boolean
+
+Private Sub Command15_Click()
+
+On Error Resume Next
+
+If Dir(BuildPath & "\*.*") <> "" Then
+   If Question("Files found in Build-Folder!" & vbNewLine & "Delete Files?") = True Then
+      Kill BuildPath & "\*.*"
+      txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Build folder cleaned!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
+      Beep
+   End If
+End If
+Call Form7.Show(vbModal)
+If start_pano = True Then
+   start_pano = False
+   t1 = ""
+   Call Command3_Click
+End If
+
+End Sub
 
 Private Sub Form_Load()
 
@@ -1965,10 +2149,13 @@ Dim ctrl As Control
 Dim cl As String
 Dim ch As String
 Dim hbc As String
+Dim t2 As String
 
 Form1.Width = 11520
 wcon = False
 za2 = 1
+start_adb = True
+start_pano = False
 Set fsx = CreateObject("Scripting.FileSystemObject")
 If fsx.FolderExists(App.path & "\files") = False Then
    Timer1.Enabled = False
@@ -1999,15 +2186,25 @@ If Dir(App.path & "\files\config.ini") = "" Then
    PutINISetting "Save", "ButtonState", "1", App.path & "\files\config.ini"
    PutINISetting "Save", "TextureDelete", "1", App.path & "\files\config.ini"
    PutINISetting "Save", "AutoClear", "0", App.path & "\files\config.ini"
-   PutINISetting "QuestIP", "Port", "5557", App.path & "\files\config.ini"
+   PutINISetting "QuestIP", "Port", "5555", App.path & "\files\config.ini"
    PutINISetting "Save", "ADBKill", "1", App.path & "\files\config.ini"
+   PutINISetting "Save", "Pack", "1", App.path & "\files\config.ini"
+   PutINISetting "Save", "WiFiAuto", "0", App.path & "\files\config.ini"
 End If
+If GetINISetting("Save", "WiFiAuto", App.path & "\files\config.ini") = "" Then PutINISetting "Save", "WiFiAuto", "0", App.path & "\files\config.ini"
 If GetINISetting("Save", "ADBKill", App.path & "\files\config.ini") = "" Then PutINISetting "Save", "ADBKill", "1", App.path & "\files\config.ini"
-If GetINISetting("QuestIP", "Port", App.path & "\files\config.ini") = "" Then PutINISetting "QuestIP", "Port", "5557", App.path & "\files\config.ini"
-If GetINISetting("Save", "ADBKill", App.path & "\files\config.ini") = "1" Then
-   Check16.Value = True
+If GetINISetting("QuestIP", "Port", App.path & "\files\config.ini") = "" Then PutINISetting "QuestIP", "Port", "5555", App.path & "\files\config.ini"
+If GetINISetting("Save", "Pack", App.path & "\files\config.ini") = "" Then PutINISetting "Save", "Pack", "1", App.path & "\files\config.ini"
+If GetINISetting("Save", "WiFiAuto", App.path & "\files\config.ini") = "1" Then
+   Check18.Value = True
+   wifi_auto = True
 Else
-   Check16.Value = False
+   Check18.Value = False
+End If
+If GetINISetting("Save", "Pack", App.path & "\files\config.ini") = "1" Then
+   Check17.Value = True
+Else
+   Check17.Value = False
 End If
 If GetINISetting("Save", "AutoClear", App.path & "\files\config.ini") = "1" Then
    Check15.Value = True
@@ -2052,7 +2249,7 @@ For Each ctrl In Form1
        ctrl.Enabled = True
     End If
 Next
-Picture2.Picture = Form1.Icon
+'Picture2.Picture = Form1.Icon
 Timer2.Enabled = True
 Timer2.Interval = 200
 Me.BorderStyle = 0
@@ -2086,7 +2283,7 @@ If Dir$(BuildPath & "\*.*") = vbNullString Then
    Label25.Enabled = False
 Else
    qw = 0
-   txtOutputs.Text = txtOutputs.Text & vbNewLine & "Found gltf-model in .\Build" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
+   txtOutputs.Text = txtOutputs.Text & vbNewLine & "Found gltf-model in .\Build" & vbNewLine & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
 End If
 lvButtons_H1.Visible = False
 lvButtons_H2.Visible = False
@@ -2164,20 +2361,24 @@ If GetINISetting("QuestIP", "Adress", App.path & "\files\config.ini") <> "" Then
    End If
 End If
 Message "Connect USB-Cable! " & qip & vbNewLine & "(Wake up Quest from StandBy)"
-txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Try to obtain Quest IP... Please Wait or Exit Application when adb is freezed!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
+txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Try to obtain Quest IP... Please Wait or Exit DOS Window when adb is freezed!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
 Label11.Caption = "Wait!"
 Pause (0.2)
-qip = ShellExecuteCapture("files\adb.exe shell ip route")
+'qip = ShellExecuteCapture("files\adb.exe shell ip route")
+qip = ShellRun("files\adb.exe shell ip route", 6)
 
 conip:
 
 If InStr(1, qip, "src", 0) <> 0 Or ipget = True Then
    If ipget = False Then qip = Trim(Left$(Mid$(qip, InStr(1, qip, "src", 0) + 4, Len(qip)), Len(Mid$(qip, InStr(1, qip, "src", 0) + 4, Len(qip))) - 2))
-   txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Try to connect to Quest with IP: " & qip & "  Please Wait or Exit Application when adb is freezed!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
+   txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Try to connect to Quest with IP: " & qip & "  Please Wait or Exit DOS Window when adb is freezed!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
    Label11.Caption = "Wait!"
    Pause (0.2)
-   erme = ShellExecuteCapture("files\adb.exe connect " & qip & ":" & GetINISetting("QuestIP", "Port", App.path & "\files\config.ini"))
-   If InStr(1, erme, "connect", 0) <> 0 Then
+   erme = ShellRun(App.path & "\files\adb.exe tcpip " & GetINISetting("QuestIP", "Port", App.path & "\files\config.ini"), 4)
+   'erme = ShellExecuteCapture("files\adb.exe tcpip " & GetINISetting("QuestIP", "Port", App.path & "\files\config.ini"))
+   erme = ShellRun(App.path & "\files\adb.exe connect " & qip & ":" & GetINISetting("QuestIP", "Port", App.path & "\files\config.ini"), 5)
+   'erme = ShellExecuteCapture("files\adb.exe connect " & qip & ":" & GetINISetting("QuestIP", "Port", App.path & "\files\config.ini"))
+   If InStr(1, erme, "connected", 0) <> 0 Then
       If ipget = False Then
          Beep
          Message "Connected to " & qip & vbNewLine & "Remove USB-Cable Please!"
@@ -2191,10 +2392,12 @@ If InStr(1, qip, "src", 0) <> 0 Or ipget = True Then
       wcon = True
       Check10.Value = True
       Label11.Caption = "Connected!"
+      Pause 3
       Label22.ForeColor = RGB(130, 255, 130)
    Else
       MessageBeep (16)
-      Message "Can´t Connect!" & vbNewLine & "Quest in Deep-StandBy?"
+      'Message "Can´t Connect!" & vbNewLine & "Quest in Deep-StandBy?"
+      Message "Can´t Connect! Quest in Deep-StandBy?" & vbNewLine & "Maybe try to connect with USB-Cable!", True
       Check10.Value = False
       Label11.Caption = "Error!"
    End If
@@ -2207,15 +2410,6 @@ End If
 
 End Sub
 
-Private Function Message(mesa1 As String)
-
-On Error Resume Next
-
-Form3.Label1.Caption = mesa1
-Call Form3.Show(vbModal)
-
-End Function
-
 Private Sub Check16_Click()
 
 On Error Resume Next
@@ -2224,6 +2418,20 @@ If Check16.Value = True Then
    PutINISetting "Save", "ADBKill", "1", App.path & "\files\config.ini"
 Else
    PutINISetting "Save", "ADBKill", "0", App.path & "\files\config.ini"
+End If
+Pause (0.5)
+Command2_Click
+
+End Sub
+
+Private Sub Check18_Click()
+
+On Error Resume Next
+
+If Check18.Value = True Then
+   PutINISetting "Save", "WiFiAuto", "1", App.path & "\files\config.ini"
+Else
+   PutINISetting "Save", "WiFiAuto", "0", App.path & "\files\config.ini"
 End If
 Pause (0.5)
 Command2_Click
@@ -2362,7 +2570,7 @@ Private Sub DropList1_Closed()
 On Error Resume Next
 
 If Combo1.Text = "" Then Exit Sub
-lvButtons_H.Caption = Combo1.Text
+lvButtons_H.Caption = Combo1.Text: Form7.lvButtons_H.Caption = Combo1.Text
 
 End Sub
 
@@ -2377,7 +2585,7 @@ Dim fin(6) As String
 Dim MyPath As String
 Dim pathstr As String
 
-If Label9.Caption = "" Then
+If Label9.Caption = "" And Check2.Value = False Then
    MessageBeep (16)
    Message "No Audio file!"
    Exit Sub
@@ -2389,7 +2597,7 @@ Do Until MyPath = vbNullString
         End If
     MyPath = Dir
 Loop
-idr2 = InputBox("Pure APK-Filename (without WinterLodge/ClassicHome):", "APK-FIlename", idr2)
+Call Form6.Show(vbModal)
 If create(0, 1) = "0" Then Exit Sub
 fin(1) = fin2
 If create(0, 0) = "0" Then Exit Sub
@@ -2403,31 +2611,51 @@ fin(5) = fin2
 If create(1, 2) = "0" Then Exit Sub
 fin(6) = fin2
 
-sa = save2(idr2 & ".zip", App.path)
-If sa = "" Then GoTo ende
-If LCase(Right$(sa, 3)) <> "zip" Then sa = sa & ".zip"
 
-objDOS.CommandLine = ("files\7za.exe a " & J & sa & J & " " & J & fin(1) & J & " " & J & fin(2) & J & " " & J & fin(3) & J & " " & J & fin(4) & J & " " & J & fin(5) & J & " " & J & fin(6) & J)
-objDOS.ExecuteCommand
-If Dir(fin(1)) <> "" Then Kill fin(1)
-If Dir(fin(2)) <> "" Then Kill fin(2)
-If Dir(fin(3)) <> "" Then Kill fin(3)
-If Dir(fin(4)) <> "" Then Kill fin(4)
-If Dir(fin(5)) <> "" Then Kill fin(5)
-If Dir(fin(6)) <> "" Then Kill fin(6)
+
+If GetINISetting("Save", "Pack", App.path & "\files\config.ini") = "1" Then
+   sa = save2(idr2 & ".zip", App.path)
+   If sa = "" Then GoTo ende
+   If LCase(Right$(sa, 3)) <> "zip" Then sa = sa & ".zip"
+   objDOS.CommandLine = ("files\7za.exe a " & J & sa & J & " " & J & fin(1) & J & " " & J & fin(2) & J & " " & J & fin(3) & J & " " & J & fin(4) & J & " " & J & fin(5) & J & " " & J & fin(6) & J)
+   objDOS.ExecuteCommand
+   If InStrRev(sa, "\") > 0 Then
+      pathstr = Left$(sa, InStrRev(sa, "\"))
+   Else
+      pathstr = ""
+   End If
+    If Dir(fin(1)) <> "" Then Kill fin(1)
+    If Dir(fin(2)) <> "" Then Kill fin(2)
+    If Dir(fin(3)) <> "" Then Kill fin(3)
+    If Dir(fin(4)) <> "" Then Kill fin(4)
+    If Dir(fin(5)) <> "" Then Kill fin(5)
+    If Dir(fin(6)) <> "" Then Kill fin(6)
+Else
+   sa = BrowseForFolder(Me.hwnd, "Select destination Folder" & vbNewLine & "Or choose Cancel for Main App folder")
+   If sa <> "" Then
+      If sa <> App.path Then
+         FileCopy fin(1), sa & "\" & ExtractFile(fin(1)): FileCopy fin(2), sa & "\" & ExtractFile(fin(2)): FileCopy fin(3), sa & "\" & ExtractFile(fin(3))
+         FileCopy fin(4), sa & "\" & ExtractFile(fin(4)): FileCopy fin(5), sa & "\" & ExtractFile(fin(5)): FileCopy fin(6), sa & "\" & ExtractFile(fin(6))
+         If Dir(fin(1)) <> "" Then Kill fin(1)
+         If Dir(fin(2)) <> "" Then Kill fin(2)
+         If Dir(fin(3)) <> "" Then Kill fin(3)
+         If Dir(fin(4)) <> "" Then Kill fin(4)
+         If Dir(fin(5)) <> "" Then Kill fin(5)
+         If Dir(fin(6)) <> "" Then Kill fin(6)
+      End If
+      pathstr = sa
+   Else
+      pathstr = App.path
+   End If
+End If
 txtOutputs.Text = txtOutputs.Text & vbNewLine & "Create Release finished! " & Time & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
 Label11.Caption = "DONE!": Beep
 snd = PlaySound(App.path & "\files\gong.wav", ByVal 0&, &H20000 Or &H1)
-If InStrRev(sa, "\") > 0 Then
-    pathstr = Left$(sa, InStrRev(sa, "\"))
-Else
-    pathstr = ""
-End If
 ShellExecute hwnd, "open", pathstr, vbNullString, vbNullString, 1
-Timer1.Enabled = False
-Command1.Enabled = False
-Command3.Enabled = False
-Command5.Enabled = False
+'Timer1.Enabled = False
+'Command1.Enabled = False
+'Command3.Enabled = False
+'Command5.Enabled = False
 Exit Sub
 
 ende:
@@ -2451,6 +2679,7 @@ If Check1.Value = True Then
 Else
    Combo1.Enabled = False
 End If
+Form7.Check1.Value = Check1.Value
 If Check1.Value = True Then
 
 Else
@@ -2468,21 +2697,21 @@ Check7.Value = False: Check0.Value = False
 
 End Sub
 
-Private Sub Check0_Click()
-
-On Error Resume Next
-
-If Check0.Value = False Then Check0.Value = True: Exit Sub
-Check6.Value = False: Check7.Value = False
-
-End Sub
-
 Private Sub Check7_Click()
 
 On Error Resume Next
 
 If Check7.Value = False Then Check7.Value = True: Exit Sub
 Check6.Value = False: Check0.Value = False
+
+End Sub
+
+Private Sub Check0_Click()
+
+On Error Resume Next
+
+If Check0.Value = False Then Check0.Value = True: Exit Sub
+Check6.Value = False: Check7.Value = False
 
 End Sub
 
@@ -2498,6 +2727,7 @@ Dim idr As String
 Dim an As String
 Dim ie As Boolean
 
+com3_Self = True
 ' apk prüfung build ordner!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ie = False
 J = Chr$(34)
@@ -2519,6 +2749,41 @@ End If
 If Dir$(BuildPath & "\*.zip") <> "" Then
    MessageBeep (16)
    Message "ZIP file found in .\Build, Error!"
+   Exit Sub
+End If
+If Dir$(BuildPath & "\*.mp3") <> "" Then
+   MessageBeep (16)
+   Message "mp3 file found in .\Build, Error!"
+   Exit Sub
+End If
+If Dir$(BuildPath & "\*.ogg") <> "" Then
+   MessageBeep (16)
+   Message "ogg file found in .\Build, Error!"
+   Exit Sub
+End If
+If Dir$(BuildPath & "\*.wav") <> "" Then
+   MessageBeep (16)
+   Message "wav file found in .\Build, Error!"
+   Exit Sub
+End If
+If Dir$(BuildPath & "\*.wma") <> "" Then
+   MessageBeep (16)
+   Message "wma file found in .\Build, Error!"
+   Exit Sub
+End If
+If Dir$(BuildPath & "\*.zip") <> "" Then
+   MessageBeep (16)
+   Message "ZIP file found in .\Build, Error!"
+   Exit Sub
+End If
+If Dir$(BuildPath & "\*.fla") <> "" Then
+   MessageBeep (16)
+   Message "fla file found in .\Build, Error!"
+   Exit Sub
+End If
+If Dir$(BuildPath & "\*.pcm") <> "" Then
+   MessageBeep (16)
+   Message "pcm file found in .\Build, Error!"
    Exit Sub
 End If
 If Dir$(BuildPath & "\*.ovrscene") <> "" Then
@@ -2699,6 +2964,9 @@ If ie = True Then
    MessageBeep (16)
    Label11.Caption = "Error!"
    ie = False
+   If InStr(1, objDOS.ExecuteCommand, "more", vbTextCompare) > 0 Then
+      Message "Error: USB-Cable Connected!" & vbNewLine & "Please Remove USB-Cable!"
+   End If
 Else
    Label11.Caption = "Done!"
    snd = PlaySound(App.path & "\files\gong.wav", ByVal 0&, &H20000 Or &H1)
@@ -2964,16 +3232,25 @@ Private Function Draw_Cross(Optional hover As Boolean, Optional pic As Integer)
 
 On Error Resume Next
 
+Dim clx As String
+
+clx = Boarder1.BackColor
+If Lux(clx) > 120 Then
+   clx = vbBlack
+   Label21.ForeColor = vbBlack
+Else
+   clx = Command2.ForeColor
+End If
 Picture5.DrawWidth = 2
-Picture5.Line (70, 70)-Step(160, 160), Command2.ForeColor, B
+Picture5.Line (70, 70)-Step(160, 160), clx, B
 Picture6.DrawWidth = 2
-Picture6.Line (70, 70)-Step(160, 160), Command2.ForeColor, B
+Picture6.Line (70, 70)-Step(160, 160), clx, B
 If hover = False Then
    Picture3.DrawWidth = 2
-   Picture3.Line (60, 60)-(210, 210), Command2.ForeColor
-   Picture3.Line (210, 60)-(60, 210), Command2.ForeColor
+   Picture3.Line (60, 60)-(210, 210), clx
+   Picture3.Line (210, 60)-(60, 210), clx
    Picture4.DrawWidth = 2
-   Picture4.Line (60, 210)-(230, 210), Command2.ForeColor, B
+   Picture4.Line (60, 210)-(230, 210), clx, B
 Else
    If pic = 3 Then
       Picture3.DrawWidth = 2
@@ -3084,7 +3361,8 @@ Private Sub objDOS_ReceiveOutputs(CommandOutputs As String)
 
 On Error Resume Next
 
-txtOutputs.Text = txtOutputs.Text & CommandOutputs
+If out_text = False Then txtOutputs.Text = txtOutputs.Text & CommandOutputs
+out_text = False
 
 End Sub
 
@@ -3216,6 +3494,7 @@ End If
 Check1.Enabled = True
 Label1.Enabled = True
 Label9.Caption = u
+Form7.Label9.Caption = u
 txtOutputs.Text = txtOutputs.Text & "Added Audio-file: " & aud & vbNewLine & vbNewLine
 txtOutputs.SelStart = Len(txtOutputs.Text)
 pataud = u
@@ -3237,6 +3516,97 @@ Private Sub Timer1_Timer()
 
 On Error Resume Next
 
+Dim t2 As String
+
+If start_adb = True Then
+   start_adb = False
+    If GetINISetting("Save", "ADBKill", App.path & "\files\config.ini") = "1" Then
+       Check16.Value = True
+    Else
+       Check16.Value = False
+       If IsEXERunning("adb.exe") = True Then
+          objDOS.CommandLine = ("files\adb.exe devices")
+          out_text = True
+          qip = objDOS.ExecuteCommand
+          If InStr(1, qip, GetINISetting("QuestIP", "Adress", App.path & "\files\config.ini"), vbTextCompare) > 0 Then
+             Label22.ForeColor = RGB(130, 255, 130)
+             Check10.Value = True
+             adb = 1
+             wcon = True
+             qip = GetINISetting("QuestIP", "Adress", App.path & "\files\config.ini")
+             txtOutputs.Text = txtOutputs.Text & vbNewLine & "Found active ADB-Connection (WiFi): " & qip & ":" & GetINISetting("QuestIP", "Port", App.path & "\files\config.ini") & vbNewLine & vbNewLine
+             txtOutputs.SelStart = Len(txtOutputs.Text)
+          Else
+             qip = GetINISetting("QuestIP", "Adress", App.path & "\files\config.ini")
+             adb = 1
+             txtOutputs.Text = txtOutputs.Text & vbNewLine & "Found active ADB-Connection(USB) " & vbNewLine & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
+          End If
+       End If
+    End If
+End If
+
+If GetINISetting("Save", "WiFiAuto", App.path & "\files\config.ini") = "1" And wifi_auto = True Then
+   wifi_auto = False
+   Call Check10_Click
+End If
+
+If Label11.Caption <> "" Then
+   If Command1.Enabled = False And tp = False Then GoTo cont5
+   za = za + 1
+   If za > 15 Then
+      Label11.Caption = ""
+      za = 0
+      tp = False
+   End If
+End If
+
+cont5:
+
+If wcon = True Then
+   za2 = za2 + 1
+   If za2 > 5 Then
+      za2 = 1
+      If (GetRTTAndHopCount(inet_addr(qip), 0, 20, 200) = 1) = True Then
+         Label22.ForeColor = RGB(130, 255, 130)
+         objDOS.CommandLine = ("files\adb.exe shell settings get global wifi_on")
+         out_text = True
+         t2 = objDOS.ExecuteCommand
+         If t2 = 1 Then
+            Label22.ForeColor = RGB(130, 255, 130)
+         Else
+            Label22.ForeColor = vbWhite
+            Check10.Value = False
+            MessageBeep (16)
+            Message "Error: Lost WiFi Connection!"
+            adb = 0
+            wcon = False
+            objDOS.CommandLine = ("files\adb.exe kill-server")
+            objDOS.ExecuteCommand
+            Exit Sub
+         End If
+         If InStr(1, t1, "more", vbTextCompare) > 0 Then
+            MessageBeep (16)
+            Message "Error: USB-Cable Connected!" & vbNewLine & "Please Remove USB-Cable!"
+            Exit Sub
+         End If
+         'error more than one
+         '1 wenn gut
+         '0 wenn aus
+      Else
+         Label22.ForeColor = vbWhite
+         Check10.Value = False
+         MsgBox qip
+         MessageBeep (16)
+         Message "Error: Lost WiFi Connection/IP!"
+         adb = 0
+         wcon = False
+         objDOS.CommandLine = ("files\adb.exe kill-server")
+         objDOS.ExecuteCommand
+         Exit Sub
+      End If
+   End If
+End If
+
 If Dir$(BuildPath & "\*.*") <> vbNullString Then
     Set fsx = CreateObject("Scripting.FileSystemObject")
     For Each oFile In fsx.GetFolder(BuildPath & "").Files
@@ -3246,15 +3616,18 @@ If Dir$(BuildPath & "\*.*") <> vbNullString Then
         End If
     Next
     If t1 = "" Then t1 = FileDateTime(BuildPath & "\" & fn)
-    If FileDateTime(BuildPath & "\" & fn) <> t1 Then
+    'If FileDateTime(BuildPath & "\" & fn) <> t1 Then
+    If DateDiff("s", t1, FileDateTime(BuildPath & "\" & fn)) > 8 Then
        t1 = FileDateTime(BuildPath & "\" & fn)
        If Check9.Value = True Then
           If Dir$(BuildPath & "\*.glTF") = "" Then
              Exit Sub
           Else
-             Call Command3_Click
+             If com3_Self = True Then Call Command3_Click
           End If
        End If
+    Else
+       t1 = FileDateTime(BuildPath & "\" & fn)
     End If
 End If
 If Dir$(BuildPath & "\*.*") = vbNullString Then
@@ -3299,28 +3672,6 @@ Else
    End If
 End If
 
-If Label11.Caption <> "" Then
-   If Command1.Enabled = False And tp = False Then Exit Sub
-   za = za + 1
-   If za > 15 Then
-      Label11.Caption = ""
-      za = 0
-      tp = False
-   End If
-End If
-
-If wcon = True Then
-   za2 = za2 + 1
-   If za2 > 12 Then
-      za2 = 1
-      If (GetRTTAndHopCount(inet_addr(qip), 0, 20, 200) = 1) = True Then
-         Label22.ForeColor = RGB(130, 255, 130)
-      Else
-         Label22.ForeColor = vbRed
-      End If
-   End If
-End If
-
 End Sub
 
 Private Sub txtOutputs_Change()
@@ -3337,6 +3688,7 @@ On Error Resume Next
 
 If Check2.Value = True Then Check3.Value = False
 If Label8.Caption <> "" Then Command1.Enabled = True
+Form7.Check2.Value = Check2.Value
 
 End Sub
 
@@ -3346,6 +3698,7 @@ On Error Resume Next
 
 If Check3.Value = True Then Check2.Value = False
 If Label8.Caption <> "" Then Command1.Enabled = True
+Form7.Check3.Value = Check3.Value
 
 End Sub
 
@@ -3354,6 +3707,7 @@ Private Sub Check4_Click()
 On Error Resume Next
 
 If Check4.Value = False Then Check1.Value = False
+Form7.Check4.Value = Check4.Value
 
 End Sub
 
@@ -3585,28 +3939,6 @@ End If
 
 End Sub
 
-Private Function ExtractFile(ByVal PathName As String) As String
-
-On Error Resume Next
-
-Dim f As String
-Dim n As Integer
-
-f$ = PathName
-Do
-    n% = InStr(f$, "\")
-    If n% > 0 Then f$ = Right$(f$, Len(f$) - n%)
-Loop While n% > 0
-Do
-    n% = InStr(f$, "/")
-    If n% > 0 Then f$ = Right$(f$, Len(f$) - n%)
-Loop While n% > 0
-
-ExtractFile = f$
-
-End Function
-
-
 Private Function save(filename As String, path As String) As String
 
 On Error Resume Next
@@ -3735,6 +4067,10 @@ If LCase(Right$(Label9.Caption, 3)) = "ogg" Then
       GoTo tell
    End If
 End If
+If fu = 0 And Check2.Value = True Then
+   FileCopy App.path & "\files\default.ogg", App.path & "\files\tmp\_BACKGROUND_LOOP.ogg"
+   GoTo tell
+End If
 If Label9.Caption = "" And Check2.Value = False And Check3.Value = False Then GoTo killer
 If Check1.Value = True Then
    txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Encode Audio File..." & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
@@ -3862,12 +4198,12 @@ Private Sub Pause(Seconds As Single)
 
 On Error Resume Next
 
-Dim Timer1 As Single, Timer2 As Single, currentDate As Date
+Dim Timerx1 As Single, Timerx2 As Single, currentDate As Date
 
 currentDate = Date
-Timer1 = Timer + Seconds
-Timer2 = Timer1 - 86400
-While ((Timer() < Timer1) And (currentDate = Date)) Or ((Timer() < Timer2) And (currentDate + 1 = Date))
+Timerx1 = Timer + Seconds
+Timerx2 = Timerx1 - 86400
+While ((Timer() < Timerx1) And (currentDate = Date)) Or ((Timer() < Timerx2) And (currentDate + 1 = Date))
   DoEvents
 Wend
 
@@ -3973,11 +4309,15 @@ If ap9 = "files\WinterLodge" Then
    If InStr(1, LCase(tu), "classic", 0) <> 0 Then
       tu = Replace(tu, "classichome", "WinterLodge", , , vbTextCompare)
       tu = Replace(tu, "classic home", "WinterLodge", , , vbTextCompare)
+      tu = Replace(tu, "classic_home", "WinterLodge", , , vbTextCompare)
+      tu = Replace(tu, "classic.home", "WinterLodge", , , vbTextCompare)
       GoTo ren_end
    End If
    If InStr(1, LCase(tu), "space", 0) <> 0 Then
       tu = Replace(tu, "spacestation", "WinterLodge", , , vbTextCompare)
       tu = Replace(tu, "space station", "WinterLodge", , , vbTextCompare)
+      tu = Replace(tu, "space_station", "WinterLodge", , , vbTextCompare)
+      tu = Replace(tu, "space.station", "WinterLodge", , , vbTextCompare)
       GoTo ren_end
    End If
 End If
@@ -3985,11 +4325,15 @@ If ap9 = "files\ClassicHome" Then
    If InStr(1, LCase(tu), "winter", 0) <> 0 Then
       tu = Replace(tu, "WinterLodge", "ClassicHome", , , vbTextCompare)
       tu = Replace(tu, "Winter Lodge", "ClassicHome", , , vbTextCompare)
+      tu = Replace(tu, "Winter_Lodge", "ClassicHome", , , vbTextCompare)
+      tu = Replace(tu, "Winter.Lodge", "ClassicHome", , , vbTextCompare)
       GoTo ren_end
    End If
    If InStr(1, LCase(tu), "space", 0) <> 0 Then
       tu = Replace(tu, "spacestation", "ClassicHome", , , vbTextCompare)
       tu = Replace(tu, "space station", "ClassicHome", , , vbTextCompare)
+      tu = Replace(tu, "space_station", "ClassicHome", , , vbTextCompare)
+      tu = Replace(tu, "space.station", "ClassicHome", , , vbTextCompare)
       GoTo ren_end
    End If
 End If
@@ -3997,11 +4341,15 @@ If ap9 = "files\SpaceStation" Then
    If InStr(1, LCase(tu), "winter", 0) <> 0 Then
       tu = Replace(tu, "WinterLodge", "SpaceStation", , , vbTextCompare)
       tu = Replace(tu, "Winter Lodge", "SpaceStation", , , vbTextCompare)
+      tu = Replace(tu, "Winter_Lodge", "SpaceStation", , , vbTextCompare)
+      tu = Replace(tu, "Winter.Lodge", "SpaceStation", , , vbTextCompare)
       GoTo ren_end
    End If
    If InStr(1, LCase(tu), "classic", 0) <> 0 Then
       tu = Replace(tu, "classichome", "SpaceStation", , , vbTextCompare)
       tu = Replace(tu, "classic home", "SpaceStation", , , vbTextCompare)
+      tu = Replace(tu, "classic_home", "SpaceStation", , , vbTextCompare)
+      tu = Replace(tu, "classic.home", "SpaceStation", , , vbTextCompare)
       GoTo ren_end
    End If
 End If
@@ -4067,3 +4415,25 @@ Pause (0.5)
 Command2_Click
 
 End Sub
+
+Private Sub Command14_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+
+On Error Resume Next
+
+Call Form5.Show(vbModal)
+
+End Sub
+
+Private Sub Check17_Click()
+
+If Check17.Value = True Then
+   PutINISetting "Save", "Pack", "1", App.path & "\files\config.ini"
+Else
+   PutINISetting "Save", "Pack", "0", App.path & "\files\config.ini"
+End If
+Pause (0.5)
+Command2_Click
+
+End Sub
+
+
