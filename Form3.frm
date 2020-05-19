@@ -129,6 +129,7 @@ Me.Top = (Form1.Top + (Form1.Height / 2) - (Form3.Height / 2))
 Me.Left = (Form1.Left + (Form1.Width / 2) - (Form3.Width / 2))
 Command4.HoverBackColor = Form1.Command4.HoverBackColor
 Command4.HoverForeColor = Form1.Command4.HoverForeColor
+Command4.ForeColor = Form1.Command4.ForeColor
 
 End Sub
 

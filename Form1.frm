@@ -2120,26 +2120,6 @@ Private out_text As Boolean
 Private start_adb As Boolean
 Private wifi_auto As Boolean
 
-Private Sub Command15_Click()
-
-On Error Resume Next
-
-If Dir(BuildPath & "\*.*") <> "" Then
-   If Question("Files found in Build-Folder!" & vbNewLine & "Delete Files?") = True Then
-      Kill BuildPath & "\*.*"
-      txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Build folder cleaned!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
-      Beep
-   End If
-End If
-Call Form7.Show(vbModal)
-If start_pano = True Then
-   start_pano = False
-   t1 = ""
-   Call Command3_Click
-End If
-
-End Sub
-
 Private Sub Form_Load()
 
 On Error Resume Next
@@ -2152,6 +2132,7 @@ Dim hbc As String
 Dim t2 As String
 
 Form1.Width = 11520
+'Form7.lvButtons_H.Enabled = False
 wcon = False
 za2 = 1
 start_adb = True
@@ -2247,6 +2228,24 @@ For Each ctrl In Form1
        ctrl.CheckDownColor = hbc
        ctrl.Enabled = False
        ctrl.Enabled = True
+       If Lux(hbc) > 120 Then
+          ctrl.HoverForeColor = vbBlack
+       Else
+          ctrl.HoverForeColor = vbWhite
+       End If
+    End If
+Next
+For Each ctrl In Form7
+    If ctrl.HoverBackColor <> "" Then
+       ctrl.HoverBackColor = hbc
+       ctrl.CheckDownColor = hbc
+       ctrl.Enabled = False
+       ctrl.Enabled = True
+       If Lux(hbc) > 120 Then
+          ctrl.HoverForeColor = vbBlack
+       Else
+          ctrl.HoverForeColor = vbWhite
+       End If
     End If
 Next
 'Picture2.Picture = Form1.Icon
@@ -2291,7 +2290,7 @@ lvButtons_H3.Visible = False
 Label18.Visible = False
 Label19.Visible = False
 Label20.Visible = False
-Combo1.Enabled = False
+'Combo1.Enabled = False
 Check1.Enabled = False
 Label1.Enabled = False
 Option2.Value = True
@@ -2309,6 +2308,26 @@ Else
       Message " Error, Java not found! " & vbNewLine & " Please Install Java or use Portable Java Converter Version"
       End
    End If
+End If
+
+End Sub
+
+Private Sub Command15_Click()
+
+On Error Resume Next
+
+If Dir(BuildPath & "\*.*") <> "" Then
+   If Question("Files found in Build-Folder!" & vbNewLine & "Delete Files?") = True Then
+      Kill BuildPath & "\*.*"
+      txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Build folder cleaned!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
+      Beep
+   End If
+End If
+Call Form7.Show(vbModal)
+If start_pano = True Then
+   start_pano = False
+   t1 = ""
+   Call Command3_Click
 End If
 
 End Sub
@@ -2673,11 +2692,12 @@ Private Sub Check1_Click()
 On Error Resume Next
 
 If Check1.Value = True Then
-   Combo1.Enabled = True
-   lvButtons_H.Enabled = True
+   'Combo1.Enabled = True
+   lvButtons_H.Enabled = True: Form7.lvButtons_H.Enabled = True
    If Check4.Enabled = True Then Check4.Value = True
 Else
-   Combo1.Enabled = False
+   'Combo1.Enabled = False
+   lvButtons_H.Enabled = False: Form7.lvButtons_H.Enabled = False
 End If
 Form7.Check1.Value = Check1.Value
 If Check1.Value = True Then
@@ -3069,20 +3089,40 @@ For Each ctrl In Form1
        ctrl.Enabled = False
        ctrl.Enabled = True
        ctrl.Enabled = col1
+       If Lux(cl) > 120 Then
+          ctrl.HoverForeColor = vbBlack
+       Else
+          ctrl.HoverForeColor = vbWhite
+       End If
+    End If
+Next
+For Each ctrl In Form7
+    If ctrl.HoverBackColor <> "" Then
+       ctrl.HoverBackColor = cl
+       ctrl.CheckDownColor = cl
+       col1 = ctrl.Enabled
+       ctrl.Enabled = False
+       ctrl.Enabled = True
+       ctrl.Enabled = col1
+       If Lux(cl) > 120 Then
+          ctrl.HoverForeColor = vbBlack
+       Else
+          ctrl.HoverForeColor = vbWhite
+       End If
     End If
 Next
 'Command1.Enabled = col1
-If Lux(cl) > 120 Then
-   Command1.HoverForeColor = vbBlack: Command2.HoverForeColor = vbBlack: Command3.HoverForeColor = vbBlack
-   Command4.HoverForeColor = vbBlack: Command5.HoverForeColor = vbBlack: Command6.HoverForeColor = vbBlack
-   Command7.HoverForeColor = vbBlack: Command8.HoverForeColor = vbBlack: Command9.HoverForeColor = vbBlack
-   Command10.HoverForeColor = vbBlack: Command11.HoverForeColor = vbBlack
-Else
-   Command1.HoverForeColor = vbWhite: Command2.HoverForeColor = vbWhite: Command3.HoverForeColor = vbWhite
-   Command4.HoverForeColor = vbWhite: Command5.HoverForeColor = vbWhite: Command6.HoverForeColor = vbWhite
-   Command7.HoverForeColor = vbWhite: Command8.HoverForeColor = vbWhite: Command9.HoverForeColor = vbWhite
-   Command10.HoverForeColor = vbWhite: Command11.HoverForeColor = vbWhite
-End If
+'If Lux(cl) > 120 Then
+'   Command1.HoverForeColor = vbBlack: Command2.HoverForeColor = vbBlack: Command3.HoverForeColor = vbBlack
+'   Command4.HoverForeColor = vbBlack: Command5.HoverForeColor = vbBlack: Command6.HoverForeColor = vbBlack
+'   Command7.HoverForeColor = vbBlack: Command8.HoverForeColor = vbBlack: Command9.HoverForeColor = vbBlack
+'   Command10.HoverForeColor = vbBlack: Command11.HoverForeColor = vbBlack
+'Else
+'   Command1.HoverForeColor = vbWhite: Command2.HoverForeColor = vbWhite: Command3.HoverForeColor = vbWhite
+'   Command4.HoverForeColor = vbWhite: Command5.HoverForeColor = vbWhite: Command6.HoverForeColor = vbWhite
+'   Command7.HoverForeColor = vbWhite: Command8.HoverForeColor = vbWhite: Command9.HoverForeColor = vbWhite
+'   Command10.HoverForeColor = vbWhite: Command11.HoverForeColor = vbWhite
+'End If
 Command2_Click
 Me.Refresh
 
@@ -3488,27 +3528,27 @@ Else
 End If
 aud = pat
 If k = "ogg" Then
-   Check4.Enabled = True
-   Label10.Enabled = True
+   Check4.Enabled = True: Form7.Check4.Enabled = True
+   Label10.Enabled = True: Form7.Label10.Enabled = True
 End If
-Check1.Enabled = True
-Label1.Enabled = True
+Check1.Enabled = True: Form7.Check1.Enabled = True
+Label1.Enabled = True: Form7.Label1.Enabled = True
 Label9.Caption = u
 Form7.Label9.Caption = u
 txtOutputs.Text = txtOutputs.Text & "Added Audio-file: " & aud & vbNewLine & vbNewLine
 txtOutputs.SelStart = Len(txtOutputs.Text)
 pataud = u
-Check4.Enabled = False
-Label10.Enabled = False
+Check4.Enabled = False: Form7.Check4.Enabled = False
+Label10.Enabled = False: Form7.Label10.Enabled = False
 If k = "ogg" Then
-   Check4.Enabled = True
-   Label10.Enabled = True
+   Check4.Enabled = True: Form7.Check4.Enabled = True
+   Label10.Enabled = True: Form7.Label10.Enabled = True
 End If
 If patapk <> "" Then Command1.Enabled = True
-Check2.Enabled = False
-Label4.Enabled = False
-Check3.Enabled = False
-Label5.Enabled = False
+Check2.Enabled = False: Form7.Check2.Enabled = False
+Label4.Enabled = False: Form7.Label4.Enabled = False
+Check3.Enabled = False: Form7.Check3.Enabled = False
+Label5.Enabled = False: Form7.Label5.Enabled = False
 
 End Sub
 
@@ -3686,7 +3726,7 @@ Private Sub Check2_Click()
 
 On Error Resume Next
 
-If Check2.Value = True Then Check3.Value = False
+If Check2.Value = True Then Check3.Value = False: Form7.Check3.Value = False
 If Label8.Caption <> "" Then Command1.Enabled = True
 Form7.Check2.Value = Check2.Value
 
@@ -3696,7 +3736,7 @@ Private Sub Check3_Click()
 
 On Error Resume Next
 
-If Check3.Value = True Then Check2.Value = False
+If Check3.Value = True Then Check2.Value = False: Form7.Check2.Value = False
 If Label8.Caption <> "" Then Command1.Enabled = True
 Form7.Check3.Value = Check3.Value
 

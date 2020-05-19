@@ -646,6 +646,7 @@ Private sva As Integer
 Private pat As String
 Private vp As Integer
 
+
 Private Sub Form_Load()
 
 On Error Resume Next
@@ -655,7 +656,6 @@ Dim i As Long
 Set Combo5 = DropList1.Combo
 For i = 1 To 64
 Set Combo5 = DropList1.Combo
-lvButtons_H.Enabled = False
 Combo5.AddItem (i / 2)
 Next i
 rota(1) = "0.4998510181903839,0.49992236495018005,0.5001489520072937,0.5000776052474976"
@@ -715,17 +715,22 @@ lvButtons_H1.Value = Form1.Check6.Value: lvButtons_H2.Value = Form1.Check7.Value
 Check1.Value = Form1.Check1.Value: Check2.Value = Form1.Check2.Value: Check3.Value = Form1.Check3.Value: Check4.Value = Form1.Check4.Value
 Check1.Enabled = Form1.Check1.Enabled: Check2.Enabled = Form1.Check2.Enabled: Check3.Enabled = Form1.Check3.Enabled: Check4.Enabled = Form1.Check4.Enabled
 Label1.Enabled = Form1.Label1.Enabled: Label4.Enabled = Form1.Label4.Enabled: Label5.Enabled = Form1.Label5.Enabled: Label10.Enabled = Form1.Label10.Enabled:
+lvButtons_H5.CheckDownColor = Form1.Command4.HoverBackColor: lvButtons_H5.HoverBackColor = Form1.Command4.HoverBackColor
+lvButtons_H.CheckDownColor = Form1.Command4.HoverBackColor: lvButtons_H.HoverBackColor = Form1.Command4.HoverBackColor
+lvButtons_H.Enabled = Form1.lvButtons_H.Enabled
 
 End Sub
 
 Private Sub Check1_Click()
 
 If Check1.Value = True Then
-   Combo5.Enabled = True ': Form1.Combo1.Enabled = True
+   'Combo5.Enabled = True ': Form1.Combo1.Enabled = True
    lvButtons_H.Enabled = True: Form1.lvButtons_H.Enabled = True
    If Check4.Enabled = True Then Check4.Value = True: Form1.Check4.Value = True
 Else
-   Combo5.Enabled = False ': Form1.Combo1.Enabled = False
+   'Combo5.Enabled = False ': Form1.Combo1.Enabled = False
+   Form1.Check4.Enabled = False
+   lvButtons_H.Enabled = False: Form1.lvButtons_H.Enabled = False
 End If
 Form1.Check1.Value = Check1.Value
 
