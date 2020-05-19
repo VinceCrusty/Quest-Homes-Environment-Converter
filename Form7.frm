@@ -284,6 +284,7 @@ Begin VB.Form Form7
       cGradient       =   4210752
       Mode            =   1
       Value           =   -1  'True
+      Enabled         =   0   'False
       cBack           =   8421504
    End
    Begin Projekt1.lvButtons_H Check2 
@@ -313,7 +314,7 @@ Begin VB.Form Form7
       LockHover       =   1
       cGradient       =   4210752
       Mode            =   1
-      Value           =   -1  'True
+      Value           =   0   'False
       cBack           =   8421504
    End
    Begin Projekt1.lvButtons_H Check3 
@@ -343,7 +344,7 @@ Begin VB.Form Form7
       LockHover       =   1
       cGradient       =   4210752
       Mode            =   1
-      Value           =   -1  'True
+      Value           =   0   'False
       cBack           =   8421504
    End
    Begin Projekt1.lvButtons_H lvButtons_H 
@@ -374,6 +375,7 @@ Begin VB.Form Form7
       cGradient       =   4210752
       Mode            =   0
       Value           =   0   'False
+      Enabled         =   0   'False
       cBack           =   4210752
    End
    Begin Projekt1.DropList DropList1 
@@ -413,6 +415,7 @@ Begin VB.Form Form7
       cGradient       =   4210752
       Mode            =   1
       Value           =   -1  'True
+      Enabled         =   0   'False
       cBack           =   8421504
    End
    Begin VB.Label Label10 
@@ -1006,8 +1009,8 @@ Private Sub lvButtons_H4_Click()
 On Error Resume Next
 
 Form1.Check8.Value = lvButtons_H4.Value
-Form1.Check6.Value = lvButtons_H1.Value
-Form1.Check7.Value = lvButtons_H2.Value
-Form1.Check0.Value = lvButtons_H3.Value
+'Form1.Check6.Value = lvButtons_H1.Value
+'Form1.Check7.Value = lvButtons_H2.Value
+'Form1.Check0.Value = lvButtons_H3.Value
 
 End Sub

@@ -2130,6 +2130,7 @@ Dim cl As String
 Dim ch As String
 Dim hbc As String
 Dim t2 As String
+Dim bt As Boolean
 
 Form1.Width = 11520
 'Form7.lvButtons_H.Enabled = False
@@ -2226,8 +2227,10 @@ For Each ctrl In Form1
     If ctrl.HoverBackColor <> "" Then
        ctrl.HoverBackColor = hbc
        ctrl.CheckDownColor = hbc
+       bt = ctrl.Enabled
        ctrl.Enabled = False
        ctrl.Enabled = True
+       ctrl.Enabled = bt
        If Lux(hbc) > 120 Then
           ctrl.HoverForeColor = vbBlack
        Else
@@ -2239,8 +2242,10 @@ For Each ctrl In Form7
     If ctrl.HoverBackColor <> "" Then
        ctrl.HoverBackColor = hbc
        ctrl.CheckDownColor = hbc
+       bt = ctrl.Enabled
        ctrl.Enabled = False
        ctrl.Enabled = True
+       ctrl.Enabled = bt
        If Lux(hbc) > 120 Then
           ctrl.HoverForeColor = vbBlack
        Else
@@ -2248,6 +2253,9 @@ For Each ctrl In Form7
        End If
     End If
 Next
+Form7.Check4.Enabled = False
+Form7.Check1.Enabled = False
+Form7.lvButtons_H.Enabled = False
 'Picture2.Picture = Form1.Icon
 Timer2.Enabled = True
 Timer2.Interval = 200
@@ -2281,6 +2289,8 @@ If Dir$(BuildPath & "\*.*") = vbNullString Then
    Label22.Enabled = False
    Label25.Enabled = False
 Else
+   Check10.Enabled = True
+   Check13.Enabled = True
    qw = 0
    txtOutputs.Text = txtOutputs.Text & vbNewLine & "Found gltf-model in .\Build" & vbNewLine & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
 End If
@@ -2329,6 +2339,12 @@ If start_pano = True Then
    t1 = ""
    Call Command3_Click
 End If
+
+End Sub
+
+Private Sub Check8_Click()
+
+Form7.lvButtons_H4.Value = Check8.Value
 
 End Sub
 
@@ -2712,8 +2728,10 @@ Private Sub Check6_Click()
 
 On Error Resume Next
 
-If Check6.Value = False Then Check6.Value = True: Exit Sub
+If Check6.Value = False Then Check6.Value = True: Form7.lvButtons_H1.Value = True: Exit Sub
 Check7.Value = False: Check0.Value = False
+Form7.lvButtons_H2.Value = False: Form7.lvButtons_H3.Value = False
+Form7.lvButtons_H1.Value = True
 
 End Sub
 
@@ -2721,8 +2739,10 @@ Private Sub Check7_Click()
 
 On Error Resume Next
 
-If Check7.Value = False Then Check7.Value = True: Exit Sub
+If Check7.Value = False Then Check7.Value = True: Form7.lvButtons_H2.Value = True: Exit Sub
 Check6.Value = False: Check0.Value = False
+Form7.lvButtons_H1.Value = False: Form7.lvButtons_H3.Value = False
+Form7.lvButtons_H2.Value = True
 
 End Sub
 
@@ -2730,8 +2750,10 @@ Private Sub Check0_Click()
 
 On Error Resume Next
 
-If Check0.Value = False Then Check0.Value = True: Exit Sub
+If Check0.Value = False Then Check0.Value = True: Form7.lvButtons_H3.Value = True: Exit Sub
 Check6.Value = False: Check7.Value = False
+Form7.lvButtons_H1.Value = False: Form7.lvButtons_H2.Value = False
+Form7.lvButtons_H3.Value = True
 
 End Sub
 
