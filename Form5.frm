@@ -1,38 +1,38 @@
 VERSION 5.00
-Begin VB.Form Form3 
+Begin VB.Form Form5 
    AutoRedraw      =   -1  'True
    BackColor       =   &H0025221F&
    BorderStyle     =   0  'Kein
-   Caption         =   "Form3"
-   ClientHeight    =   2250
+   Caption         =   "Form5"
+   ClientHeight    =   10650
    ClientLeft      =   0
    ClientTop       =   0
-   ClientWidth     =   6870
+   ClientWidth     =   14445
    ClipControls    =   0   'False
-   LinkTopic       =   "Form3"
+   LinkTopic       =   "Form5"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   2250
-   ScaleWidth      =   6870
+   ScaleHeight     =   10650
+   ScaleWidth      =   14445
    ShowInTaskbar   =   0   'False
    StartUpPosition =   3  'Windows-Standard
    Begin VB.PictureBox Picture4 
       BackColor       =   &H00404040&
-      Height          =   2205
-      Left            =   6840
-      ScaleHeight     =   2205
+      Height          =   11805
+      Left            =   14400
+      ScaleHeight     =   11805
       ScaleWidth      =   45
-      TabIndex        =   5
+      TabIndex        =   4
       Top             =   0
-      Width           =   50
+      Width           =   45
    End
    Begin VB.PictureBox Picture3 
       BackColor       =   &H00404040&
-      Height          =   2205
+      Height          =   11085
       Left            =   0
-      ScaleHeight     =   2205
+      ScaleHeight     =   11085
       ScaleWidth      =   45
-      TabIndex        =   4
+      TabIndex        =   3
       Top             =   0
       Width           =   50
    End
@@ -41,30 +41,30 @@ Begin VB.Form Form3
       Height          =   50
       Left            =   0
       ScaleHeight     =   45
-      ScaleWidth      =   6975
-      TabIndex        =   3
-      Top             =   2200
-      Width           =   6975
+      ScaleWidth      =   17175
+      TabIndex        =   2
+      Top             =   10605
+      Width           =   17175
    End
    Begin VB.PictureBox Picture1 
       BackColor       =   &H00404040&
       Height          =   50
       Left            =   0
       ScaleHeight     =   45
-      ScaleWidth      =   6975
-      TabIndex        =   2
+      ScaleWidth      =   17535
+      TabIndex        =   1
       Top             =   0
-      Width           =   6975
+      Width           =   17535
    End
    Begin Projekt1.lvButtons_H Command4 
-      Height          =   615
-      Left            =   2640
-      TabIndex        =   0
-      Top             =   1440
+      Height          =   495
+      Left            =   6240
+      TabIndex        =   5
+      Top             =   9840
       Width           =   1545
       _ExtentX        =   2725
-      _ExtentY        =   1085
-      Caption         =   "OK"
+      _ExtentY        =   873
+      Caption         =   "Exit"
       CapAlign        =   2
       BackStyle       =   5
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -87,12 +87,12 @@ Begin VB.Form Form3
       cBack           =   4210752
    End
    Begin VB.Label Label1 
-      Alignment       =   2  'Zentriert
       Appearance      =   0  '2D
       BackColor       =   &H0025221F&
+      Caption         =   $"Form5.frx":0000
       BeginProperty Font 
          Name            =   "Arial"
-         Size            =   18
+         Size            =   12
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -100,14 +100,14 @@ Begin VB.Form Form3
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00E0E0E0&
-      Height          =   975
+      Height          =   10215
       Left            =   240
-      TabIndex        =   1
-      Top             =   360
-      Width           =   6375
+      TabIndex        =   0
+      Top             =   240
+      Width           =   14055
    End
 End
-Attribute VB_Name = "Form3"
+Attribute VB_Name = "Form5"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
@@ -125,8 +125,8 @@ Private Sub Form_Load()
 
 On Error Resume Next
 
-Me.Top = (Form1.Top + (Form1.Height / 2) - (Form3.Height / 2))
-Me.Left = (Form1.Left + (Form1.Width / 2) - (Form3.Width / 2))
+'Me.Top = (Form1.Top + (Form1.Height / 2) - (Form3.Height / 2))
+'Me.Left = (Form1.Left + (Form1.Width / 2) - (Form3.Width / 2))
 Command4.HoverBackColor = Form1.Command4.HoverBackColor
 Command4.HoverForeColor = Form1.Command4.HoverForeColor
 
