@@ -9,6 +9,13 @@ Public pataud As String
 Public u As String
 Public aud As String
 
+Public use_pic As String
+Public rota(40) As String
+Public gltf1 As String
+Public gltf2 As String
+Public sva As Integer
+Public vp As Integer
+
 '------------------------------------------------------------------
 
 Public Declare Function MessageBeep Lib "user32" (ByVal wType As Long) As Long

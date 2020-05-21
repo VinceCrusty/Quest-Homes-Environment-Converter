@@ -16,6 +16,7 @@ Form=Form5.frm
 Form=Form6.frm
 Form=Form7.frm
 Form=Form8.frm
+Form=Form9.frm
 Module=ShellExec; ShellExec.bas
 Module=ExeRunning; ExeRunning.bas
 IconForm="Form1"

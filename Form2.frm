@@ -26,7 +26,7 @@ Begin VB.Form Form2
       Width           =   3975
    End
    Begin VB.Label Label1 
-      Caption         =   "(c) Vince Crusty 2020 for Quest Homes Discord"
+      Caption         =   "© Vince Crusty 2020 for Quest Homes Discord"
       BeginProperty Font 
          Name            =   "Arial"
          Size            =   12

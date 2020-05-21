@@ -640,14 +640,10 @@ Option Explicit
 Private WithEvents Combo5 As ComboBox
 Attribute Combo5.VB_VarHelpID = -1
 
-Private rota(40) As String
-Private gltf1 As String
-Private gltf2 As String
 Private storedx As Integer
 Private storedy As Integer
-Private sva As Integer
 Private pat As String
-Private vp As Integer
+
 
 
 Private Sub Form_Load()
@@ -825,6 +821,7 @@ If k = "png" Or k = "jpg" Or k = "peg" Then
       Message "Image aspect ratio wrong, will be distorted in Quest! Aspect Ratio have to be 2:1", True
    End If
    LoadPicture2 pat, Picture5
+   use_pic = pat
    Picture5.DrawWidth = 2
    Picture5.Line (4030, 0)-(4030, 5000), vbGreen
 Else
@@ -881,7 +878,7 @@ On Error Resume Next
 Form1.txtOutputs.Text = Form1.txtOutputs.Text & vbNewLine & "Building Panorama Files" & vbNewLine & vbNewLine
 Form1.txtOutputs.SelStart = Len(Form1.txtOutputs.Text)
 FileCopy App.path & "\files\pano.bin", BuildPath & "\pano.bin"
-FileCopy pat, BuildPath & "\pano.jpg"
+FileCopy use_pic, BuildPath & "\pano.jpg"
 If vp < 1 Then vp = 1
 If vp > 24 Then vp = 24
 If Dir(BuildPath & "\pano.gltf") <> "" Then Kill BuildPath & "\pano.gltf"
@@ -1000,6 +997,8 @@ On Error Resume Next
 
 If lvButtons_H3.Value = False Then lvButtons_H3.Value = True: Exit Sub
 lvButtons_H1.Value = False: lvButtons_H2.Value = False
+Form1.Check6.Value = lvButtons_H1.Value
+Form1.Check7.Value = lvButtons_H2.Value
 Form1.Check0.Value = lvButtons_H3.Value
 
 End Sub

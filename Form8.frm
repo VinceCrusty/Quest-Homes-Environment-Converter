@@ -7,13 +7,13 @@ Begin VB.Form Form8
    ClientHeight    =   2250
    ClientLeft      =   0
    ClientTop       =   0
-   ClientWidth     =   6870
+   ClientWidth     =   6885
    ClipControls    =   0   'False
    LinkTopic       =   "Form8"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   2250
-   ScaleWidth      =   6870
+   ScaleWidth      =   6885
    ShowInTaskbar   =   0   'False
    StartUpPosition =   3  'Windows-Standard
    Begin VB.PictureBox Picture4 

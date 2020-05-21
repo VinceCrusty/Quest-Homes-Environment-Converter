@@ -15,7 +15,7 @@ Option Explicit
 
 'The CreatePipe function creates an anonymous pipe,
 'and returns handles to the read and write ends of the pipe.
-Private Declare Function CreatePipe Lib "kernel32" ( _
+Private Declare Function CreatePipe Lib "Kernel32" ( _
     phReadPipe As Long, _
     phWritePipe As Long, _
     lpPipeAttributes As Any, _
@@ -23,7 +23,7 @@ Private Declare Function CreatePipe Lib "kernel32" ( _
 
 'Used to read the the pipe filled by the process create
 'with the CretaProcessA function
-Private Declare Function ReadFile Lib "kernel32" ( _
+Private Declare Function ReadFile Lib "Kernel32" ( _
     ByVal hFile As Long, _
     ByVal lpBuffer As String, _
     ByVal nNumberOfBytesToRead As Long, _
@@ -50,7 +50,7 @@ Private Type STARTUPINFO
     dwXCountChars As Long
     dwYCountChars As Long
     dwFillAttribute As Long
-    dwFlags As Long
+    dwflags As Long
     wShowWindow As Integer
     cbReserved2 As Integer
     lpReserved2 As Long
@@ -69,7 +69,7 @@ End Type
 
 'This function launch the the commend and return the relative process
 'into the PRECESS_INFORMATION structure
-Private Declare Function CreateProcessA Lib "kernel32" ( _
+Private Declare Function CreateProcessA Lib "Kernel32" ( _
     ByVal lpApplicationName As Long, _
     ByVal lpCommandLine As String, _
     lpProcessAttributes As SECURITY_ATTRIBUTES, _
@@ -82,7 +82,7 @@ Private Declare Function CreateProcessA Lib "kernel32" ( _
     lpProcessInformation As PROCESS_INFORMATION) As Long
 
 'Close opened handle
-Private Declare Function CloseHandle Lib "kernel32" ( _
+Private Declare Function CloseHandle Lib "Kernel32" ( _
     ByVal hHandle As Long) As Long
 
 'Consts for the above functions
@@ -152,7 +152,7 @@ Public Function ExecuteCommand(Optional CommandLine As String) As String
     
     'Launch the command line application
     start.cb = Len(start)
-    start.dwFlags = STARTF_USESTDHANDLES Or STARTF_USESHOWWINDOW
+    start.dwflags = STARTF_USESTDHANDLES Or STARTF_USESHOWWINDOW
     'set the StdOutput and the StdError output to the same Write Pipe handle
     start.hStdOutput = hWritePipe
     start.hStdError = hWritePipe
@@ -162,6 +162,8 @@ Public Function ExecuteCommand(Optional CommandLine As String) As String
         
     If ret <> 1 Then
         'if the command is not found ....
+        Form1.txtOutputs.Text = Form1.txtOutputs.Text & vbNewLine & "Command Error: " & vbNewLine & mCommand & vbNewLine & vbNewLine
+        Form1.txtOutputs.SelStart = Len(Form1.txtOutputs.Text)
         MsgBox " File or command not found" & vbNewLine & mCommand, vbCritical
         Exit Function
     End If

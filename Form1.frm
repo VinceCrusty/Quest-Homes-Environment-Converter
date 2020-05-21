@@ -81,7 +81,7 @@ Begin VB.Form Form1
          ForeColor       =   &H80000008&
          Height          =   375
          Left            =   110
-         Picture         =   "Form1.frx":838B
+         Picture         =   "Form1.frx":1AC21
          ScaleHeight     =   375
          ScaleWidth      =   375
          TabIndex        =   47
@@ -124,7 +124,7 @@ Begin VB.Form Form1
       Height          =   2775
       Left            =   240
       OLEDropMode     =   1  'Manuell
-      Picture         =   "Form1.frx":8BA5
+      Picture         =   "Form1.frx":1B43B
       ScaleHeight     =   2745
       ScaleWidth      =   2850
       TabIndex        =   19
@@ -2018,6 +2018,7 @@ Option Explicit
 
 'Next Release:
 'JPG compression und png conversion mit modul in autinstall
+'default audio je nach typ wählen (SpaceStation hat kein Fireplace sound)
 
 Private Type BrowseInfo
     lngHwnd        As Long
@@ -2318,6 +2319,10 @@ Else
       Message " Error, Java not found! " & vbNewLine & " Please Install Java or use Portable Java Converter Version"
       End
    End If
+End If
+If GetINISetting("Save", "Splash", App.path & "\files\config.ini") = "" Then
+   PutINISetting "Save", "Splash", "1", App.path & "\files\config.ini"
+   Call Form9.Show(vbModal)
 End If
 
 End Sub
@@ -3188,7 +3193,8 @@ Private Sub Command9_Click()
 
 On Error Resume Next
 
-Call Form2.Show(vbModal)
+Call Form9.Show(vbModal)
+Command2_Click
 
 End Sub
 
@@ -4482,7 +4488,14 @@ Private Sub Command14_MouseDown(Button As Integer, Shift As Integer, x As Single
 
 On Error Resume Next
 
-Call Form5.Show(vbModal)
+Dim r As Long
+
+'Call Form5.Show
+If Question("Yes = Open tutorial in Browser" & vbNewLine & "No = Open with Adobe Reader", True) = True Then
+   r = ShellExecute(0, "open", "https://documentcloud.adobe.com/link/track?uri=urn:aaid:scds:US:378deebf-9e73-4100-bdb1-40b816baef58", 0, 0, 1)
+Else
+   r = ShellExecute(0, "open", App.path & "\EnviromentConverterBuilder_HowTo.pdf", 0, 0, 1)
+End If
 
 End Sub
 
