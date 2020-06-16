@@ -1,9 +1,9 @@
 Attribute VB_Name = "ShellExec"
 Option Explicit
 
-Private Declare Function CreatePipe Lib "kernel32" (phReadPipe As Long, phWritePipe As Long, lpPipeAttributes As Any, ByVal nSize As Long) As Long
-Private Declare Function ReadFile Lib "kernel32" (ByVal hFile As Long, ByVal lpBuffer As String, ByVal nNumberOfBytesToRead As Long, lpNumberOfBytesRead As Long, ByVal lpOverlapped As Any) As Long
-Private Declare Function GetNamedPipeInfo Lib "kernel32" (ByVal hNamedPipe As Long, lType As Long, lLenOutBuf As Long, lLenInBuf As Long, lMaxInstances As Long) As Long
+Private Declare Function CreatePipe Lib "Kernel32" (phReadPipe As Long, phWritePipe As Long, lpPipeAttributes As Any, ByVal nSize As Long) As Long
+Private Declare Function ReadFile Lib "Kernel32" (ByVal hFile As Long, ByVal lpBuffer As String, ByVal nNumberOfBytesToRead As Long, lpNumberOfBytesRead As Long, ByVal lpOverlapped As Any) As Long
+Private Declare Function GetNamedPipeInfo Lib "Kernel32" (ByVal hNamedPipe As Long, lType As Long, lLenOutBuf As Long, lLenInBuf As Long, lMaxInstances As Long) As Long
    
 Private Type SECURITY_ATTRIBUTES
     nLength As Long
@@ -23,7 +23,7 @@ Private Type STARTUPINFO
     dwXCountChars As Long
     dwYCountChars As Long
     dwFillAttribute As Long
-    dwFlags As Long
+    dwflags As Long
     wShowWindow As Integer
     cbReserved2 As Integer
     lpReserved2 As Long
@@ -39,9 +39,9 @@ Private Type PROCESS_INFORMATION
     dwThreadID As Long
 End Type
 
-Private Declare Function WaitForSingleObject Lib "kernel32" (ByVal hHandle As Long, ByVal dwMilliseconds As Long) As Long
-Private Declare Function CreateProcessA Lib "kernel32" (ByVal lpApplicationName As Long, ByVal lpCommandLine As String, lpProcessAttributes As Any, lpThreadAttributes As Any, ByVal bInheritHandles As Long, ByVal dwCreationFlags As Long, ByVal lpEnvironment As Long, ByVal lpCurrentDirectory As Long, lpStartupInfo As Any, lpProcessInformation As Any) As Long
-Private Declare Function CloseHandle Lib "kernel32" (ByVal hObject As Long) As Long
+Private Declare Function WaitForSingleObject Lib "Kernel32" (ByVal hHandle As Long, ByVal dwMilliseconds As Long) As Long
+Private Declare Function CreateProcessA Lib "Kernel32" (ByVal lpApplicationName As Long, ByVal lpCommandLine As String, lpProcessAttributes As Any, lpThreadAttributes As Any, ByVal bInheritHandles As Long, ByVal dwCreationFlags As Long, ByVal lpEnvironment As Long, ByVal lpCurrentDirectory As Long, lpStartupInfo As Any, lpProcessInformation As Any) As Long
+Private Declare Function CloseHandle Lib "Kernel32" (ByVal hObject As Long) As Long
 
 
 'Purpose     :  Synchronously runs a DOS command line and returns the captured screen output.
@@ -82,7 +82,7 @@ Public Function ShellExecuteCapture(sCommandLine As String, Optional bShowWindow
     End If
 
     tStartupInf.cb = Len(tStartupInf)
-    tStartupInf.dwFlags = STARTF_USESTDHANDLES Or STARTF_USESHOWWINDOW
+    tStartupInf.dwflags = STARTF_USESTDHANDLES Or STARTF_USESHOWWINDOW
     tStartupInf.hStdOutput = lhwndWritePipe
     If bShowWindow Then
         'Show the DOS window

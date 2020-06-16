@@ -3,19 +3,19 @@ Begin VB.Form Form1
    BackColor       =   &H0025221F&
    BorderStyle     =   1  'Fest Einfach
    Caption         =   "Enviroment Converter"
-   ClientHeight    =   9030
+   ClientHeight    =   9405
    ClientLeft      =   45
    ClientTop       =   375
    ClientWidth     =   14415
    Icon            =   "Form1.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
-   ScaleHeight     =   9030
+   ScaleHeight     =   9405
    ScaleWidth      =   14415
    StartUpPosition =   3  'Windows-Standard
    Begin VB.Timer Timer2 
       Left            =   11880
-      Top             =   8400
+      Top             =   8760
    End
    Begin VB.PictureBox Boarder1 
       BackColor       =   &H00404040&
@@ -112,8 +112,8 @@ Begin VB.Form Form1
       Height          =   315
       Left            =   5520
       TabIndex        =   21
-      Top             =   2910
-      Width           =   710
+      Top             =   3270
+      Width           =   705
       _ExtentX        =   1296
       _ExtentY        =   556
    End
@@ -166,7 +166,7 @@ Begin VB.Form Form1
       Left            =   240
       TabIndex        =   14
       ToolTipText     =   "Start Converter"
-      Top             =   4200
+      Top             =   4560
       Width           =   2895
       _ExtentX        =   5106
       _ExtentY        =   1508
@@ -208,7 +208,7 @@ Begin VB.Form Form1
       Height          =   2055
       Left            =   3480
       TabIndex        =   13
-      Top             =   4080
+      Top             =   4440
       Width           =   7695
       Begin Projekt1.lvButtons_H Command5 
          Height          =   510
@@ -689,7 +689,7 @@ Begin VB.Form Form1
    Begin VB.Timer Timer1 
       Interval        =   1000
       Left            =   12480
-      Top             =   8400
+      Top             =   8760
    End
    Begin VB.TextBox txtOutputs 
       Appearance      =   0  '2D
@@ -702,15 +702,15 @@ Begin VB.Form Form1
       MultiLine       =   -1  'True
       ScrollBars      =   2  'Vertikal
       TabIndex        =   10
-      Top             =   6285
+      Top             =   6645
       Width           =   10935
    End
    Begin Projekt1.lvButtons_H lvButtons_H 
       Height          =   315
       Left            =   5520
       TabIndex        =   20
-      Top             =   2610
-      Width           =   710
+      Top             =   2970
+      Width           =   705
       _ExtentX        =   1296
       _ExtentY        =   556
       Caption         =   "19"
@@ -739,7 +739,7 @@ Begin VB.Form Form1
       Height          =   255
       Left            =   3480
       TabIndex        =   22
-      Top             =   3000
+      Top             =   3360
       Width           =   255
       _ExtentX        =   450
       _ExtentY        =   450
@@ -769,7 +769,7 @@ Begin VB.Form Form1
       Height          =   255
       Left            =   3480
       TabIndex        =   23
-      Top             =   3360
+      Top             =   3720
       Width           =   255
       _ExtentX        =   450
       _ExtentY        =   450
@@ -799,7 +799,7 @@ Begin VB.Form Form1
       Height          =   255
       Left            =   3480
       TabIndex        =   24
-      Top             =   2640
+      Top             =   3000
       Width           =   255
       _ExtentX        =   450
       _ExtentY        =   450
@@ -829,7 +829,7 @@ Begin VB.Form Form1
       Height          =   255
       Left            =   3480
       TabIndex        =   25
-      Top             =   3720
+      Top             =   4080
       Width           =   255
       _ExtentX        =   450
       _ExtentY        =   450
@@ -1129,7 +1129,7 @@ Begin VB.Form Form1
       Height          =   375
       Left            =   13080
       TabIndex        =   57
-      Top             =   8400
+      Top             =   8760
       Width           =   855
       _ExtentX        =   1508
       _ExtentY        =   661
@@ -1220,7 +1220,7 @@ Begin VB.Form Form1
       Height          =   255
       Left            =   11880
       TabIndex        =   60
-      Top             =   4440
+      Top             =   4800
       Width           =   255
       _ExtentX        =   450
       _ExtentY        =   450
@@ -1250,7 +1250,7 @@ Begin VB.Form Form1
       Height          =   255
       Left            =   11880
       TabIndex        =   63
-      Top             =   5040
+      Top             =   5400
       Width           =   255
       _ExtentX        =   450
       _ExtentY        =   450
@@ -1280,7 +1280,7 @@ Begin VB.Form Form1
       Height          =   255
       Left            =   11880
       TabIndex        =   66
-      Top             =   5640
+      Top             =   6000
       Width           =   255
       _ExtentX        =   450
       _ExtentY        =   450
@@ -1310,7 +1310,7 @@ Begin VB.Form Form1
       Height          =   255
       Left            =   11880
       TabIndex        =   69
-      Top             =   6240
+      Top             =   6600
       Width           =   255
       _ExtentX        =   450
       _ExtentY        =   450
@@ -1340,7 +1340,7 @@ Begin VB.Form Form1
       Height          =   255
       Left            =   11880
       TabIndex        =   71
-      Top             =   6840
+      Top             =   7200
       Width           =   255
       _ExtentX        =   450
       _ExtentY        =   450
@@ -1430,7 +1430,7 @@ Begin VB.Form Form1
       Height          =   255
       Left            =   11880
       TabIndex        =   77
-      Top             =   7440
+      Top             =   7800
       Width           =   255
       _ExtentX        =   450
       _ExtentY        =   450
@@ -1460,7 +1460,7 @@ Begin VB.Form Form1
       Height          =   255
       Left            =   11880
       TabIndex        =   78
-      Top             =   8040
+      Top             =   8400
       Width           =   255
       _ExtentX        =   450
       _ExtentY        =   450
@@ -1491,7 +1491,7 @@ Begin VB.Form Form1
       Left            =   240
       TabIndex        =   79
       ToolTipText     =   "Start Converter"
-      Top             =   5280
+      Top             =   5640
       Width           =   2895
       _ExtentX        =   5106
       _ExtentY        =   1508
@@ -1517,6 +1517,99 @@ Begin VB.Form Form1
       Value           =   0   'False
       cBack           =   4210752
    End
+   Begin Projekt1.lvButtons_H lvButtons_H4 
+      Height          =   375
+      Left            =   6840
+      TabIndex        =   80
+      Top             =   1680
+      Width           =   2055
+      _ExtentX        =   3625
+      _ExtentY        =   661
+      Caption         =   "Unpack APK to ..\Build"
+      CapAlign        =   2
+      BackStyle       =   5
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Arial"
+         Size            =   9
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      cFore           =   16777215
+      cFHover         =   16777215
+      cBhover         =   4194368
+      Focus           =   0   'False
+      LockHover       =   1
+      cGradient       =   4210752
+      Mode            =   0
+      Value           =   0   'False
+      Enabled         =   0   'False
+      cBack           =   4210752
+   End
+   Begin Projekt1.lvButtons_H lvButtons_H5 
+      Height          =   375
+      Left            =   4560
+      TabIndex        =   81
+      Top             =   1680
+      Width           =   2055
+      _ExtentX        =   3625
+      _ExtentY        =   661
+      Caption         =   "Only install APK"
+      CapAlign        =   2
+      BackStyle       =   5
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Arial"
+         Size            =   9
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      cFore           =   16777215
+      cFHover         =   16777215
+      cBhover         =   4194368
+      Focus           =   0   'False
+      LockHover       =   1
+      cGradient       =   4210752
+      Mode            =   0
+      Value           =   0   'False
+      Enabled         =   0   'False
+      cBack           =   4210752
+   End
+   Begin Projekt1.lvButtons_H lvButtons_H6 
+      Height          =   375
+      Left            =   9120
+      TabIndex        =   82
+      Top             =   1680
+      Width           =   2055
+      _ExtentX        =   3625
+      _ExtentY        =   661
+      Caption         =   "Uninstall APK"
+      CapAlign        =   2
+      BackStyle       =   5
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Arial"
+         Size            =   9
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      cFore           =   16777215
+      cFHover         =   16777215
+      cBhover         =   4194368
+      Focus           =   0   'False
+      LockHover       =   1
+      cGradient       =   4210752
+      Mode            =   0
+      Value           =   0   'False
+      Enabled         =   0   'False
+      cBack           =   4210752
+   End
    Begin VB.Label Label30 
       BackColor       =   &H0025221F&
       Caption         =   "WiFi Auto Connect"
@@ -1534,7 +1627,7 @@ Begin VB.Form Form1
       Left            =   12240
       TabIndex        =   76
       ToolTipText     =   "Automatically connects to the Quest via WiFi when the converter is started"
-      Top             =   8040
+      Top             =   8400
       Width           =   3135
    End
    Begin VB.Label Label29 
@@ -1554,7 +1647,7 @@ Begin VB.Form Form1
       Left            =   12240
       TabIndex        =   75
       ToolTipText     =   "Untick if you don´t want to zip the releases"
-      Top             =   7320
+      Top             =   7680
       Width           =   1695
    End
    Begin VB.Label Label28 
@@ -1574,7 +1667,7 @@ Begin VB.Form Form1
       Left            =   12240
       TabIndex        =   72
       ToolTipText     =   "Useful if you want to save time and keep the adb connection"
-      Top             =   6720
+      Top             =   7080
       Width           =   1695
    End
    Begin VB.Label Label27 
@@ -1593,7 +1686,7 @@ Begin VB.Form Form1
       Height          =   495
       Left            =   12240
       TabIndex        =   70
-      Top             =   6120
+      Top             =   6480
       Width           =   1695
    End
    Begin VB.Label Label26 
@@ -1613,7 +1706,7 @@ Begin VB.Form Form1
       Left            =   12240
       TabIndex        =   67
       ToolTipText     =   "Delete folder with protected textures (only for builder)"
-      Top             =   5520
+      Top             =   5880
       Width           =   1695
    End
    Begin VB.Label Label24 
@@ -1633,7 +1726,7 @@ Begin VB.Form Form1
       Left            =   12240
       TabIndex        =   62
       ToolTipText     =   "Stres the state of all check boxes/Buttons"
-      Top             =   5040
+      Top             =   5400
       Width           =   3135
    End
    Begin VB.Label Label23 
@@ -1652,7 +1745,7 @@ Begin VB.Form Form1
       Height          =   495
       Left            =   12240
       TabIndex        =   61
-      Top             =   4320
+      Top             =   4680
       Width           =   1695
    End
    Begin VB.Label Label20 
@@ -1735,8 +1828,8 @@ Begin VB.Form Form1
       BorderColor     =   &H8000000C&
       X1              =   3480
       X2              =   11160
-      Y1              =   2160
-      Y2              =   2160
+      Y1              =   2520
+      Y2              =   2520
    End
    Begin VB.Label Label11 
       BackColor       =   &H0025221F&
@@ -1750,10 +1843,10 @@ Begin VB.Form Form1
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H0000C000&
-      Height          =   775
+      Height          =   780
       Left            =   7560
       TabIndex        =   11
-      Top             =   3120
+      Top             =   3480
       Width           =   3495
    End
    Begin VB.Label Label10 
@@ -1773,7 +1866,7 @@ Begin VB.Form Form1
       Left            =   3840
       TabIndex        =   9
       ToolTipText     =   "Re-encode the OGG-audio file to reduce the size"
-      Top             =   3720
+      Top             =   4080
       Width           =   3615
    End
    Begin VB.Label Label9 
@@ -1791,7 +1884,7 @@ Begin VB.Form Form1
       Height          =   255
       Left            =   4560
       TabIndex        =   8
-      Top             =   2280
+      Top             =   2640
       Width           =   6615
    End
    Begin VB.Label Label8 
@@ -1809,7 +1902,7 @@ Begin VB.Form Form1
       Height          =   255
       Left            =   4560
       TabIndex        =   7
-      Top             =   1800
+      Top             =   2160
       Width           =   6615
    End
    Begin VB.Label Label7 
@@ -1828,7 +1921,7 @@ Begin VB.Form Form1
       Height          =   255
       Left            =   3840
       TabIndex        =   6
-      Top             =   2280
+      Top             =   2640
       Width           =   615
    End
    Begin VB.Label Label6 
@@ -1847,7 +1940,7 @@ Begin VB.Form Form1
       Height          =   255
       Left            =   3840
       TabIndex        =   5
-      Top             =   1800
+      Top             =   2160
       Width           =   615
    End
    Begin VB.Label Label5 
@@ -1867,7 +1960,7 @@ Begin VB.Form Form1
       Left            =   3840
       TabIndex        =   4
       ToolTipText     =   "Exchange the audio file with an empty (silent) audio file"
-      Top             =   3360
+      Top             =   3720
       Width           =   3255
    End
    Begin VB.Label Label4 
@@ -1887,7 +1980,7 @@ Begin VB.Form Form1
       Left            =   3840
       TabIndex        =   3
       ToolTipText     =   "Exchange the audio file with the standard fireplace sound"
-      Top             =   3000
+      Top             =   3360
       Width           =   3255
    End
    Begin VB.Label Label3 
@@ -1947,7 +2040,7 @@ Begin VB.Form Form1
       Left            =   3840
       TabIndex        =   0
       ToolTipText     =   "Most audio files are too loud for an environment"
-      Top             =   2640
+      Top             =   3000
       Width           =   4455
    End
 End
@@ -2017,8 +2110,23 @@ Option Explicit
 
 
 'Next Release:
+
 'JPG compression und png conversion mit modul in autinstall
 'default audio je nach typ wählen (SpaceStation hat kein Fireplace sound)
+'ADB vorher beenden/task kill wenn WiFi connect
+'Delete untitled.apk beim build after install option
+'Freeze wenn WiFi ADB connect lost (MSGBOX noch da?)
+
+
+'Fertig:
+
+'Uninstaller for environments
+'apk unpack to Build folder
+'restart after release creation
+'Install funktion für env.apks
+'texture_temp in files
+'kommastellen im db decrease ist nicht funktional mit sox compiler (audio) also nich -16.5 db
+'ogg encode funktioniert wieder
 
 Private Type BrowseInfo
     lngHwnd        As Long
@@ -2263,11 +2371,12 @@ Timer2.Interval = 200
 Me.BorderStyle = 0
 Me.Caption = Me.Caption
 s = SetSysColors(1, COLOR_CAPTIONTEXT, vbBlack)
-For i = 1 To 64
+For i = 1 To 32
 Set Combo1 = DropList1.Combo
 lvButtons_H.Enabled = False
-Combo1.AddItem (i / 2)
+Combo1.AddItem (i)
 Next i
+Combo1.Text = "19"
 Set objDOS = New DOSOutputs
 za = 0
 qw = 1
@@ -2696,6 +2805,30 @@ ShellExecute hwnd, "open", pathstr, vbNullString, vbNullString, 1
 'Command1.Enabled = False
 'Command3.Enabled = False
 'Command5.Enabled = False
+
+On Error Resume Next
+
+Kill App.path & "\files\tmp\scene.zip"
+Kill App.path & "\files\tmp\tmp.apk"
+Kill App.path & "\files\ClassicHome\assets\scene.zip"
+Kill App.path & "\files\WinterLodge\assets\scene.zip"
+Kill App.path & "\files\SpaceStation\assets\scene.zip"
+If GetINISetting("Save", "TextureDelete", App.path & "\files\config.ini") = "1" Then
+   If Dir(App.path & "\files\texture_tmp\*.*") <> "" Then Kill App.path & "\files\texture_tmp\*.*"
+   RmDir App.path & "\files\texture_tmp"
+End If
+PutINISetting "WindowPos", "Left", Form1.Left, App.path & "\files\config.ini"
+PutINISetting "WindowPos", "Top", Form1.Top, App.path & "\files\config.ini"
+PutINISetting "CheckValue", "Check", GetCheck, App.path & "\files\config.ini"
+If adb = 0 Then End
+If Check16.Value = False Then End
+objDOS.CommandLine = ("files\adb.exe kill-server")
+objDOS.ExecuteCommand
+
+Message "Done, restarting now!", True
+Shell App.path & "\" & App.EXEName
+End
+
 Exit Sub
 
 ende:
@@ -2852,10 +2985,10 @@ If Dir(App.path & "\files\tmp\_BACKGROUND_LOOP.ogg") <> "" Then Kill App.path & 
 
 If Check13.Value = True Then
    Set fsx = CreateObject("Scripting.FileSystemObject")
-   If fsx.FolderExists(App.path & "\texture_tmp") = False Then GoTo weit3
-   For Each oFile In fsx.GetFolder(App.path & "\texture_tmp" & "").Files
+   If fsx.FolderExists(App.path & "\files\texture_tmp") = False Then GoTo weit3
+   For Each oFile In fsx.GetFolder(App.path & "\files\texture_tmp" & "").Files
         fn = fsx.GetFileName(oFile.path)
-        FileCopy App.path & "\texture_tmp\" & fn, BuildPath & "\" & fn
+        FileCopy App.path & "\files\texture_tmp\" & fn, BuildPath & "\" & fn
    Next
 End If
 
@@ -2870,11 +3003,12 @@ If Check3.Value = True Then
    GoTo tell
 End If
 If LCase(Right$(Label9.Caption, 3)) = "ogg" Then
-   If Check4.Value = False And Check1 = False Then
+   If Check4.Value = False And Check1.Value = False Then
       FileCopy aud, App.path & "\files\tmp\_BACKGROUND_LOOP.ogg"
       GoTo tell
    End If
 End If
+
 If Label9.Caption = "" And Check2.Value = False And Check3.Value = False Then GoTo killer
 If Check1.Value = True Then
    txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Encode Audio File..." & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
@@ -3198,6 +3332,101 @@ Command2_Click
 
 End Sub
 
+Private Sub lvButtons_H4_Click()
+
+'On Error Resume Next
+
+J = Chr$(34)
+
+txtOutputs.Text = txtOutputs.Text & vbNewLine & "Extracting glTF-Files to ..\Build" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
+Pause 0.2
+objDOS.CommandLine = ("files\7za.exe e " & J & patapk & J & " -o" & J & BuildPath & J & " scene.zip -r -aoa > nul")
+objDOS.ExecuteCommand
+objDOS.CommandLine = ("files\7za.exe e " & J & BuildPath & "\scene.zip" & J & " -o" & J & BuildPath & J & " _WORLD_MODEL.gltf.ovrscene -r -aoa > nul")
+objDOS.ExecuteCommand
+objDOS.CommandLine = ("files\7za.exe e " & J & BuildPath & "\scene.zip" & J & " -o" & J & App.path & J & " _BACKGROUND_LOOP.ogg -r -aoa > nul")
+objDOS.ExecuteCommand
+objDOS.CommandLine = ("files\7za.exe e " & J & BuildPath & "\_WORLD_MODEL.gltf.ovrscene" & J & " -o" & J & BuildPath & J & " -aoa")
+objDOS.ExecuteCommand
+
+Kill BuildPath & "\scene.zip"
+Kill BuildPath & "\_WORLD_MODEL.gltf.ovrscene"
+
+Drag App.path & "\_BACKGROUND_LOOP.ogg"
+
+Label11.Caption = "Done!"
+snd = PlaySound(App.path & "\files\gong.wav", ByVal 0&, &H20000 Or &H1)
+   
+End Sub
+
+Private Sub lvButtons_H5_Click()
+
+Dim ie As Boolean
+
+On Error Resume Next
+
+txtOutputs.Text = txtOutputs.Text & vbNewLine & "Try connecting to Quest for APK-install" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
+Pause 0.2
+objDOS.CommandLine = ("files\adb.exe install -r " & J & patapk & J)
+If InStr(1, objDOS.ExecuteCommand, "connect error", 0) <> 0 Then ie = True
+
+If ie = True Then
+   MessageBeep (16)
+   Label11.Caption = "Error!"
+   ie = False
+   If InStr(1, objDOS.ExecuteCommand, "more", vbTextCompare) > 0 Then
+      Message "Error: USB-Cable Connected!" & vbNewLine & "Please Remove USB-Cable!"
+   End If
+Else
+   Label11.Caption = "Done!"
+   snd = PlaySound(App.path & "\files\gong.wav", ByVal 0&, &H20000 Or &H1)
+End If
+
+adb = 1
+
+End Sub
+
+Private Sub lvButtons_H6_Click()
+
+Dim ie As Boolean
+Dim tme As String
+Dim ff As String
+Dim pack2 As String
+Dim fields() As String
+Dim i As Long
+
+On Error Resume Next
+
+J = Chr$(34)
+
+out_text = True
+objDOS.CommandLine = (J & App.path & "\files\aapt.exe" & J & " d badging " & J & patapk & J)
+ff = objDOS.ExecuteCommand
+fields() = Split(ff, "'")
+For i = 0 To UBound(fields)
+    If InStr(Trim$(fields(i)), "package") <> 0 Then pack2 = Trim$(fields(i + 1))
+Next i
+txtOutputs.Text = txtOutputs.Text & vbNewLine & "Try connecting to Quest for APK-uninstall (" & pack2 & ")" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
+Pause 0.2
+objDOS.CommandLine = ("files\adb.exe uninstall " & pack2)
+ff = objDOS.ExecuteCommand
+If InStr(1, ff, "connect error", 0) <> 0 Then ie = True
+If InStr(1, ff, "cannot Connect", 0) <> 0 Then ie = True
+If InStr(1, ff, "Unknown package", 0) <> 0 Then MessageBeep (16): Message "Error: Unknown package!" & vbNewLine & "APK already uninstalled?!": ie = True
+If InStr(1, ff, "more", 0) <> 0 Then MessageBeep (16): Message "Error: USB-Cable Connected!" & vbNewLine & "Please Remove USB-Cable!": ie = True
+If ie = True Then
+   MessageBeep (16)
+   Label11.Caption = "Error!"
+   ie = False
+Else
+   Label11.Caption = "Done!"
+   snd = PlaySound(App.path & "\files\gong.wav", ByVal 0&, &H20000 Or &H1)
+End If
+
+adb = 1
+
+End Sub
+
 Private Sub Picture2_DblClick()
 
 On Error Resume Next
@@ -3208,8 +3437,8 @@ Kill App.path & "\files\ClassicHome\assets\scene.zip"
 Kill App.path & "\files\WinterLodge\assets\scene.zip"
 Kill App.path & "\files\SpaceStation\assets\scene.zip"
 If GetINISetting("Save", "TextureDelete", App.path & "\files\config.ini") = "1" Then
-   If Dir(App.path & "\texture_tmp\*.*") <> "" Then Kill App.path & "\texture_tmp\*.*"
-   RmDir App.path & "\texture_tmp"
+   If Dir(App.path & "\files\texture_tmp\*.*") <> "" Then Kill App.path & "\files\texture_tmp\*.*"
+   RmDir App.path & "\files\texture_tmp"
 End If
 PutINISetting "WindowPos", "Left", Form1.Left, App.path & "\files\config.ini"
 PutINISetting "WindowPos", "Top", Form1.Top, App.path & "\files\config.ini"
@@ -3232,8 +3461,8 @@ Kill App.path & "\files\ClassicHome\assets\scene.zip"
 Kill App.path & "\files\WinterLodge\assets\scene.zip"
 Kill App.path & "\files\SpaceStation\assets\scene.zip"
 If GetINISetting("Save", "TextureDelete", App.path & "\files\config.ini") = "1" Then
-   If Dir(App.path & "\texture_tmp\*.*") <> "" Then Kill App.path & "\texture_tmp\*.*"
-   RmDir App.path & "\texture_tmp"
+   If Dir(App.path & "\files\texture_tmp\*.*") <> "" Then Kill App.path & "\files\texture_tmp\*.*"
+   RmDir App.path & "\files\texture_tmp"
 End If
 PutINISetting "WindowPos", "Left", Form1.Left, App.path & "\files\config.ini"
 PutINISetting "WindowPos", "Top", Form1.Top, App.path & "\files\config.ini"
@@ -3256,8 +3485,8 @@ Kill App.path & "\files\ClassicHome\assets\scene.zip"
 Kill App.path & "\files\WinterLodge\assets\scene.zip"
 Kill App.path & "\files\SpaceStation\assets\scene.zip"
 If GetINISetting("Save", "TextureDelete", App.path & "\files\config.ini") = "1" Then
-   If Dir(App.path & "\texture_tmp\*.*") <> "" Then Kill App.path & "\texture_tmp\*.*"
-   RmDir App.path & "\texture_tmp"
+   If Dir(App.path & "\files\texture_tmp\*.*") <> "" Then Kill App.path & "\files\texture_tmp\*.*"
+   RmDir App.path & "\files\texture_tmp"
 End If
 PutINISetting "WindowPos", "Left", Form1.Left, App.path & "\files\config.ini"
 PutINISetting "WindowPos", "Top", Form1.Top, App.path & "\files\config.ini"
@@ -3490,6 +3719,8 @@ Private Sub Picture1_OLEDragDrop(Data As DataObject, Effect As Long, Button As I
 
 On Error Resume Next
 
+'Achtung!!!!!!  Gleiche routine als Drag funktion als spiegelbild vorhanden für unpack apk routine!
+
 Dim intFile As Integer
 Dim i As Long
 Dim fields() As String
@@ -3509,6 +3740,9 @@ tw = False
 u = ExtractFile(pat)
 k = LCase(Right$(u, 3))
 If k = "apk" Then
+   lvButtons_H6.Enabled = True
+   lvButtons_H5.Enabled = True
+   lvButtons_H4.Enabled = True
    If Option1.Value = True Then
       Command1.Enabled = True
    Else
@@ -3579,6 +3813,97 @@ Check3.Enabled = False: Form7.Check3.Enabled = False
 Label5.Enabled = False: Form7.Label5.Enabled = False
 
 End Sub
+
+Private Function Drag(pat As String)
+
+On Error Resume Next
+
+'Achtung!!!!!!  Gleiche routine als Drag funktion als spiegelbild vorhanden für unpack apk routine!
+
+Dim intFile As Integer
+Dim i As Long
+Dim fields() As String
+Dim k As String
+Dim tme As String
+Dim ff As String
+Dim tw As Boolean
+
+tw = False
+u = ExtractFile(pat)
+k = LCase(Right$(u, 3))
+If k = "apk" Then
+   lvButtons_H5.Enabled = True
+   lvButtons_H4.Enabled = True
+   If Option1.Value = True Then
+      Command1.Enabled = True
+   Else
+      If pataud <> "" Then Command1.Enabled = True
+   End If
+   J = Chr$(34)
+   tme = txtOutputs.Text
+   objDOS.CommandLine = (J & App.path & "\files\aapt.exe" & J & " d badging " & J & pat & J)
+   ff = objDOS.ExecuteCommand
+   txtOutputs.Text = tme & "Added APK: " & pat & vbNewLine & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
+   fields() = Split(ff, "'")
+   For i = 0 To UBound(fields)
+       If InStr(Trim$(fields(i)), "package") <> 0 Then pack = Trim$(fields(i + 1))
+   Next i
+   Label8.Caption = u
+   patapk = pat
+   If pack = "com.oculus.environment.prod.winterlodge" Then
+      lvButtons_H1.Value = False: lvButtons_H2.Value = True: lvButtons_H3.Value = False
+      lvButtons_H1.Enabled = False: lvButtons_H2.Enabled = True: lvButtons_H3.Enabled = True
+   End If
+   If pack = "com.oculus.environment.prod.rifthome" Then
+      lvButtons_H1.Value = True: lvButtons_H2.Value = False: lvButtons_H3.Value = False
+      lvButtons_H1.Enabled = True: lvButtons_H2.Enabled = False: lvButtons_H3.Enabled = True
+   End If
+   If pack = "com.oculus.environment.prod.spacestation" Then
+      lvButtons_H1.Value = True: lvButtons_H2.Value = False: lvButtons_H3.Value = False
+      lvButtons_H1.Enabled = True: lvButtons_H2.Enabled = True: lvButtons_H3.Enabled = False
+   End If
+   Exit Function
+Else
+   If k = "mp3" Then tw = True
+   If k = "aif" Then tw = True
+   If k = "iff" Then tw = True
+   If k = "ogg" Then tw = True
+   If k = "lac" Then tw = True
+   If k = "fla" Then tw = True
+   If k = "wav" Then tw = True
+   If k = "ave" Then tw = True
+   If k = "pcm" Then tw = True
+   If tw = False Then
+      MessageBeep (16)
+      Message "File or Audio-file type '" & k & "' not supported, sorry!"
+      Exit Function
+   End If
+End If
+aud = pat
+If k = "ogg" Then
+   Check4.Enabled = True: Form7.Check4.Enabled = True
+   Label10.Enabled = True: Form7.Label10.Enabled = True
+End If
+Check1.Enabled = True: Form7.Check1.Enabled = True
+Label1.Enabled = True: Form7.Label1.Enabled = True
+Label9.Caption = u
+Form7.Label9.Caption = u
+txtOutputs.Text = txtOutputs.Text & "Added Audio-file: " & aud & vbNewLine & vbNewLine
+txtOutputs.SelStart = Len(txtOutputs.Text)
+pataud = u
+Check4.Enabled = False: Form7.Check4.Enabled = False
+Label10.Enabled = False: Form7.Label10.Enabled = False
+If k = "ogg" Then
+   Check4.Enabled = True: Form7.Check4.Enabled = True
+   Label10.Enabled = True: Form7.Label10.Enabled = True
+End If
+If patapk <> "" Then Command1.Enabled = True
+Check2.Enabled = False: Form7.Check2.Enabled = False
+Label4.Enabled = False: Form7.Label4.Enabled = False
+Check3.Enabled = False: Form7.Check3.Enabled = False
+Label5.Enabled = False: Form7.Label5.Enabled = False
+
+End Function
 
 Private Sub Timer1_Timer()
 
@@ -3663,7 +3988,6 @@ If wcon = True Then
       Else
          Label22.ForeColor = vbWhite
          Check10.Value = False
-         MsgBox qip
          MessageBeep (16)
          Message "Error: Lost WiFi Connection/IP!"
          adb = 0
@@ -3808,7 +4132,7 @@ If Dir(App.path & "\files\tmp\_BACKGROUND_LOOP.ogg") <> "" Then Kill App.path & 
 If Check2.Value = True Then FileCopy App.path & "\files\default.ogg", App.path & "\files\tmp\_BACKGROUND_LOOP.ogg": GoTo tell
 If Check3.Value = True Then FileCopy App.path & "\files\silent.ogg", App.path & "\files\tmp\_BACKGROUND_LOOP.ogg": GoTo tell
 If LCase(Right$(Label9.Caption, 3)) = "ogg" Then
-   If Check4.Value = False And Check1 = False Then
+   If Check4.Value = False And Check1.Value = False Then
       FileCopy aud, App.path & "\files\tmp\_BACKGROUND_LOOP.ogg"
       GoTo tell
    End If
@@ -4130,7 +4454,7 @@ If fu = "1" Then
    GoTo tell
 End If
 If LCase(Right$(Label9.Caption, 3)) = "ogg" Then
-   If Check4.Value = False And Check1 = False Then
+   If Check4.Value = False And Check1.Value = False Then
       FileCopy aud, App.path & "\files\tmp\_BACKGROUND_LOOP.ogg"
       GoTo tell
    End If
@@ -4445,22 +4769,22 @@ Private Sub Check13_Click()
 On Error Resume Next
 
 If Check13.Value = False Then
-   RmDir App.path & "\texture_tmp"
-   If Dir(App.path & "\texture_tmp" & "\*.*") <> "" Then Kill App.path & "\texture_tmp" & "\*.*"
+   RmDir App.path & "\files\texture_tmp"
+   If Dir(App.path & "\files\texture_tmp" & "\*.*") <> "" Then Kill App.path & "\files\texture_tmp" & "\*.*"
    Label11.Caption = "ERASED!": Beep
    txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Textures in .\Build deleted!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
    tp = True
    Exit Sub
 End If
-If Dir(App.path & "\texture_tmp" & "\*.*") <> "" Then Kill App.path & "\texture_tmp" & "\*.*"
+If Dir(App.path & "\files\texture_tmp" & "\*.*") <> "" Then Kill App.path & "\files\texture_tmp" & "\*.*"
 
 Set fsx = CreateObject("Scripting.FileSystemObject")
-If fsx.FolderExists(App.path & "\texture_tmp") = False Then MkDir (App.path & "\texture_tmp")
+If fsx.FolderExists(App.path & "\files\texture_tmp") = False Then MkDir (App.path & "\files\texture_tmp")
 If Dir$(App.path & "\Build" & "\*.*") <> vbNullString Then
     For Each oFile In fsx.GetFolder(App.path & "\Build" & "").Files
         If LCase(fsx.GetExtensionName(oFile.path)) <> "bin" And LCase(fsx.GetExtensionName(oFile.path)) <> "gltf" Then
             fn = fsx.GetFileName(oFile.path)
-            FileCopy BuildPath & "\" & fn, App.path & "\texture_tmp\" & fn
+            FileCopy BuildPath & "\" & fn, App.path & "\files\texture_tmp\" & fn
         End If
     Next
     Label11.Caption = "SAVED!": Beep
