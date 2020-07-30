@@ -1610,6 +1610,36 @@ Begin VB.Form Form1
       Enabled         =   0   'False
       cBack           =   4210752
    End
+   Begin Projekt1.lvButtons_H lvButtons_H7 
+      Height          =   390
+      Left            =   9360
+      TabIndex        =   83
+      Top             =   1200
+      Width           =   1810
+      _ExtentX        =   3201
+      _ExtentY        =   688
+      Caption         =   "Save last Quest Video"
+      CapAlign        =   2
+      BackStyle       =   5
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Arial"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      cFore           =   16777215
+      cFHover         =   16777215
+      cBhover         =   4194368
+      Focus           =   0   'False
+      LockHover       =   1
+      cGradient       =   4210752
+      Mode            =   0
+      Value           =   0   'False
+      cBack           =   4210752
+   End
    Begin VB.Label Label30 
       BackColor       =   &H0025221F&
       Caption         =   "WiFi Auto Connect"
@@ -2067,7 +2097,7 @@ Option Explicit
 '*Audio switch name _new ändern
 '*Prüfung glTF doppelt vorhanden
 '*Delete old textures before copy bei textur_tmp
-'*Build und files folder prüfung, vieleicht mit dateien
+'*Build und " & apppath & "\files folder prüfung, vieleicht mit dateien
 '*Prüfung audio file arten oder apk, sonst fehler oder nichts
 '*Textur schutz bei modifizierten texturen (schreibschutz oder copy beim builden)
 '*Prüfung ob Install erfolgreich war (Kritischer Fehler sound und "Done!" mit Rot "Error!" ersetzen
@@ -2105,6 +2135,14 @@ Option Explicit
 'Audio Spiegeln Panobuilder
 'Neuer Font (Arial)
 'Help Button (Form5)
+'Uninstaller for environments
+'apk unpack to Build folder
+'restart after release creation
+'Install funktion für env.apks
+'texture_temp in " & apppath & "\files
+'kommastellen im db decrease ist nicht funktional mit sox compiler (audio) also nich -16.5 db
+'Pitch/Speed increase when encoding audio without decrase volume
+'No more restart after Convert/Switch or create
 
 'Todo:
 
@@ -2116,17 +2154,12 @@ Option Explicit
 'ADB vorher beenden/task kill wenn WiFi connect
 'Delete untitled.apk beim build after install option
 'Freeze wenn WiFi ADB connect lost (MSGBOX noch da?)
-
+'ogg file encode bug fixed
+'Delete dragged audio (text) Button
 
 'Fertig:
 
-'Uninstaller for environments
-'apk unpack to Build folder
-'restart after release creation
-'Install funktion für env.apks
-'texture_temp in files
-'kommastellen im db decrease ist nicht funktional mit sox compiler (audio) also nich -16.5 db
-'ogg encode funktioniert wieder
+'Save last Quest Video
 
 Private Type BrowseInfo
     lngHwnd        As Long
@@ -2228,6 +2261,7 @@ Private com3_Self As Boolean
 Private out_text As Boolean
 Private start_adb As Boolean
 Private wifi_auto As Boolean
+Private apppath As String
 
 Private Sub Form_Load()
 
@@ -2247,91 +2281,92 @@ wcon = False
 za2 = 1
 start_adb = True
 start_pano = False
+apppath = App.path
 Set fsx = CreateObject("Scripting.FileSystemObject")
-If fsx.FolderExists(App.path & "\files") = False Then
+If fsx.FolderExists(apppath & "\files") = False Then
    Timer1.Enabled = False
    Timer2.Enabled = False
    MessageBeep (16)
    Message "No .\files Folder found, Error!"
    End
 End If
-If Dir(App.path & "\files\SpaceStation.zip") = "" Or Dir(App.path & "\files\WinterLodge.zip") = "" Or _
-   Dir(App.path & "\files\ClassicHome.zip") = "" Or Dir(App.path & "\files\adb.exe") = "" Or _
-   fsx.FolderExists(App.path & "\files\ClassicHome") = False Or fsx.FolderExists(App.path & "\files\SpaceStation") = False Or _
-   fsx.FolderExists(App.path & "\files\WinterLodge") = False Then
+If Dir(apppath & "\files\SpaceStation.zip") = "" Or Dir(apppath & "\files\WinterLodge.zip") = "" Or _
+   Dir(apppath & "\files\ClassicHome.zip") = "" Or Dir(apppath & "\files\adb.exe") = "" Or _
+   fsx.FolderExists(apppath & "\files\ClassicHome") = False Or fsx.FolderExists(apppath & "\files\SpaceStation") = False Or _
+   fsx.FolderExists(apppath & "\files\WinterLodge") = False Then
    Timer1.Enabled = False
    Timer2.Enabled = False
    MessageBeep (16)
-   Message "Missing Files in.\files Folder, Error!"
+   Message "Missing " & apppath & "\files in.\files Folder, Error!"
    End
 End If
-If Dir(App.path & "\files\config.ini") = "" Then
-   PutINISetting "Color", "HoverBackColor", "&H00BF1675&", App.path & "\files\config.ini"
-   PutINISetting "Color", "TitleBarColor", "&H00404040&", App.path & "\files\config.ini"
-   PutINISetting "Color", "ConsoleColor", "&H00FF80FF&", App.path & "\files\config.ini"
-   PutINISetting "Paths", "BuildPath", "", App.path & "\files\config.ini"
-   PutINISetting "WindowPos", "Left", Form1.Left, App.path & "\files\config.ini"
-   PutINISetting "WindowPos", "Top", Form1.Top, App.path & "\files\config.ini"
-   PutINISetting "CheckValue", "Check", "010110", App.path & "\files\config.ini"
-   PutINISetting "Save", "WindowPos", "1", App.path & "\files\config.ini"
-   PutINISetting "Save", "ButtonState", "1", App.path & "\files\config.ini"
-   PutINISetting "Save", "TextureDelete", "1", App.path & "\files\config.ini"
-   PutINISetting "Save", "AutoClear", "0", App.path & "\files\config.ini"
-   PutINISetting "QuestIP", "Port", "5555", App.path & "\files\config.ini"
-   PutINISetting "Save", "ADBKill", "1", App.path & "\files\config.ini"
-   PutINISetting "Save", "Pack", "1", App.path & "\files\config.ini"
-   PutINISetting "Save", "WiFiAuto", "0", App.path & "\files\config.ini"
+If Dir(apppath & "\files\config.ini") = "" Then
+   PutINISetting "Color", "HoverBackColor", "&H00BF1675&", apppath & "\files\config.ini"
+   PutINISetting "Color", "TitleBarColor", "&H00404040&", apppath & "\files\config.ini"
+   PutINISetting "Color", "ConsoleColor", "&H00FF80FF&", apppath & "\files\config.ini"
+   PutINISetting "Paths", "BuildPath", "", apppath & "\files\config.ini"
+   PutINISetting "WindowPos", "Left", Form1.Left, apppath & "\files\config.ini"
+   PutINISetting "WindowPos", "Top", Form1.Top, apppath & "\files\config.ini"
+   PutINISetting "CheckValue", "Check", "010110", apppath & "\files\config.ini"
+   PutINISetting "Save", "WindowPos", "1", apppath & "\files\config.ini"
+   PutINISetting "Save", "ButtonState", "1", apppath & "\files\config.ini"
+   PutINISetting "Save", "TextureDelete", "1", apppath & "\files\config.ini"
+   PutINISetting "Save", "AutoClear", "0", apppath & "\files\config.ini"
+   PutINISetting "QuestIP", "Port", "5555", apppath & "\files\config.ini"
+   PutINISetting "Save", "ADBKill", "1", apppath & "\files\config.ini"
+   PutINISetting "Save", "Pack", "1", apppath & "\files\config.ini"
+   PutINISetting "Save", "WiFiAuto", "0", apppath & "\files\config.ini"
 End If
-If GetINISetting("Save", "WiFiAuto", App.path & "\files\config.ini") = "" Then PutINISetting "Save", "WiFiAuto", "0", App.path & "\files\config.ini"
-If GetINISetting("Save", "ADBKill", App.path & "\files\config.ini") = "" Then PutINISetting "Save", "ADBKill", "1", App.path & "\files\config.ini"
-If GetINISetting("QuestIP", "Port", App.path & "\files\config.ini") = "" Then PutINISetting "QuestIP", "Port", "5555", App.path & "\files\config.ini"
-If GetINISetting("Save", "Pack", App.path & "\files\config.ini") = "" Then PutINISetting "Save", "Pack", "1", App.path & "\files\config.ini"
-If GetINISetting("Save", "WiFiAuto", App.path & "\files\config.ini") = "1" Then
+If GetINISetting("Save", "WiFiAuto", apppath & "\files\config.ini") = "" Then PutINISetting "Save", "WiFiAuto", "0", apppath & "\files\config.ini"
+If GetINISetting("Save", "ADBKill", apppath & "\files\config.ini") = "" Then PutINISetting "Save", "ADBKill", "1", apppath & "\files\config.ini"
+If GetINISetting("QuestIP", "Port", apppath & "\files\config.ini") = "" Then PutINISetting "QuestIP", "Port", "5555", apppath & "\files\config.ini"
+If GetINISetting("Save", "Pack", apppath & "\files\config.ini") = "" Then PutINISetting "Save", "Pack", "1", apppath & "\files\config.ini"
+If GetINISetting("Save", "WiFiAuto", apppath & "\files\config.ini") = "1" Then
    Check18.Value = True
    wifi_auto = True
 Else
    Check18.Value = False
 End If
-If GetINISetting("Save", "Pack", App.path & "\files\config.ini") = "1" Then
+If GetINISetting("Save", "Pack", apppath & "\files\config.ini") = "1" Then
    Check17.Value = True
 Else
    Check17.Value = False
 End If
-If GetINISetting("Save", "AutoClear", App.path & "\files\config.ini") = "1" Then
+If GetINISetting("Save", "AutoClear", apppath & "\files\config.ini") = "1" Then
    Check15.Value = True
 Else
    Check15.Value = False
 End If
-If GetINISetting("Save", "WindowPos", App.path & "\files\config.ini") = "1" Then
-   Form1.Left = GetINISetting("WindowPos", "Left", App.path & "\files\config.ini")
-   Form1.Top = GetINISetting("WindowPos", "Top", App.path & "\files\config.ini")
+If GetINISetting("Save", "WindowPos", apppath & "\files\config.ini") = "1" Then
+   Form1.Left = GetINISetting("WindowPos", "Left", apppath & "\files\config.ini")
+   Form1.Top = GetINISetting("WindowPos", "Top", apppath & "\files\config.ini")
 Else
    Check11.Value = False
 End If
-If GetINISetting("Save", "ButtonState", App.path & "\files\config.ini") = "1" Then
-   ch = GetINISetting("CheckValue", "Check", App.path & "\files\config.ini")
+If GetINISetting("Save", "ButtonState", apppath & "\files\config.ini") = "1" Then
+   ch = GetINISetting("CheckValue", "Check", apppath & "\files\config.ini")
    Check0.Value = Mid(ch, 1, 1): Check6.Value = Mid(ch, 2, 1): Check7.Value = Mid(ch, 3, 1)
    Check8.Value = Mid(ch, 4, 1): Check9.Value = Mid(ch, 5, 1): 'Check10.Value = Mid(ch, 6, 1)
 Else
    Check12.Value = False
 End If
-cl = GetINISetting("Color", "TitleBarColor", App.path & "\files\config.ini")
-If GetINISetting("Paths", "BuildPath", App.path & "\files\config.ini") <> "" Then
-   BuildPath = GetINISetting("Paths", "BuildPath", App.path & "\files\config.ini")
+cl = GetINISetting("Color", "TitleBarColor", apppath & "\files\config.ini")
+If GetINISetting("Paths", "BuildPath", apppath & "\files\config.ini") <> "" Then
+   BuildPath = GetINISetting("Paths", "BuildPath", apppath & "\files\config.ini")
 Else
-   BuildPath = App.path & "\Build"
+   BuildPath = apppath & "\Build"
 End If
 Boarder1.BackColor = HTC(cl): Label21.BackColor = HTC(cl): Picture2.BackColor = HTC(cl)
 Picture3.BackColor = HTC(cl): Picture4.BackColor = HTC(cl): Picture5.BackColor = HTC(cl): Picture6.BackColor = HTC(cl)
-If Lux(HTC(GetINISetting("Color", "HoverBackColor", App.path & "\files\config.ini"))) > 120 Then
+If Lux(HTC(GetINISetting("Color", "HoverBackColor", apppath & "\files\config.ini"))) > 120 Then
    Command1.HoverForeColor = vbBlack: Command2.HoverForeColor = vbBlack: Command3.HoverForeColor = vbBlack
    Command4.HoverForeColor = vbBlack: Command5.HoverForeColor = vbBlack: Command6.HoverForeColor = vbBlack
    Command7.HoverForeColor = vbBlack: Command8.HoverForeColor = vbBlack: Command9.HoverForeColor = vbBlack
    Command10.HoverForeColor = vbBlack: Command11.HoverForeColor = vbBlack
 End If
-hbc = HTC(GetINISetting("Color", "ConsoleColor", App.path & "\files\config.ini"))
+hbc = HTC(GetINISetting("Color", "ConsoleColor", apppath & "\files\config.ini"))
 txtOutputs.ForeColor = hbc
-hbc = HTC(GetINISetting("Color", "HoverBackColor", App.path & "\files\config.ini"))
+hbc = HTC(GetINISetting("Color", "HoverBackColor", apppath & "\files\config.ini"))
 For Each ctrl In Form1
     If ctrl.HoverBackColor <> "" Then
        ctrl.HoverBackColor = hbc
@@ -2417,11 +2452,11 @@ Option2.Value = True
 Check4.Enabled = False
 Label10.Enabled = False
 Command1.Enabled = False
-If Dir(App.path & "\files\Java64\bin\java.exe") <> "" Then
-   java = Chr$(34) & App.path & "\files\Java64\bin\java.exe" & Chr$(34)
+If Dir(apppath & "\files\Java64\bin\java.exe") <> "" Then
+   java = Chr$(34) & apppath & "\files\Java64\bin\java.exe" & Chr$(34)
 Else
    java = "java"
-   If App.LogMode = 1 And Shell("java", vbHide) = 0 And Dir(App.path & "\files\Java64\bin\java.exe") = "" Then
+   If App.LogMode = 1 And Shell("java", vbHide) = 0 And Dir(apppath & "\files\Java64\bin\java.exe") = "" Then
       Timer1.Enabled = False
       Timer2.Enabled = False
       MessageBeep (16)
@@ -2429,8 +2464,8 @@ Else
       End
    End If
 End If
-If GetINISetting("Save", "Splash", App.path & "\files\config.ini") = "" Then
-   PutINISetting "Save", "Splash", "1", App.path & "\files\config.ini"
+If GetINISetting("Save", "Splash", apppath & "\files\config.ini") = "" Then
+   PutINISetting "Save", "Splash", "1", apppath & "\files\config.ini"
    Call Form9.Show(vbModal)
 End If
 
@@ -2441,7 +2476,7 @@ Private Sub Command15_Click()
 On Error Resume Next
 
 If Dir(BuildPath & "\*.*") <> "" Then
-   If Question("Files found in Build-Folder!" & vbNewLine & "Delete Files?") = True Then
+   If Question(apppath & "\files found in Build-Folder!" & vbNewLine & "Delete " & apppath & "\files?") = True Then
       Kill BuildPath & "\*.*"
       txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Build folder cleaned!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
       Beep
@@ -2480,7 +2515,7 @@ If adb = 1 Then
       Label22.ForeColor = vbWhite
       txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Kill ADB Server!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
       Pause (0.2)
-      objDOS.CommandLine = ("files\adb.exe kill-server")
+      objDOS.CommandLine = (apppath & "\files\adb.exe kill-server")
       objDOS.ExecuteCommand
       txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Wireless ADB Disconnected!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
       wcon = False
@@ -2491,7 +2526,7 @@ If adb = 1 Then
       Pause (0.2)
       wcon = False
       adb = 0
-      objDOS.CommandLine = ("files\adb.exe kill-server")
+      objDOS.CommandLine = (apppath & "\files\adb.exe kill-server")
       objDOS.ExecuteCommand
       txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "ADB Disconnected!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
    End If
@@ -2499,11 +2534,11 @@ End If
 If adb = 1 And wcon = False Then
    txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Kill old ADB Server!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
    Pause (0.2)
-   objDOS.CommandLine = ("files\adb.exe kill-server")
+   objDOS.CommandLine = (apppath & "\files\adb.exe kill-server")
    objDOS.ExecuteCommand
 End If
-If GetINISetting("QuestIP", "Adress", App.path & "\files\config.ini") <> "" Then
-   qip = GetINISetting("QuestIP", "Adress", App.path & "\files\config.ini")
+If GetINISetting("QuestIP", "Adress", apppath & "\files\config.ini") <> "" Then
+   qip = GetINISetting("QuestIP", "Adress", apppath & "\files\config.ini")
    If (GetRTTAndHopCount(inet_addr(qip), 0, 20, 200) = 1) = True Then
        ipget = True
        GoTo conip
@@ -2513,8 +2548,8 @@ Message "Connect USB-Cable! " & qip & vbNewLine & "(Wake up Quest from StandBy)"
 txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Try to obtain Quest IP... Please Wait or Exit DOS Window when adb is freezed!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
 Label11.Caption = "Wait!"
 Pause (0.2)
-'qip = ShellExecuteCapture("files\adb.exe shell ip route")
-qip = ShellRun("files\adb.exe shell ip route", 6)
+'qip = ShellExecuteCapture(apppath & "\files\adb.exe shell ip route")
+qip = ShellRun(apppath & "\files\adb.exe shell ip route", 6)
 
 conip:
 
@@ -2523,16 +2558,16 @@ If InStr(1, qip, "src", 0) <> 0 Or ipget = True Then
    txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Try to connect to Quest with IP: " & qip & "  Please Wait or Exit DOS Window when adb is freezed!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
    Label11.Caption = "Wait!"
    Pause (0.2)
-   erme = ShellRun(App.path & "\files\adb.exe tcpip " & GetINISetting("QuestIP", "Port", App.path & "\files\config.ini"), 4)
-   'erme = ShellExecuteCapture("files\adb.exe tcpip " & GetINISetting("QuestIP", "Port", App.path & "\files\config.ini"))
-   erme = ShellRun(App.path & "\files\adb.exe connect " & qip & ":" & GetINISetting("QuestIP", "Port", App.path & "\files\config.ini"), 5)
-   'erme = ShellExecuteCapture("files\adb.exe connect " & qip & ":" & GetINISetting("QuestIP", "Port", App.path & "\files\config.ini"))
+   erme = ShellRun(apppath & "\files\adb.exe tcpip " & GetINISetting("QuestIP", "Port", apppath & "\files\config.ini"), 4)
+   'erme = ShellExecuteCapture(apppath & "\files\adb.exe tcpip " & GetINISetting("QuestIP", "Port", apppath & "\files\config.ini"))
+   erme = ShellRun(apppath & "\files\adb.exe connect " & qip & ":" & GetINISetting("QuestIP", "Port", apppath & "\files\config.ini"), 5)
+   'erme = ShellExecuteCapture(apppath & "\files\adb.exe connect " & qip & ":" & GetINISetting("QuestIP", "Port", apppath & "\files\config.ini"))
    If InStr(1, erme, "connected", 0) <> 0 Then
       If ipget = False Then
          Beep
          Message "Connected to " & qip & vbNewLine & "Remove USB-Cable Please!"
          adb = 1
-         PutINISetting "QuestIP", "Adress", qip, App.path & "\files\config.ini"
+         PutINISetting "QuestIP", "Adress", qip, apppath & "\files\config.ini"
       Else
          Beep
          Message "Connected to " & qip
@@ -2564,9 +2599,9 @@ Private Sub Check16_Click()
 On Error Resume Next
 
 If Check16.Value = True Then
-   PutINISetting "Save", "ADBKill", "1", App.path & "\files\config.ini"
+   PutINISetting "Save", "ADBKill", "1", apppath & "\files\config.ini"
 Else
-   PutINISetting "Save", "ADBKill", "0", App.path & "\files\config.ini"
+   PutINISetting "Save", "ADBKill", "0", apppath & "\files\config.ini"
 End If
 Pause (0.5)
 Command2_Click
@@ -2578,9 +2613,9 @@ Private Sub Check18_Click()
 On Error Resume Next
 
 If Check18.Value = True Then
-   PutINISetting "Save", "WiFiAuto", "1", App.path & "\files\config.ini"
+   PutINISetting "Save", "WiFiAuto", "1", apppath & "\files\config.ini"
 Else
-   PutINISetting "Save", "WiFiAuto", "0", App.path & "\files\config.ini"
+   PutINISetting "Save", "WiFiAuto", "0", apppath & "\files\config.ini"
 End If
 Pause (0.5)
 Command2_Click
@@ -2601,9 +2636,9 @@ Private Sub Check11_Click()
 On Error Resume Next
 
 If Check11.Value = True Then
-   PutINISetting "Save", "WindowPos", "1", App.path & "\files\config.ini"
+   PutINISetting "Save", "WindowPos", "1", apppath & "\files\config.ini"
 Else
-   PutINISetting "Save", "WindowPos", "0", App.path & "\files\config.ini"
+   PutINISetting "Save", "WindowPos", "0", apppath & "\files\config.ini"
 End If
 Pause (0.5)
 Command2_Click
@@ -2627,9 +2662,9 @@ Private Sub Check14_Click()
 On Error Resume Next
 
 If Check11.Value = True Then
-   PutINISetting "Save", "TextureDelete", "1", App.path & "\files\config.ini"
+   PutINISetting "Save", "TextureDelete", "1", apppath & "\files\config.ini"
 Else
-   PutINISetting "Save", "TextureDelete", "0", App.path & "\files\config.ini"
+   PutINISetting "Save", "TextureDelete", "0", apppath & "\files\config.ini"
 End If
 Pause (0.5)
 Command2_Click
@@ -2641,10 +2676,10 @@ Private Sub Check12_Click()
 On Error Resume Next
 
 If Check12.Value = True Then
-   PutINISetting "Save", "ButtonState", "1", App.path & "\files\config.ini"
+   PutINISetting "Save", "ButtonState", "1", apppath & "\files\config.ini"
 Else
-   PutINISetting "Save", "ButtonState", "0", App.path & "\files\config.ini"
-   PutINISetting "CheckValue", "Check", "010110", App.path & "\files\config.ini"
+   PutINISetting "Save", "ButtonState", "0", apppath & "\files\config.ini"
+   PutINISetting "CheckValue", "Check", "010110", apppath & "\files\config.ini"
 End If
 Pause (0.5)
 Command2_Click
@@ -2660,7 +2695,7 @@ On Error Resume Next
 
 cl = ShowColorDialog(Me.hwnd, True, Form1.Check1.ForeColor)
 If cl = -1 Then Command2_Click: Exit Sub
-PutINISetting "Color", "ConsoleColor", HexIt(cl), App.path & "\files\config.ini"
+PutINISetting "Color", "ConsoleColor", HexIt(cl), apppath & "\files\config.ini"
 txtOutputs.ForeColor = cl
 Command2_Click
 Me.Refresh
@@ -2674,10 +2709,10 @@ Dim ctrl As Control
 
 On Error Resume Next
 
-PutINISetting "Color", "HoverBackColor", "&H00BF1675&", App.path & "\files\config.ini"
-PutINISetting "Color", "TitleBarColor", "&H00404040&", App.path & "\files\config.ini"
-PutINISetting "Color", "ConsoleColor", "&H00FF80FF&", App.path & "\files\config.ini"
-cl = HTC(GetINISetting("Color", "HoverBackColor", App.path & "\files\config.ini"))
+PutINISetting "Color", "HoverBackColor", "&H00BF1675&", apppath & "\files\config.ini"
+PutINISetting "Color", "TitleBarColor", "&H00404040&", apppath & "\files\config.ini"
+PutINISetting "Color", "ConsoleColor", "&H00FF80FF&", apppath & "\files\config.ini"
+cl = HTC(GetINISetting("Color", "HoverBackColor", apppath & "\files\config.ini"))
 For Each ctrl In Form1
     If ctrl.HoverBackColor <> "" Then
        ctrl.HoverBackColor = cl
@@ -2697,7 +2732,7 @@ Else
    Command7.HoverForeColor = vbWhite: Command8.HoverForeColor = vbWhite: Command9.HoverForeColor = vbWhite
    Command10.HoverForeColor = vbWhite: Command11.HoverForeColor = vbWhite
 End If
-cl = HTC(GetINISetting("Color", "TitleBarColor", App.path & "\files\config.ini"))
+cl = HTC(GetINISetting("Color", "TitleBarColor", apppath & "\files\config.ini"))
 Boarder1.BackColor = cl
 Label21.BackColor = cl
 Picture2.BackColor = cl
@@ -2705,7 +2740,7 @@ Picture3.BackColor = cl
 Picture4.BackColor = cl
 Picture5.BackColor = cl
 Picture6.BackColor = cl
-cl = HTC(GetINISetting("Color", "ConsoleColor", App.path & "\files\config.ini"))
+cl = HTC(GetINISetting("Color", "ConsoleColor", apppath & "\files\config.ini"))
 txtOutputs.ForeColor = cl
 
 Command2_Click
@@ -2762,11 +2797,11 @@ fin(6) = fin2
 
 
 
-If GetINISetting("Save", "Pack", App.path & "\files\config.ini") = "1" Then
-   sa = save2(idr2 & ".zip", App.path)
+If GetINISetting("Save", "Pack", apppath & "\files\config.ini") = "1" Then
+   sa = save2(idr2 & ".zip", apppath)
    If sa = "" Then GoTo ende
    If LCase(Right$(sa, 3)) <> "zip" Then sa = sa & ".zip"
-   objDOS.CommandLine = ("files\7za.exe a " & J & sa & J & " " & J & fin(1) & J & " " & J & fin(2) & J & " " & J & fin(3) & J & " " & J & fin(4) & J & " " & J & fin(5) & J & " " & J & fin(6) & J)
+   objDOS.CommandLine = (apppath & "\files\7za.exe a " & J & sa & J & " " & J & fin(1) & J & " " & J & fin(2) & J & " " & J & fin(3) & J & " " & J & fin(4) & J & " " & J & fin(5) & J & " " & J & fin(6) & J)
    objDOS.ExecuteCommand
    If InStrRev(sa, "\") > 0 Then
       pathstr = Left$(sa, InStrRev(sa, "\"))
@@ -2782,7 +2817,7 @@ If GetINISetting("Save", "Pack", App.path & "\files\config.ini") = "1" Then
 Else
    sa = BrowseForFolder(Me.hwnd, "Select destination Folder" & vbNewLine & "Or choose Cancel for Main App folder")
    If sa <> "" Then
-      If sa <> App.path Then
+      If sa <> apppath Then
          FileCopy fin(1), sa & "\" & ExtractFile(fin(1)): FileCopy fin(2), sa & "\" & ExtractFile(fin(2)): FileCopy fin(3), sa & "\" & ExtractFile(fin(3))
          FileCopy fin(4), sa & "\" & ExtractFile(fin(4)): FileCopy fin(5), sa & "\" & ExtractFile(fin(5)): FileCopy fin(6), sa & "\" & ExtractFile(fin(6))
          If Dir(fin(1)) <> "" Then Kill fin(1)
@@ -2794,12 +2829,12 @@ Else
       End If
       pathstr = sa
    Else
-      pathstr = App.path
+      pathstr = apppath
    End If
 End If
 txtOutputs.Text = txtOutputs.Text & vbNewLine & "Create Release finished! " & Time & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
 Label11.Caption = "DONE!": Beep
-snd = PlaySound(App.path & "\files\gong.wav", ByVal 0&, &H20000 Or &H1)
+snd = PlaySound(apppath & "\files\gong.wav", ByVal 0&, &H20000 Or &H1)
 ShellExecute hwnd, "open", pathstr, vbNullString, vbNullString, 1
 'Timer1.Enabled = False
 'Command1.Enabled = False
@@ -2808,30 +2843,38 @@ ShellExecute hwnd, "open", pathstr, vbNullString, vbNullString, 1
 
 On Error Resume Next
 
-Kill App.path & "\files\tmp\scene.zip"
-Kill App.path & "\files\tmp\tmp.apk"
-Kill App.path & "\files\ClassicHome\assets\scene.zip"
-Kill App.path & "\files\WinterLodge\assets\scene.zip"
-Kill App.path & "\files\SpaceStation\assets\scene.zip"
-If GetINISetting("Save", "TextureDelete", App.path & "\files\config.ini") = "1" Then
-   If Dir(App.path & "\files\texture_tmp\*.*") <> "" Then Kill App.path & "\files\texture_tmp\*.*"
-   RmDir App.path & "\files\texture_tmp"
+Kill apppath & "\files\tmp\scene.zip"
+Kill apppath & "\files\tmp\tmp.apk"
+Kill apppath & "\files\ClassicHome\assets\scene.zip"
+Kill apppath & "\files\WinterLodge\assets\scene.zip"
+Kill apppath & "\files\SpaceStation\assets\scene.zip"
+If GetINISetting("Save", "TextureDelete", apppath & "\files\config.ini") = "1" Then
+   If Dir(apppath & "\files\texture_tmp\*.*") <> "" Then Kill apppath & "\files\texture_tmp\*.*"
+   RmDir apppath & "\files\texture_tmp"
 End If
-PutINISetting "WindowPos", "Left", Form1.Left, App.path & "\files\config.ini"
-PutINISetting "WindowPos", "Top", Form1.Top, App.path & "\files\config.ini"
-PutINISetting "CheckValue", "Check", GetCheck, App.path & "\files\config.ini"
-If adb = 0 Then End
+PutINISetting "WindowPos", "Left", Form1.Left, apppath & "\files\config.ini"
+PutINISetting "WindowPos", "Top", Form1.Top, apppath & "\files\config.ini"
+PutINISetting "CheckValue", "Check", GetCheck, apppath & "\files\config.ini"
+If adb <> 0 Then
 If Check16.Value = False Then End
-objDOS.CommandLine = ("files\adb.exe kill-server")
-objDOS.ExecuteCommand
-
-Message "Done, restarting now!", True
-Shell App.path & "\" & App.EXEName
-End
+   objDOS.CommandLine = (apppath & "\files\adb.exe kill-server")
+   objDOS.ExecuteCommand
+End If
+If renunp = True Then
+   If GetINISetting("Save", "AutoClear", apppath & "\files\config.ini") = "1" Then
+      If Dir(BuildPath & "\*.*") <> "" Then Kill BuildPath & "\*.*"
+      If Dir(apppath & "\_BACKGROUND_LOOP.ogg") <> "" Then Kill apppath & "\_BACKGROUND_LOOP.ogg"
+   End If
+End If
+'Message "Done, restarting now!", True
+'Shell apppath & "\" & App.EXEName
+'End
 
 Exit Sub
 
 ende:
+
+
 If Dir(fin(1)) <> "" Then Kill fin(1)
 If Dir(fin(2)) <> "" Then Kill fin(2)
 If Dir(fin(3)) <> "" Then Kill fin(3)
@@ -2979,32 +3022,32 @@ If CountFiles(BuildPath & "\*.gltf") > 1 Then
    Message "More than one .glTF file found in .\Build, Error!"
    Exit Sub
 End If
-If Dir(App.path & "\files\tmp\_WORLD_MODEL.gltf.ovrscene") <> "" Then Kill App.path & "\files\tmp\_WORLD_MODEL.gltf.ovrscene"
-If Dir(App.path & "\files\tmp\scene.zip") <> "" Then Kill App.path & "\files\tmp\scene.zip"
-If Dir(App.path & "\files\tmp\_BACKGROUND_LOOP.ogg") <> "" Then Kill App.path & "\files\tmp\_BACKGROUND_LOOP.ogg"
+If Dir(apppath & "\files\tmp\_WORLD_MODEL.gltf.ovrscene") <> "" Then Kill apppath & "\files\tmp\_WORLD_MODEL.gltf.ovrscene"
+If Dir(apppath & "\files\tmp\scene.zip") <> "" Then Kill apppath & "\files\tmp\scene.zip"
+If Dir(apppath & "\files\tmp\_BACKGROUND_LOOP.ogg") <> "" Then Kill apppath & "\files\tmp\_BACKGROUND_LOOP.ogg"
 
 If Check13.Value = True Then
    Set fsx = CreateObject("Scripting.FileSystemObject")
-   If fsx.FolderExists(App.path & "\files\texture_tmp") = False Then GoTo weit3
-   For Each oFile In fsx.GetFolder(App.path & "\files\texture_tmp" & "").Files
+   If fsx.FolderExists(apppath & "\files\texture_tmp") = False Then GoTo weit3
+   For Each oFile In fsx.GetFolder(apppath & "\files\texture_tmp" & "").Files
         fn = fsx.GetFileName(oFile.path)
-        FileCopy App.path & "\files\texture_tmp\" & fn, BuildPath & "\" & fn
+        FileCopy apppath & "\files\texture_tmp\" & fn, BuildPath & "\" & fn
    Next
 End If
 
 weit3:
 
 If Check2.Value = True Then
-   FileCopy App.path & "\files\default.ogg", App.path & "\files\tmp\_BACKGROUND_LOOP.ogg"
+   FileCopy apppath & "\files\default.ogg", apppath & "\files\tmp\_BACKGROUND_LOOP.ogg"
    GoTo tell
 End If
 If Check3.Value = True Then
-   FileCopy App.path & "\files\silent.ogg", App.path & "\files\tmp\_BACKGROUND_LOOP.ogg"
+   FileCopy apppath & "\files\silent.ogg", apppath & "\files\tmp\_BACKGROUND_LOOP.ogg"
    GoTo tell
 End If
 If LCase(Right$(Label9.Caption, 3)) = "ogg" Then
    If Check4.Value = False And Check1.Value = False Then
-      FileCopy aud, App.path & "\files\tmp\_BACKGROUND_LOOP.ogg"
+      FileCopy aud, apppath & "\files\tmp\_BACKGROUND_LOOP.ogg"
       GoTo tell
    End If
 End If
@@ -3013,66 +3056,66 @@ If Label9.Caption = "" And Check2.Value = False And Check3.Value = False Then Go
 If Check1.Value = True Then
    txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Encode Audio File..." & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
    Pause (0.2)
-   objDOS.CommandLine = ("files\sox.exe -S " & J & aud & J & " -C 3 " & J & App.path & "\files\tmp\_BACKGROUND_LOOP.ogg" & J & " vol -" & lvButtons_H.Caption & " dB speed 0.92")
+   objDOS.CommandLine = (apppath & "\files\sox.exe -S " & J & aud & J & " -C 3 " & J & apppath & "\files\tmp\_BACKGROUND_LOOP.ogg" & J & " vol -" & lvButtons_H.Caption & " dB speed 0.92")
    objDOS.ExecuteCommand
 Else
    txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Encode Audio File..." & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
    Pause (0.2)
-   objDOS.CommandLine = ("files\sox.exe -S " & J & aud & J & " -C 3 " & J & App.path & "\files\tmp\_BACKGROUND_LOOP.ogg" & J)
+   objDOS.CommandLine = (apppath & "\files\sox.exe -S " & J & aud & J & " -C 3 " & J & apppath & "\files\tmp\_BACKGROUND_LOOP.ogg" & J & " speed 0.92")
    objDOS.ExecuteCommand
 End If
 
 killer:
 
-If Dir(App.path & "\files\tmpz.apk") <> "" Then Kill App.path & "\files\tmpz.apk"
-If Dir(App.path & "\files\tmp.apk") <> "" Then Kill App.path & "\files\tmp.apk"
-If Dir(App.path & "\files\tmp.zip") <> "" Then Kill App.path & "\files\tmp.apk"
-If Dir(App.path & "\files\scene.zip") <> "" Then Kill App.path & "\files\scene.zip"
+If Dir(apppath & "\files\tmpz.apk") <> "" Then Kill apppath & "\files\tmpz.apk"
+If Dir(apppath & "\files\tmp.apk") <> "" Then Kill apppath & "\files\tmp.apk"
+If Dir(apppath & "\files\tmp.zip") <> "" Then Kill apppath & "\files\tmp.apk"
+If Dir(apppath & "\files\scene.zip") <> "" Then Kill apppath & "\files\scene.zip"
 
-If Dir(App.path & "\files\tmp\tmpz.apk") <> "" Then Kill App.path & "\files\tmp\tmpz.apk"
-If Dir(App.path & "\files\tmp\tmp.apk") <> "" Then Kill App.path & "\files\tmp\tmp.apk"
-If Dir(App.path & "\files\tmp\tmp.zip") <> "" Then Kill App.path & "\files\tmp\tmp.apk"
-If Dir(App.path & "\files\tmp\scene.zip") <> "" Then Kill App.path & "\files\tmp\scene.zip"
-If Dir(App.path & "\files\tmp\temp_ec.wav") <> "" Then Kill App.path & "\files\tmp\temp_ec.wav"
+If Dir(apppath & "\files\tmp\tmpz.apk") <> "" Then Kill apppath & "\files\tmp\tmpz.apk"
+If Dir(apppath & "\files\tmp\tmp.apk") <> "" Then Kill apppath & "\files\tmp\tmp.apk"
+If Dir(apppath & "\files\tmp\tmp.zip") <> "" Then Kill apppath & "\files\tmp\tmp.apk"
+If Dir(apppath & "\files\tmp\scene.zip") <> "" Then Kill apppath & "\files\tmp\scene.zip"
+If Dir(apppath & "\files\tmp\temp_ec.wav") <> "" Then Kill apppath & "\files\tmp\temp_ec.wav"
 
 tell:
 '--------------------------------------------------------------
-objDOS.CommandLine = ("files\7za.exe a files\tmp\_WORLD_MODEL.gltf.ovrscene.zip " & J & BuildPath & "\*" & J)
+objDOS.CommandLine = (apppath & "\files\7za.exe a " & J & apppath & "\files\tmp\_WORLD_MODEL.gltf.ovrscene.zip" & J & " " & J & BuildPath & "\*" & J)
 objDOS.ExecuteCommand
-Name App.path & "\files\tmp\_WORLD_MODEL.gltf.ovrscene.zip" As App.path & "\files\tmp\_WORLD_MODEL.gltf.ovrscene"
-If Dir("files\tmp\_BACKGROUND_LOOP.ogg") = "" Then FileCopy App.path & "\files\silent.ogg", App.path & "\files\tmp\_BACKGROUND_LOOP.ogg"
-objDOS.CommandLine = ("files\7za.exe a files\tmp\scene.zip " & J & App.path & "\files\tmp\_WORLD_MODEL.gltf.ovrscene" & J & " " & J & App.path & "\files\tmp\_BACKGROUND_LOOP.ogg" & J)
+Name apppath & "\files\tmp\_WORLD_MODEL.gltf.ovrscene.zip" As apppath & "\files\tmp\_WORLD_MODEL.gltf.ovrscene"
+If Dir(apppath & "\files\tmp\_BACKGROUND_LOOP.ogg") = "" Then FileCopy apppath & "\files\silent.ogg", apppath & "\files\tmp\_BACKGROUND_LOOP.ogg"
+objDOS.CommandLine = (apppath & "\files\7za.exe a " & J & apppath & "\files\tmp\scene.zip" & J & " " & J & apppath & "\files\tmp\_WORLD_MODEL.gltf.ovrscene" & J & " " & J & apppath & "\files\tmp\_BACKGROUND_LOOP.ogg" & J)
 objDOS.ExecuteCommand
-If Dir(App.path & "\files\tmp\_BACKGROUND_LOOP.ogg") <> "" Then Kill App.path & "\files\tmp\_BACKGROUND_LOOP.ogg"
-Kill App.path & "\files\tmp\_WORLD_MODEL.gltf.ovrscene"
+If Dir(apppath & "\files\tmp\_BACKGROUND_LOOP.ogg") <> "" Then Kill apppath & "\files\tmp\_BACKGROUND_LOOP.ogg"
+Kill apppath & "\files\tmp\_WORLD_MODEL.gltf.ovrscene"
 If Check6.Value = True Then
-   ap = "files\WinterLodge\assets\"
-   ap1 = "files\WinterLodge"
+   ap = apppath & "\files\WinterLodge\assets\"
+   ap1 = apppath & "\files\WinterLodge"
    an = "WinterLodge"
 End If
 If Check7.Value = True Then
-   ap = "files\ClassicHome\assets\"
-   ap1 = "files\ClassicHome"
+   ap = apppath & "\files\ClassicHome\assets\"
+   ap1 = apppath & "\files\ClassicHome"
    an = "ClassicHome"
 End If
 If Check0.Value = True Then
-   ap = "files\SpaceStation\assets\"
-   ap1 = "files\SpaceStation"
+   ap = apppath & "\files\SpaceStation\assets\"
+   ap1 = apppath & "\files\SpaceStation"
    an = "SpaceStation"
 End If
 
 GoTo fastbuild
 
 '----------------------------------------------------------------------------
-FileCopy App.path & "\files\tmp\scene.zip", ap & "scene.zip"
-objDOS.CommandLine = (java & " -Xmx1024m -jar " & J & "files\apktool_2.3.4.jar" & J & " b -f -o " & J & "files\tmp\tmp.apk" & J & " " & J & ap1 & J)
+FileCopy apppath & "\files\tmp\scene.zip", ap & "scene.zip"
+objDOS.CommandLine = (java & " -Xmx1024m -jar " & J & apppath & "\files\apktool_2.3.4.jar" & J & " b -f -o " & J & apppath & "\files\tmp\tmp.apk" & J & " " & J & ap1 & J)
 objDOS.ExecuteCommand
 txtOutputs.Text = txtOutputs.Text & vbNewLine & "Zipalign APK-file" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
-objDOS.CommandLine = ("files\zipalign.exe -f 4 " & J & App.path & "\files\tmp\tmp.apk" & J & " " & J & App.path & "\files\tmp\tmpz.apk" & J)
+objDOS.CommandLine = (apppath & "\files\zipalign.exe -f 4 " & J & apppath & "\files\tmp\tmp.apk" & J & " " & J & apppath & "\files\tmp\tmpz.apk" & J)
 objDOS.ExecuteCommand
 txtOutputs.Text = txtOutputs.Text & vbNewLine & "Sign APK-file" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
-objDOS.CommandLine = (java & " -Xmx1024m -jar " & J & "files\ApkSigner.jar" & J & " sign  --key " & J & "files\apkeasytool.pk8" & J & " --cert " & J & _
-     "files\apkeasytool.pem" & J & " --out " & J & "files\tmp\tmpz.apk" & J & " " & J & "files\tmp\tmpz.apk" & J)
+objDOS.CommandLine = (java & " -Xmx1024m -jar " & J & apppath & "\files\ApkSigner.jar" & J & " sign  --key " & J & apppath & "\files\apkeasytool.pk8" & J & " --cert " & J & _
+     apppath & "\files\apkeasytool.pem" & J & " --out " & J & apppath & "\files\tmp\tmpz.apk" & J & " " & J & apppath & "\files\tmp\tmpz.apk" & J)
 objDOS.ExecuteCommand
 
 MyPath = Dir(BuildPath & "\")
@@ -3083,25 +3126,27 @@ Do Until MyPath = vbNullString
     MyPath = Dir
 Loop
 
-FileCopy App.path & "\files\tmp\tmpz.apk", App.path & "\" & idr & "." & an & ".apk"
+FileCopy apppath & "\files\tmp\tmpz.apk", apppath & "\" & idr & "." & an & ".apk"
 GoTo insta
 '-----------------------------------------------------
 
 fastbuild:
 
-FileCopy App.path & "\files\" & an & ".zip", App.path & "\files\tmp.zip"
-FileCopy App.path & "\files\tmp\scene.zip", App.path & "\files\scene.zip"
-objDOS.CommandLine = ("files\7za.exe a files\tmp.zip files\scene.zip")
+FileCopy apppath & "\files\" & an & ".zip", apppath & "\files\tmp.zip"
+FileCopy apppath & "\files\tmp\scene.zip", apppath & "\files\scene.zip"
+ChDir apppath
+ChDrive Left$(apppath, 2)
+objDOS.CommandLine = (apppath & "\files\7za.exe a " & J & apppath & "\files\tmp.zip" & J & " files\scene.zip" & J)
 objDOS.ExecuteCommand
-objDOS.CommandLine = ("files\7za.exe rn files\tmp.zip files\ assets\")
+objDOS.CommandLine = (apppath & "\files\7za.exe rn " & J & apppath & "\files\tmp.zip" & J & " files\ assets\")
 objDOS.ExecuteCommand
-Name App.path & "\files\tmp.zip" As App.path & "\files\tmp.apk"
+Name apppath & "\files\tmp.zip" As apppath & "\files\tmp.apk"
 txtOutputs.Text = txtOutputs.Text & vbNewLine & "Zipalign APK-file" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
-objDOS.CommandLine = ("files\zipalign.exe -f 4 " & J & App.path & "\files\tmp.apk" & J & " " & J & App.path & "\files\tmpz.apk" & J)
+objDOS.CommandLine = (apppath & "\files\zipalign.exe -f 4 " & J & apppath & "\files\tmp.apk" & J & " " & J & apppath & "\files\tmpz.apk" & J)
 objDOS.ExecuteCommand
 txtOutputs.Text = txtOutputs.Text & vbNewLine & "Sign APK-file" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
-objDOS.CommandLine = (java & " -Xmx1024m -jar " & J & "files\ApkSigner.jar" & J & " sign  --key " & J & "files\apkeasytool.pk8" & J & " --cert " & J & _
-     "files\apkeasytool.pem" & J & " --out " & J & "files\tmpz.apk" & J & " " & J & "files\tmpz.apk" & J)
+objDOS.CommandLine = (java & " -Xmx1024m -jar " & J & apppath & "\files\ApkSigner.jar" & J & " sign  --key " & J & apppath & "\files\apkeasytool.pk8" & J & " --cert " & J & _
+     apppath & "\files\apkeasytool.pem" & J & " --out " & J & apppath & "\files\tmpz.apk" & J & " " & J & apppath & "\files\tmpz.apk" & J)
 objDOS.ExecuteCommand
 MyPath = Dir(BuildPath & "\")
 Do Until MyPath = vbNullString
@@ -3111,7 +3156,7 @@ Do Until MyPath = vbNullString
     MyPath = Dir
 Loop
 
-FileCopy App.path & "\files\tmpz.apk", App.path & "\" & idr & "." & an & ".apk"
+FileCopy apppath & "\files\tmpz.apk", apppath & "\" & idr & "." & an & ".apk"
 
 
 
@@ -3119,26 +3164,26 @@ insta:
 
 If Check8.Value = False Then GoTo nex
 txtOutputs.Text = txtOutputs.Text & vbNewLine & "Try connecting to Quest for APK-install" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
-objDOS.CommandLine = ("files\adb.exe install -r " & J & App.path & "\" & idr & "." & an & ".apk" & J)
+objDOS.CommandLine = (apppath & "\files\adb.exe install -r " & J & apppath & "\" & idr & "." & an & ".apk" & J)
 If InStr(1, objDOS.ExecuteCommand, "connect error", 0) <> 0 Then ie = True
 adb = 1
-'objDOS.CommandLine = ("files\adb.exe kill-server")
+'objDOS.CommandLine = (apppath & "\files\adb.exe kill-server")
 'objDOS.ExecuteCommand
 
 nex:
 
-If Dir(App.path & "\files\tmp\_WORLD_MODEL.gltf.ovrscene") <> "" Then Kill App.path & "\files\tmp\_WORLD_MODEL.gltf.ovrscene"
-If Dir(App.path & "\files\tmp\scene.zip") <> "" Then Kill App.path & "\files\tmp\scene.zip"
-If Dir(App.path & "\files\scene.zip") <> "" Then Kill App.path & "\files\scene.zip"
-If Dir(App.path & "\files\tmp\_BACKGROUND_LOOP.ogg") <> "" Then Kill App.path & "\files\tmp\_BACKGROUND_LOOP.ogg"
-If Dir(App.path & "\files\tmp\tmpz.apk") <> "" Then Kill App.path & "\files\tmp\tmpz.apk"
-If Dir(App.path & "\files\tmp\tmp.apk") <> "" Then Kill App.path & "\files\tmp\tmp.apk"
-If Dir(App.path & "\files\tmpz.apk") <> "" Then Kill App.path & "\files\tmpz.apk"
-If Dir(App.path & "\files\tmp.apk") <> "" Then Kill App.path & "\files\tmp.apk"
-If Dir(App.path & "\files\tmp.zip") <> "" Then Kill App.path & "\files\tmp.apk"
-If Dir(App.path & "\files\tmp\temp_ec.wav") <> "" Then Kill App.path & "\files\tmp\temp_ec.wav"
+If Dir(apppath & "\files\tmp\_WORLD_MODEL.gltf.ovrscene") <> "" Then Kill apppath & "\files\tmp\_WORLD_MODEL.gltf.ovrscene"
+If Dir(apppath & "\files\tmp\scene.zip") <> "" Then Kill apppath & "\files\tmp\scene.zip"
+If Dir(apppath & "\files\scene.zip") <> "" Then Kill apppath & "\files\scene.zip"
+If Dir(apppath & "\files\tmp\_BACKGROUND_LOOP.ogg") <> "" Then Kill apppath & "\files\tmp\_BACKGROUND_LOOP.ogg"
+If Dir(apppath & "\files\tmp\tmpz.apk") <> "" Then Kill apppath & "\files\tmp\tmpz.apk"
+If Dir(apppath & "\files\tmp\tmp.apk") <> "" Then Kill apppath & "\files\tmp\tmp.apk"
+If Dir(apppath & "\files\tmpz.apk") <> "" Then Kill apppath & "\files\tmpz.apk"
+If Dir(apppath & "\files\tmp.apk") <> "" Then Kill apppath & "\files\tmp.apk"
+If Dir(apppath & "\files\tmp.zip") <> "" Then Kill apppath & "\files\tmp.apk"
+If Dir(apppath & "\files\tmp\temp_ec.wav") <> "" Then Kill apppath & "\files\tmp\temp_ec.wav"
 
-If GetINISetting("Save", "AutoClear", App.path & "\files\config.ini") = "1" Then If Dir(BuildPath & "\*.*") <> "" Then Kill BuildPath & "\*.*"
+If GetINISetting("Save", "AutoClear", apppath & "\files\config.ini") = "1" Then If Dir(BuildPath & "\*.*") <> "" Then Kill BuildPath & "\*.*"
 txtOutputs.Text = txtOutputs.Text & vbNewLine & "Build APK finished! " & Time & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
 
 If ie = True Then
@@ -3150,7 +3195,7 @@ If ie = True Then
    End If
 Else
    Label11.Caption = "Done!"
-   snd = PlaySound(App.path & "\files\gong.wav", ByVal 0&, &H20000 Or &H1)
+   snd = PlaySound(apppath & "\files\gong.wav", ByVal 0&, &H20000 Or &H1)
 End If
 
 End Sub
@@ -3240,7 +3285,7 @@ On Error Resume Next
 
 cl = ShowColorDialog(Me.hwnd, True, Form1.Check1.HoverBackColor)
 If cl = -1 Then Command2_Click: Exit Sub
-PutINISetting "Color", "HoverBackColor", HexIt(cl), App.path & "\files\config.ini"
+PutINISetting "Color", "HoverBackColor", HexIt(cl), apppath & "\files\config.ini"
 'col1 = Command1.Enabled
 For Each ctrl In Form1
     If ctrl.HoverBackColor <> "" Then
@@ -3297,7 +3342,7 @@ On Error Resume Next
 
 cl = ShowColorDialog(Me.hwnd, True, Boarder1.BackColor)
 If cl = -1 Then Command2_Click: Exit Sub
-PutINISetting "Color", "TitleBarColor", HexIt(cl), App.path & "\files\config.ini"
+PutINISetting "Color", "TitleBarColor", HexIt(cl), apppath & "\files\config.ini"
 Boarder1.BackColor = cl
 Label21.BackColor = cl
 Picture2.BackColor = cl
@@ -3318,7 +3363,7 @@ On Error Resume Next
 fo6 = BrowseForFolder(Me.hwnd, "Select new Build Folder")
 If fo6 = "" Then Command2_Click: Exit Sub
 BuildPath = fo6
-PutINISetting "Paths", "BuildPath", BuildPath, App.path & "\files\config.ini"
+PutINISetting "Paths", "BuildPath", BuildPath, apppath & "\files\config.ini"
 Command2_Click
 
 End Sub
@@ -3334,28 +3379,33 @@ End Sub
 
 Private Sub lvButtons_H4_Click()
 
-'On Error Resume Next
+On Error Resume Next
 
 J = Chr$(34)
+renunp = True
+
+If Dir(BuildPath & "\*.*") <> "" Then
+   Kill BuildPath & "\*.*"
+End If
 
 txtOutputs.Text = txtOutputs.Text & vbNewLine & "Extracting glTF-Files to ..\Build" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
 Pause 0.2
-objDOS.CommandLine = ("files\7za.exe e " & J & patapk & J & " -o" & J & BuildPath & J & " scene.zip -r -aoa > nul")
+objDOS.CommandLine = (apppath & "\files\7za.exe e " & J & patapk & J & " -o" & J & BuildPath & J & " scene.zip -r -aoa > nul")
 objDOS.ExecuteCommand
-objDOS.CommandLine = ("files\7za.exe e " & J & BuildPath & "\scene.zip" & J & " -o" & J & BuildPath & J & " _WORLD_MODEL.gltf.ovrscene -r -aoa > nul")
+objDOS.CommandLine = (apppath & "\files\7za.exe e " & J & BuildPath & "\scene.zip" & J & " -o" & J & BuildPath & J & " _WORLD_MODEL.gltf.ovrscene -r -aoa > nul")
 objDOS.ExecuteCommand
-objDOS.CommandLine = ("files\7za.exe e " & J & BuildPath & "\scene.zip" & J & " -o" & J & App.path & J & " _BACKGROUND_LOOP.ogg -r -aoa > nul")
+objDOS.CommandLine = (apppath & "\files\7za.exe e " & J & BuildPath & "\scene.zip" & J & " -o" & J & apppath & J & " _BACKGROUND_LOOP.ogg -r -aoa > nul")
 objDOS.ExecuteCommand
-objDOS.CommandLine = ("files\7za.exe e " & J & BuildPath & "\_WORLD_MODEL.gltf.ovrscene" & J & " -o" & J & BuildPath & J & " -aoa")
+objDOS.CommandLine = (apppath & "\files\7za.exe e " & J & BuildPath & "\_WORLD_MODEL.gltf.ovrscene" & J & " -o" & J & BuildPath & J & " -aoa")
 objDOS.ExecuteCommand
 
 Kill BuildPath & "\scene.zip"
 Kill BuildPath & "\_WORLD_MODEL.gltf.ovrscene"
 
-Drag App.path & "\_BACKGROUND_LOOP.ogg"
+Drag apppath & "\_BACKGROUND_LOOP.ogg"
 
 Label11.Caption = "Done!"
-snd = PlaySound(App.path & "\files\gong.wav", ByVal 0&, &H20000 Or &H1)
+snd = PlaySound(apppath & "\files\gong.wav", ByVal 0&, &H20000 Or &H1)
    
 End Sub
 
@@ -3367,7 +3417,7 @@ On Error Resume Next
 
 txtOutputs.Text = txtOutputs.Text & vbNewLine & "Try connecting to Quest for APK-install" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
 Pause 0.2
-objDOS.CommandLine = ("files\adb.exe install -r " & J & patapk & J)
+objDOS.CommandLine = (apppath & "\files\adb.exe install -r " & J & patapk & J)
 If InStr(1, objDOS.ExecuteCommand, "connect error", 0) <> 0 Then ie = True
 
 If ie = True Then
@@ -3379,7 +3429,7 @@ If ie = True Then
    End If
 Else
    Label11.Caption = "Done!"
-   snd = PlaySound(App.path & "\files\gong.wav", ByVal 0&, &H20000 Or &H1)
+   snd = PlaySound(apppath & "\files\gong.wav", ByVal 0&, &H20000 Or &H1)
 End If
 
 adb = 1
@@ -3400,7 +3450,7 @@ On Error Resume Next
 J = Chr$(34)
 
 out_text = True
-objDOS.CommandLine = (J & App.path & "\files\aapt.exe" & J & " d badging " & J & patapk & J)
+objDOS.CommandLine = (J & apppath & "\files\aapt.exe" & J & " d badging " & J & patapk & J)
 ff = objDOS.ExecuteCommand
 fields() = Split(ff, "'")
 For i = 0 To UBound(fields)
@@ -3408,7 +3458,7 @@ For i = 0 To UBound(fields)
 Next i
 txtOutputs.Text = txtOutputs.Text & vbNewLine & "Try connecting to Quest for APK-uninstall (" & pack2 & ")" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
 Pause 0.2
-objDOS.CommandLine = ("files\adb.exe uninstall " & pack2)
+objDOS.CommandLine = (apppath & "\files\adb.exe uninstall " & pack2)
 ff = objDOS.ExecuteCommand
 If InStr(1, ff, "connect error", 0) <> 0 Then ie = True
 If InStr(1, ff, "cannot Connect", 0) <> 0 Then ie = True
@@ -3420,10 +3470,41 @@ If ie = True Then
    ie = False
 Else
    Label11.Caption = "Done!"
-   snd = PlaySound(App.path & "\files\gong.wav", ByVal 0&, &H20000 Or &H1)
+   snd = PlaySound(apppath & "\files\gong.wav", ByVal 0&, &H20000 Or &H1)
 End If
 
 adb = 1
+
+End Sub
+
+Private Sub lvButtons_H7_Click()
+
+Dim fold As String
+Dim entry() As String
+Dim sa As String
+Dim path4 As String
+
+On Error Resume Next
+
+ChDir apppath
+ChDrive Left$(apppath, 2)
+adb = 1
+fold = ShellRun(apppath & "\files\adb.exe shell ls -lt /sdcard/Oculus/VideoShots", 4, True)
+entry = Split(fold, vbCrLf, , vbTextCompare)
+If entry(1) = "" Then
+   MessageBeep (16)
+   Label11.Caption = "Error!"
+   Exit Sub
+End If
+fold = Mid$(entry(1), InStr(1, entry(1), "com.oculus.vrshell", 1), Len(entry(1)) - InStr(1, entry(1), "com.oculus.vrshell", 1) + 1)
+sa = ShellRun(apppath & "\files\adb.exe pull /sdcard/Oculus/VideoShots/" & fold & " " & Chr$(34) & apppath & "\files\tmp" & Chr$(34), 4)
+path4 = save3(fold, apppath)
+If path4 = "" Then path4 = apppath
+FileCopy apppath & "\files\tmp\" & fold, path4
+Kill apppath & "\files\tmp\" & fold
+Beep
+ShellExecute hwnd, "open", path4, vbNullString, vbNullString, 1
+Reset
 
 End Sub
 
@@ -3431,21 +3512,21 @@ Private Sub Picture2_DblClick()
 
 On Error Resume Next
 
-Kill App.path & "\files\tmp\scene.zip"
-Kill App.path & "\files\tmp\tmp.apk"
-Kill App.path & "\files\ClassicHome\assets\scene.zip"
-Kill App.path & "\files\WinterLodge\assets\scene.zip"
-Kill App.path & "\files\SpaceStation\assets\scene.zip"
-If GetINISetting("Save", "TextureDelete", App.path & "\files\config.ini") = "1" Then
-   If Dir(App.path & "\files\texture_tmp\*.*") <> "" Then Kill App.path & "\files\texture_tmp\*.*"
-   RmDir App.path & "\files\texture_tmp"
+Kill apppath & "\files\tmp\scene.zip"
+Kill apppath & "\files\tmp\tmp.apk"
+Kill apppath & "\files\ClassicHome\assets\scene.zip"
+Kill apppath & "\files\WinterLodge\assets\scene.zip"
+Kill apppath & "\files\SpaceStation\assets\scene.zip"
+If GetINISetting("Save", "TextureDelete", apppath & "\files\config.ini") = "1" Then
+   If Dir(apppath & "\files\texture_tmp\*.*") <> "" Then Kill apppath & "\files\texture_tmp\*.*"
+   RmDir apppath & "\files\texture_tmp"
 End If
-PutINISetting "WindowPos", "Left", Form1.Left, App.path & "\files\config.ini"
-PutINISetting "WindowPos", "Top", Form1.Top, App.path & "\files\config.ini"
-PutINISetting "CheckValue", "Check", GetCheck, App.path & "\files\config.ini"
+PutINISetting "WindowPos", "Left", Form1.Left, apppath & "\files\config.ini"
+PutINISetting "WindowPos", "Top", Form1.Top, apppath & "\files\config.ini"
+PutINISetting "CheckValue", "Check", GetCheck, apppath & "\files\config.ini"
 If adb = 0 Then End
 If Check16.Value = False Then End
-objDOS.CommandLine = ("files\adb.exe kill-server")
+objDOS.CommandLine = (apppath & "\files\adb.exe kill-server")
 objDOS.ExecuteCommand
 End
 
@@ -3455,21 +3536,21 @@ Private Sub Picture3_Click()
 
 On Error Resume Next
 
-Kill App.path & "\files\tmp\scene.zip"
-Kill App.path & "\files\tmp\tmp.apk"
-Kill App.path & "\files\ClassicHome\assets\scene.zip"
-Kill App.path & "\files\WinterLodge\assets\scene.zip"
-Kill App.path & "\files\SpaceStation\assets\scene.zip"
-If GetINISetting("Save", "TextureDelete", App.path & "\files\config.ini") = "1" Then
-   If Dir(App.path & "\files\texture_tmp\*.*") <> "" Then Kill App.path & "\files\texture_tmp\*.*"
-   RmDir App.path & "\files\texture_tmp"
+Kill apppath & "\files\tmp\scene.zip"
+Kill apppath & "\files\tmp\tmp.apk"
+Kill apppath & "\files\ClassicHome\assets\scene.zip"
+Kill apppath & "\files\WinterLodge\assets\scene.zip"
+Kill apppath & "\files\SpaceStation\assets\scene.zip"
+If GetINISetting("Save", "TextureDelete", apppath & "\files\config.ini") = "1" Then
+   If Dir(apppath & "\files\texture_tmp\*.*") <> "" Then Kill apppath & "\files\texture_tmp\*.*"
+   RmDir apppath & "\files\texture_tmp"
 End If
-PutINISetting "WindowPos", "Left", Form1.Left, App.path & "\files\config.ini"
-PutINISetting "WindowPos", "Top", Form1.Top, App.path & "\files\config.ini"
-PutINISetting "CheckValue", "Check", GetCheck, App.path & "\files\config.ini"
+PutINISetting "WindowPos", "Left", Form1.Left, apppath & "\files\config.ini"
+PutINISetting "WindowPos", "Top", Form1.Top, apppath & "\files\config.ini"
+PutINISetting "CheckValue", "Check", GetCheck, apppath & "\files\config.ini"
 If adb = 0 Then End
 If Check16.Value = False Then End
-objDOS.CommandLine = ("files\adb.exe kill-server")
+objDOS.CommandLine = (apppath & "\files\adb.exe kill-server")
 objDOS.ExecuteCommand
 End
 
@@ -3479,21 +3560,21 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
 
 On Error Resume Next
 
-Kill App.path & "\files\tmp\scene.zip"
-Kill App.path & "\files\tmp\tmp.apk"
-Kill App.path & "\files\ClassicHome\assets\scene.zip"
-Kill App.path & "\files\WinterLodge\assets\scene.zip"
-Kill App.path & "\files\SpaceStation\assets\scene.zip"
-If GetINISetting("Save", "TextureDelete", App.path & "\files\config.ini") = "1" Then
-   If Dir(App.path & "\files\texture_tmp\*.*") <> "" Then Kill App.path & "\files\texture_tmp\*.*"
-   RmDir App.path & "\files\texture_tmp"
+Kill apppath & "\files\tmp\scene.zip"
+Kill apppath & "\files\tmp\tmp.apk"
+Kill apppath & "\files\ClassicHome\assets\scene.zip"
+Kill apppath & "\files\WinterLodge\assets\scene.zip"
+Kill apppath & "\files\SpaceStation\assets\scene.zip"
+If GetINISetting("Save", "TextureDelete", apppath & "\files\config.ini") = "1" Then
+   If Dir(apppath & "\files\texture_tmp\*.*") <> "" Then Kill apppath & "\files\texture_tmp\*.*"
+   RmDir apppath & "\files\texture_tmp"
 End If
-PutINISetting "WindowPos", "Left", Form1.Left, App.path & "\files\config.ini"
-PutINISetting "WindowPos", "Top", Form1.Top, App.path & "\files\config.ini"
-PutINISetting "CheckValue", "Check", GetCheck, App.path & "\files\config.ini"
+PutINISetting "WindowPos", "Left", Form1.Left, apppath & "\files\config.ini"
+PutINISetting "WindowPos", "Top", Form1.Top, apppath & "\files\config.ini"
+PutINISetting "CheckValue", "Check", GetCheck, apppath & "\files\config.ini"
 If adb = 0 Then End
 If Check16.Value = False Then End
-objDOS.CommandLine = ("files\adb.exe kill-server")
+objDOS.CommandLine = (apppath & "\files\adb.exe kill-server")
 objDOS.ExecuteCommand
 End
 
@@ -3750,7 +3831,7 @@ If k = "apk" Then
    End If
    J = Chr$(34)
    tme = txtOutputs.Text
-   objDOS.CommandLine = (J & App.path & "\files\aapt.exe" & J & " d badging " & J & pat & J)
+   objDOS.CommandLine = (J & apppath & "\files\aapt.exe" & J & " d badging " & J & pat & J)
    ff = objDOS.ExecuteCommand
    txtOutputs.Text = tme & "Added APK: " & pat & vbNewLine & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
    fields() = Split(ff, "'")
@@ -3841,7 +3922,7 @@ If k = "apk" Then
    End If
    J = Chr$(34)
    tme = txtOutputs.Text
-   objDOS.CommandLine = (J & App.path & "\files\aapt.exe" & J & " d badging " & J & pat & J)
+   objDOS.CommandLine = (J & apppath & "\files\aapt.exe" & J & " d badging " & J & pat & J)
    ff = objDOS.ExecuteCommand
    txtOutputs.Text = tme & "Added APK: " & pat & vbNewLine & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
    fields() = Split(ff, "'")
@@ -3913,24 +3994,24 @@ Dim t2 As String
 
 If start_adb = True Then
    start_adb = False
-    If GetINISetting("Save", "ADBKill", App.path & "\files\config.ini") = "1" Then
+    If GetINISetting("Save", "ADBKill", apppath & "\files\config.ini") = "1" Then
        Check16.Value = True
     Else
        Check16.Value = False
        If IsEXERunning("adb.exe") = True Then
-          objDOS.CommandLine = ("files\adb.exe devices")
+          objDOS.CommandLine = (apppath & "\files\adb.exe devices")
           out_text = True
           qip = objDOS.ExecuteCommand
-          If InStr(1, qip, GetINISetting("QuestIP", "Adress", App.path & "\files\config.ini"), vbTextCompare) > 0 Then
+          If InStr(1, qip, GetINISetting("QuestIP", "Adress", apppath & "\files\config.ini"), vbTextCompare) > 0 Then
              Label22.ForeColor = RGB(130, 255, 130)
              Check10.Value = True
              adb = 1
              wcon = True
-             qip = GetINISetting("QuestIP", "Adress", App.path & "\files\config.ini")
-             txtOutputs.Text = txtOutputs.Text & vbNewLine & "Found active ADB-Connection (WiFi): " & qip & ":" & GetINISetting("QuestIP", "Port", App.path & "\files\config.ini") & vbNewLine & vbNewLine
+             qip = GetINISetting("QuestIP", "Adress", apppath & "\files\config.ini")
+             txtOutputs.Text = txtOutputs.Text & vbNewLine & "Found active ADB-Connection (WiFi): " & qip & ":" & GetINISetting("QuestIP", "Port", apppath & "\files\config.ini") & vbNewLine & vbNewLine
              txtOutputs.SelStart = Len(txtOutputs.Text)
           Else
-             qip = GetINISetting("QuestIP", "Adress", App.path & "\files\config.ini")
+             qip = GetINISetting("QuestIP", "Adress", apppath & "\files\config.ini")
              adb = 1
              txtOutputs.Text = txtOutputs.Text & vbNewLine & "Found active ADB-Connection(USB) " & vbNewLine & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
           End If
@@ -3938,7 +4019,7 @@ If start_adb = True Then
     End If
 End If
 
-If GetINISetting("Save", "WiFiAuto", App.path & "\files\config.ini") = "1" And wifi_auto = True Then
+If GetINISetting("Save", "WiFiAuto", apppath & "\files\config.ini") = "1" And wifi_auto = True Then
    wifi_auto = False
    Call Check10_Click
 End If
@@ -3961,7 +4042,7 @@ If wcon = True Then
       za2 = 1
       If (GetRTTAndHopCount(inet_addr(qip), 0, 20, 200) = 1) = True Then
          Label22.ForeColor = RGB(130, 255, 130)
-         objDOS.CommandLine = ("files\adb.exe shell settings get global wifi_on")
+         objDOS.CommandLine = (apppath & "\files\adb.exe shell settings get global wifi_on")
          out_text = True
          t2 = objDOS.ExecuteCommand
          If t2 = 1 Then
@@ -3973,7 +4054,7 @@ If wcon = True Then
             Message "Error: Lost WiFi Connection!"
             adb = 0
             wcon = False
-            objDOS.CommandLine = ("files\adb.exe kill-server")
+            objDOS.CommandLine = (apppath & "\files\adb.exe kill-server")
             objDOS.ExecuteCommand
             Exit Sub
          End If
@@ -3992,7 +4073,7 @@ If wcon = True Then
          Message "Error: Lost WiFi Connection/IP!"
          adb = 0
          wcon = False
-         objDOS.CommandLine = ("files\adb.exe kill-server")
+         objDOS.CommandLine = (apppath & "\files\adb.exe kill-server")
          objDOS.ExecuteCommand
          Exit Sub
       End If
@@ -4104,7 +4185,7 @@ Form7.Check4.Value = Check4.Value
 End Sub
 
 Private Sub Command1_Click()
-'& " > files\log.txt 2>&1"
+'& " > " & apppath & "\files\log.txt 2>&1"
 'On Error Resume Next
 
 On Error Resume Next
@@ -4115,7 +4196,7 @@ Dim t As String
 
 J = Chr$(34)
 
-objDOS.CommandLine = ("files\7za.exe e " & J & patapk & J & " -ofiles\tmp assets\scene.zip -aoa > nul")
+objDOS.CommandLine = (apppath & "\files\7za.exe e " & J & patapk & J & " -o" & J & apppath & "\files\tmp" & J & " assets\scene.zip -aoa > nul")
 objDOS.ExecuteCommand
 
 'If pataud = "" Or Option1.Value = True And Check3.Value = "0" Then GoTo switch
@@ -4124,75 +4205,75 @@ If pataud = "" And Check2.Value = False And Check3.Value = False Then GoTo switc
 
 If Option2.Value = False Then GoTo switchaud
 ' Nur Audio tauschen:
-objDOS.CommandLine = ("files\7za.exe e files\tmp\scene.zip -ofiles\tmp -aoa")
+objDOS.CommandLine = (apppath & "\files\7za.exe e " & J & apppath & "\files\tmp\scene.zip" & J & " -o" & J & apppath & "\files\tmp" & J & " -aoa")
 objDOS.ExecuteCommand
-If Dir(App.path & "\files\tmp\scene.zip") <> "" Then Kill App.path & "\files\tmp\scene.zip"
-If Dir(App.path & "\files\tmp\_BACKGROUND_LOOP.ogg") <> "" Then Kill App.path & "\files\tmp\_BACKGROUND_LOOP.ogg"
+If Dir(apppath & "\files\tmp\scene.zip") <> "" Then Kill apppath & "\files\tmp\scene.zip"
+If Dir(apppath & "\files\tmp\_BACKGROUND_LOOP.ogg") <> "" Then Kill apppath & "\files\tmp\_BACKGROUND_LOOP.ogg"
 
-If Check2.Value = True Then FileCopy App.path & "\files\default.ogg", App.path & "\files\tmp\_BACKGROUND_LOOP.ogg": GoTo tell
-If Check3.Value = True Then FileCopy App.path & "\files\silent.ogg", App.path & "\files\tmp\_BACKGROUND_LOOP.ogg": GoTo tell
+If Check2.Value = True Then FileCopy apppath & "\files\default.ogg", apppath & "\files\tmp\_BACKGROUND_LOOP.ogg": GoTo tell
+If Check3.Value = True Then FileCopy apppath & "\files\silent.ogg", apppath & "\files\tmp\_BACKGROUND_LOOP.ogg": GoTo tell
 If LCase(Right$(Label9.Caption, 3)) = "ogg" Then
    If Check4.Value = False And Check1.Value = False Then
-      FileCopy aud, App.path & "\files\tmp\_BACKGROUND_LOOP.ogg"
+      FileCopy aud, apppath & "\files\tmp\_BACKGROUND_LOOP.ogg"
       GoTo tell
    End If
 End If
 If Check1.Value = True Then
    txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Encode Audio File..." & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
    Pause (0.2)
-   objDOS.CommandLine = ("files\sox.exe -S " & J & aud & J & " -C 3 " & J & App.path & "\files\tmp\_BACKGROUND_LOOP.ogg" & J & " vol -" & lvButtons_H.Caption & " dB speed 0.92")
+   objDOS.CommandLine = (apppath & "\files\sox.exe -S " & J & aud & J & " -C 3 " & J & apppath & "\files\tmp\_BACKGROUND_LOOP.ogg" & J & " vol -" & lvButtons_H.Caption & " dB speed 0.92")
    objDOS.ExecuteCommand
 Else
    txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Encode Audio File..." & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
    Pause (0.2)
-   objDOS.CommandLine = ("files\sox.exe -S " & J & aud & J & " -C 3 " & J & App.path & "\files\tmp\_BACKGROUND_LOOP.ogg" & J)
+   objDOS.CommandLine = (apppath & "\files\sox.exe -S " & J & aud & J & " -C 3 " & J & apppath & "\files\tmp\_BACKGROUND_LOOP.ogg" & J & " speed 0.92")
    objDOS.ExecuteCommand
 End If
 
 tell: 'ohne switch
 '--------------------------------------------------------------
 
-objDOS.CommandLine = ("files\7za.exe a files\tmp\scene.zip " & J & App.path & "\files\tmp\_WORLD_MODEL.gltf.ovrscene" & J & " " & J & App.path & "\files\tmp\_BACKGROUND_LOOP.ogg" & J)
+objDOS.CommandLine = (apppath & "\files\7za.exe a " & J & apppath & "\files\tmp\scene.zip" & J & " " & J & apppath & "\files\tmp\_WORLD_MODEL.gltf.ovrscene" & J & " " & J & apppath & "\files\tmp\_BACKGROUND_LOOP.ogg" & J)
 objDOS.ExecuteCommand
-If Dir(App.path & "\files\tmp\_BACKGROUND_LOOP.ogg") <> "" Then Kill App.path & "\files\tmp\_BACKGROUND_LOOP.ogg"
-Kill App.path & "\files\tmp\_WORLD_MODEL.gltf.ovrscene"
+If Dir(apppath & "\files\tmp\_BACKGROUND_LOOP.ogg") <> "" Then Kill apppath & "\files\tmp\_BACKGROUND_LOOP.ogg"
+Kill apppath & "\files\tmp\_WORLD_MODEL.gltf.ovrscene"
 If pack = "com.oculus.environment.prod.winterlodge" Then
-   ap = "files\WinterLodge\assets\"
-   ap1 = "files\WinterLodge"
+   ap = apppath & "\files\WinterLodge\assets\"
+   ap1 = apppath & "\files\WinterLodge"
 End If
 If pack = "com.oculus.environment.prod.rifthome" Then
-   ap = "files\ClassicHome\assets\"
-   ap1 = "files\ClassicHome"
+   ap = apppath & "\files\ClassicHome\assets\"
+   ap1 = apppath & "\files\ClassicHome"
 End If
 If pack = "com.oculus.environment.prod.spacestation" Then
-   ap = "files\SpaceStation\assets\"
-   ap1 = "files\SpaceStation"
+   ap = apppath & "\files\SpaceStation\assets\"
+   ap1 = apppath & "\files\SpaceStation"
 End If
 
-FileCopy App.path & "\files\tmp\scene.zip", ap & "scene.zip"
-objDOS.CommandLine = (java & " -Xmx1024m -jar " & J & "files\apktool_2.3.4.jar" & J & " b -f -o " & J & "files\tmp\tmp.apk" & J & " " & J & ap1 & J)
+FileCopy apppath & "\files\tmp\scene.zip", ap & "scene.zip"
+objDOS.CommandLine = (java & " -Xmx1024m -jar " & J & apppath & "\files\apktool_2.3.4.jar" & J & " b -f -o " & J & apppath & "\files\tmp\tmp.apk" & J & " " & J & ap1 & J)
 objDOS.ExecuteCommand
 txtOutputs.Text = txtOutputs.Text & vbNewLine & "Zipalign APK-file" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
-objDOS.CommandLine = ("files\zipalign.exe -f 4 " & J & App.path & "\files\tmp\tmp.apk" & J & " " & J & App.path & "\files\tmp\tmpz.apk" & J)
+objDOS.CommandLine = (apppath & "\files\zipalign.exe -f 4 " & J & apppath & "\files\tmp\tmp.apk" & J & " " & J & apppath & "\files\tmp\tmpz.apk" & J)
 objDOS.ExecuteCommand
 txtOutputs.Text = txtOutputs.Text & vbNewLine & "Sign APK-file" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
-objDOS.CommandLine = (java & " -Xmx1024m -jar " & J & "files\ApkSigner.jar" & J & " sign  --key " & J & "files\apkeasytool.pk8" & J & " --cert " & J & _
-     "files\apkeasytool.pem" & J & " --out " & J & "files\tmp\tmpz.apk" & J & " " & J & "files\tmp\tmpz.apk" & J)
+objDOS.CommandLine = (java & " -Xmx1024m -jar " & J & apppath & "\files\ApkSigner.jar" & J & " sign  --key " & J & apppath & "\files\apkeasytool.pk8" & J & " --cert " & J & _
+     apppath & "\files\apkeasytool.pem" & J & " --out " & J & apppath & "\files\tmp\tmpz.apk" & J & " " & J & apppath & "\files\tmp\tmpz.apk" & J)
 objDOS.ExecuteCommand
 
 On Error Resume Next
 
 sa = save(Rename(ap1), patapk)
 If sa = "" Then GoTo ende2
-FileCopy App.path & "\files\tmp\tmpz.apk", sa
+FileCopy apppath & "\files\tmp\tmpz.apk", sa
 '" & j & "
 If Check5.Value = True Then
    txtOutputs.Text = txtOutputs.Text & vbNewLine & "Try connecting to Quest for APK-install" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
    Pause (0.1)
-   objDOS.CommandLine = ("files\adb.exe install -r " & J & sa & J)
+   objDOS.CommandLine = (apppath & "\files\adb.exe install -r " & J & sa & J)
    objDOS.ExecuteCommand
    adb = 1
-   'objDOS.CommandLine = ("files\adb.exe kill-server")
+   'objDOS.CommandLine = (apppath & "\files\adb.exe kill-server")
    'objDOS.ExecuteCommand
 End If
 
@@ -4205,33 +4286,33 @@ switchaud:
 If Label9.Caption = "" Then
    If Check2.Value = False And Check3.Value = False Then GoTo switch
 End If
-objDOS.CommandLine = ("files\7za.exe e files\tmp\scene.zip -ofiles\tmp -aoa")
+objDOS.CommandLine = (apppath & "\files\7za.exe e " & J & apppath & "\files\tmp\scene.zip" & J & " -o" & J & apppath & "\files\tmp" & J & " -aoa")
 objDOS.ExecuteCommand
-Kill App.path & "\files\tmp\scene.zip"
-Kill App.path & "\files\tmp\_BACKGROUND_LOOP.ogg"
-If Check2.Value = True Then FileCopy App.path & "\files\default.ogg", App.path & "\files\tmp\_BACKGROUND_LOOP.ogg"
-If Check3.Value = True Then FileCopy App.path & "\files\silent.ogg", App.path & "\files\tmp\_BACKGROUND_LOOP.ogg"
+Kill apppath & "\files\tmp\scene.zip"
+Kill apppath & "\files\tmp\_BACKGROUND_LOOP.ogg"
+If Check2.Value = True Then FileCopy apppath & "\files\default.ogg", apppath & "\files\tmp\_BACKGROUND_LOOP.ogg"
+If Check3.Value = True Then FileCopy apppath & "\files\silent.ogg", apppath & "\files\tmp\_BACKGROUND_LOOP.ogg"
 If LCase(Right$(Label9.Caption, 3)) = "ogg" Then
    If Check4.Value = False And Check1.Value = False Then
-      FileCopy aud, App.path & "\files\tmp\_BACKGROUND_LOOP.ogg"
+      FileCopy aud, apppath & "\files\tmp\_BACKGROUND_LOOP.ogg"
       GoTo tell
    End If
 End If
 If LCase(Right$(Label9.Caption, 3)) = "ogg" Then
    If Check4.Value = False And Check4.Value = False Then
-      FileCopy aud, App.path & "\files\tmp\_BACKGROUND_LOOP.ogg"
+      FileCopy aud, apppath & "\files\tmp\_BACKGROUND_LOOP.ogg"
       GoTo switch
    End If
 End If
 If Check1.Value = True Then
    txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Encode Audio File..." & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
    Pause (0.2)
-   objDOS.CommandLine = ("files\sox.exe -S " & J & aud & J & " -C 3 " & J & App.path & "\files\tmp\_BACKGROUND_LOOP.ogg" & J & " vol -" & lvButtons_H.Caption & " dB speed 0.92")
+   objDOS.CommandLine = (apppath & "\files\sox.exe -S " & J & aud & J & " -C 3 " & J & apppath & "\files\tmp\_BACKGROUND_LOOP.ogg" & J & " vol -" & lvButtons_H.Caption & " dB speed 0.92")
    objDOS.ExecuteCommand
 Else
    txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Encode Audio File..." & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
    Pause (0.2)
-   objDOS.CommandLine = ("files\sox.exe -S " & J & aud & J & " -C 3 " & J & App.path & "\files\tmp\_BACKGROUND_LOOP.ogg" & J)
+   objDOS.CommandLine = (apppath & "\files\sox.exe -S " & J & aud & J & " -C 3 " & J & apppath & "\files\tmp\_BACKGROUND_LOOP.ogg" & J & " speed 0.92")
    objDOS.ExecuteCommand
 End If
 
@@ -4239,57 +4320,57 @@ End If
 switch:
 
 If Label8.Caption <> "" Then
-   objDOS.CommandLine = ("files\7za.exe a files\tmp\scene.zip " & J & App.path & "\files\tmp\_WORLD_MODEL.gltf.ovrscene" & J & " " & J & App.path & "\files\tmp\_BACKGROUND_LOOP.ogg" & J)
+   objDOS.CommandLine = (apppath & "\files\7za.exe a " & J & apppath & "\files\tmp\scene.zip" & J & " " & J & apppath & "\files\tmp\_WORLD_MODEL.gltf.ovrscene" & J & " " & J & apppath & "\files\tmp\_BACKGROUND_LOOP.ogg" & J)
    objDOS.ExecuteCommand
 End If
 If lvButtons_H1.Value = True Then
-   ap = "files\WinterLodge\assets\"
-   ap1 = "files\WinterLodge"
+   ap = apppath & "\files\WinterLodge\assets\"
+   ap1 = apppath & "\files\WinterLodge"
 End If
 If lvButtons_H2.Value = True Then
-   ap = "files\ClassicHome\assets\"
-   ap1 = "files\ClassicHome"
+   ap = apppath & "\files\ClassicHome\assets\"
+   ap1 = apppath & "\files\ClassicHome"
 End If
 If lvButtons_H3.Value = True Then
-   ap = "files\SpaceStation\assets\"
-   ap1 = "files\SpaceStation"
+   ap = apppath & "\files\SpaceStation\assets\"
+   ap1 = apppath & "\files\SpaceStation"
 End If
-FileCopy App.path & "\files\tmp\scene.zip", ap & "scene.zip"
-If Dir(App.path & "\files\tmp\_BACKGROUND_LOOP.ogg") <> "" Then Kill App.path & "\files\tmp\_BACKGROUND_LOOP.ogg"
-If Dir(App.path & "\files\tmp\_WORLD_MODEL.gltf.ovrscene") <> "" Then Kill App.path & "\files\tmp\_WORLD_MODEL.gltf.ovrscene"
-objDOS.CommandLine = (java & " -Xmx1024m -jar " & J & "files\apktool_2.3.4.jar" & J & " b -f -o " & J & "files\tmp\tmp.apk" & J & " " & J & ap1 & J)
+FileCopy apppath & "\files\tmp\scene.zip", ap & "scene.zip"
+If Dir(apppath & "\files\tmp\_BACKGROUND_LOOP.ogg") <> "" Then Kill apppath & "\files\tmp\_BACKGROUND_LOOP.ogg"
+If Dir(apppath & "\files\tmp\_WORLD_MODEL.gltf.ovrscene") <> "" Then Kill apppath & "\files\tmp\_WORLD_MODEL.gltf.ovrscene"
+objDOS.CommandLine = (java & " -Xmx1024m -jar " & J & apppath & "\files\apktool_2.3.4.jar" & J & " b -f -o " & J & apppath & "\files\tmp\tmp.apk" & J & " " & J & ap1 & J)
 objDOS.ExecuteCommand
 txtOutputs.Text = txtOutputs.Text & vbNewLine & "Zipalign APK-file" & vbNewLine & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
-objDOS.CommandLine = ("files\zipalign.exe -f 4 " & J & App.path & "\files\tmp\tmp.apk" & J & " " & J & App.path & "\files\tmp\tmpz.apk" & J)
+objDOS.CommandLine = (apppath & "\files\zipalign.exe -f 4 " & J & apppath & "\files\tmp\tmp.apk" & J & " " & J & apppath & "\files\tmp\tmpz.apk" & J)
 objDOS.ExecuteCommand
 txtOutputs.Text = txtOutputs.Text & vbNewLine & "Sign APK-file" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
-objDOS.CommandLine = (java & " -Xmx1024m -jar " & J & "files\ApkSigner.jar" & J & " sign  --key " & J & "files\apkeasytool.pk8" & J & " --cert " & J & _
-     "files\apkeasytool.pem" & J & " --out " & J & "files\tmp\tmpz.apk" & J & " " & J & "files\tmp\tmpz.apk" & J)
+objDOS.CommandLine = (java & " -Xmx1024m -jar " & J & apppath & "\files\ApkSigner.jar" & J & " sign  --key " & J & apppath & "\files\apkeasytool.pk8" & J & " --cert " & J & _
+     apppath & "\files\apkeasytool.pem" & J & " --out " & J & apppath & "\files\tmp\tmpz.apk" & J & " " & J & apppath & "\files\tmp\tmpz.apk" & J)
 objDOS.ExecuteCommand
 
 On Error Resume Next
 
 sa = save(Rename(ap1), patapk)
 If sa = "" Then GoTo ende
-FileCopy App.path & "\files\tmp\tmpz.apk", sa
+FileCopy apppath & "\files\tmp\tmpz.apk", sa
 '" & j & "
 If Check5.Value = True Then
    txtOutputs.Text = txtOutputs.Text & vbNewLine & "Try connecting to Quest for APK-install" & vbNewLine & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
    Pause (0.1)
-   objDOS.CommandLine = ("files\adb.exe install -r " & J & sa & J)
+   objDOS.CommandLine = (apppath & "\files\adb.exe install -r " & J & sa & J)
    objDOS.ExecuteCommand
    adb = 1
-   'objDOS.CommandLine = ("files\adb.exe kill-server")
+   'objDOS.CommandLine = (apppath & "\files\adb.exe kill-server")
    'objDOS.ExecuteCommand
 End If
 
 ende:
 
-If Dir(App.path & "\files\tmp\tmpz.apk") <> "" Then Kill App.path & "\files\tmp\tmpz.apk"
-If Dir(App.path & "\files\tmp\tmp.apk") <> "" Then Kill App.path & "\files\tmp\tmp.apk"
-If Dir(App.path & "\files\tmp\tmp.zip") <> "" Then Kill App.path & "\files\tmp\tmp.apk"
-If Dir(App.path & "\files\tmp\scene.zip") <> "" Then Kill App.path & "\files\tmp\scene.zip"
-If Dir(App.path & "\files\tmp\temp_ec.wav") <> "" Then Kill App.path & "\files\tmp\temp_ec.wav"
+If Dir(apppath & "\files\tmp\tmpz.apk") <> "" Then Kill apppath & "\files\tmp\tmpz.apk"
+If Dir(apppath & "\files\tmp\tmp.apk") <> "" Then Kill apppath & "\files\tmp\tmp.apk"
+If Dir(apppath & "\files\tmp\tmp.zip") <> "" Then Kill apppath & "\files\tmp\tmp.apk"
+If Dir(apppath & "\files\tmp\scene.zip") <> "" Then Kill apppath & "\files\tmp\scene.zip"
+If Dir(apppath & "\files\tmp\temp_ec.wav") <> "" Then Kill apppath & "\files\tmp\temp_ec.wav"
 Deaktiv
 
 End Sub
@@ -4301,21 +4382,21 @@ On Error Resume Next
 
 txtOutputs.Text = txtOutputs.Text & vbNewLine & "All operations finished!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
 Label11.Caption = "DONE!"
-snd = PlaySound(App.path & "\files\gong.wav", ByVal 0&, &H20000 Or &H1)
-Command1.Enabled = False
-Option1.Enabled = False
-Option2.Enabled = False
-Check1.Enabled = False
-Check2.Enabled = False
-Check3.Enabled = False
-Check4.Enabled = False
-Check5.Enabled = False
-Check6.Enabled = False
-Check0.Enabled = False
-Check7.Enabled = False
-Check8.Enabled = False
-Check9.Enabled = False
-Check10.Enabled = False
+snd = PlaySound(apppath & "\files\gong.wav", ByVal 0&, &H20000 Or &H1)
+'Command1.Enabled = False
+'Option1.Enabled = False
+'Option2.Enabled = False
+'Check1.Enabled = False
+'Check2.Enabled = False
+'Check3.Enabled = False
+'Check4.Enabled = False
+'Check5.Enabled = False
+'Check6.Enabled = False
+'Check0.Enabled = False
+'Check7.Enabled = False
+'Check8.Enabled = False
+'Check9.Enabled = False
+'Check10.Enabled = False
 
 End Function
 
@@ -4407,6 +4488,44 @@ End If
 
 End Function
 
+Private Function save3(filename As String, path As String) As String
+
+On Error Resume Next
+
+Dim filebox As OPENFILENAME
+Dim fname As String
+Dim result As Long
+
+With filebox
+    .lStructSize = Len(filebox)
+    .hwndOwner = Me.hwnd
+    .hInstance = 0
+    .lpstrFilter = "mp4 File (*.mp4)" & vbNullChar & "*.mp4" & vbNullChar
+    .nMaxCustomFilter = 0
+    .nFilterIndex = 1
+    .lpstrFileTitle = "454544" & vbNullChar
+    .lpstrFile = filename & Space(257 - Len(filename)) & vbNullChar
+    .nMaxFile = Len(.lpstrFile)
+    .lpstrFileTitle = Space(256) & vbNullChar
+    .nMaxFileTitle = Len(.lpstrFileTitle)
+    .lpstrInitialDir = path & vbNullChar
+    .lpstrTitle = "Save Video as" & vbNullChar
+    .flags = OFN_PATHMUSTEXIST Or OFN_HIDEREADONLY Or OFN_OVERWRITEPROMPT
+    .nFileOffset = 0
+    .nFileExtension = 0
+    .lCustData = 0
+    .lpfnHook = 0
+End With
+result = GetSaveFileName(filebox)
+If result <> 0 Then
+    fname = Left(filebox.lpstrFile, InStr(filebox.lpstrFile, vbNullChar) - 1)
+    save3 = fname
+Else
+    save3 = ""
+End If
+
+End Function
+
 Private Function create(fu As Integer, fu2 As Integer) As String
 
 On Error Resume Next
@@ -4441,87 +4560,87 @@ If Dir$(BuildPath & "\*.zip") <> "" Then
    Message "ZIP file found in .\Build, Error!"
    Exit Function
 End If
-If Dir(App.path & "\files\tmp\_WORLD_MODEL.gltf.ovrscene") <> "" Then Kill App.path & "\files\tmp\_WORLD_MODEL.gltf.ovrscene"
-If Dir(App.path & "\files\tmp\scene.zip") <> "" Then Kill App.path & "\files\tmp\scene.zip"
-If Dir(App.path & "\files\tmp\_BACKGROUND_LOOP.ogg") <> "" Then Kill App.path & "\files\tmp\_BACKGROUND_LOOP.ogg"
+If Dir(apppath & "\files\tmp\_WORLD_MODEL.gltf.ovrscene") <> "" Then Kill apppath & "\files\tmp\_WORLD_MODEL.gltf.ovrscene"
+If Dir(apppath & "\files\tmp\scene.zip") <> "" Then Kill apppath & "\files\tmp\scene.zip"
+If Dir(apppath & "\files\tmp\_BACKGROUND_LOOP.ogg") <> "" Then Kill apppath & "\files\tmp\_BACKGROUND_LOOP.ogg"
 
 'If Check2.Value = "1" Then
-'   FileCopy App.path & "\files\default.ogg", App.path & "\files\tmp\_BACKGROUND_LOOP.ogg"
+'   FileCopy apppath & "\files\default.ogg", apppath & "\files\tmp\_BACKGROUND_LOOP.ogg"
 '   GoTo tell
 'End If
 If fu = "1" Then
-   FileCopy App.path & "\files\silent.ogg", App.path & "\files\tmp\_BACKGROUND_LOOP.ogg"
+   FileCopy apppath & "\files\silent.ogg", apppath & "\files\tmp\_BACKGROUND_LOOP.ogg"
    GoTo tell
 End If
 If LCase(Right$(Label9.Caption, 3)) = "ogg" Then
    If Check4.Value = False And Check1.Value = False Then
-      FileCopy aud, App.path & "\files\tmp\_BACKGROUND_LOOP.ogg"
+      FileCopy aud, apppath & "\files\tmp\_BACKGROUND_LOOP.ogg"
       GoTo tell
    End If
 End If
 If fu = 0 And Check2.Value = True Then
-   FileCopy App.path & "\files\default.ogg", App.path & "\files\tmp\_BACKGROUND_LOOP.ogg"
+   FileCopy apppath & "\files\default.ogg", apppath & "\files\tmp\_BACKGROUND_LOOP.ogg"
    GoTo tell
 End If
 If Label9.Caption = "" And Check2.Value = False And Check3.Value = False Then GoTo killer
 If Check1.Value = True Then
    txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Encode Audio File..." & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
    Pause (0.2)
-   objDOS.CommandLine = ("files\sox.exe -S " & J & aud & J & " -C 3 " & J & App.path & "\files\tmp\_BACKGROUND_LOOP.ogg" & J & " vol -" & lvButtons_H.Caption & " dB speed 0.92")
+   objDOS.CommandLine = (apppath & "\files\sox.exe -S " & J & aud & J & " -C 3 " & J & apppath & "\files\tmp\_BACKGROUND_LOOP.ogg" & J & " vol -" & lvButtons_H.Caption & " dB speed 0.92")
    objDOS.ExecuteCommand
 Else
    txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Encode Audio File..." & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
    Pause (0.2)
-   objDOS.CommandLine = ("files\sox.exe -S " & J & aud & J & " -C 3 " & J & App.path & "\files\tmp\_BACKGROUND_LOOP.ogg" & J)
+   objDOS.CommandLine = (apppath & "\files\sox.exe -S " & J & aud & J & " -C 3 " & J & apppath & "\files\tmp\_BACKGROUND_LOOP.ogg" & J & " speed 0.92")
    objDOS.ExecuteCommand
 End If
 
 killer:
 
-If Dir(App.path & "\files\tmpz.apk") <> "" Then Kill App.path & "\files\tmpz.apk"
-If Dir(App.path & "\files\tmp.apk") <> "" Then Kill App.path & "\files\tmp.apk"
-If Dir(App.path & "\files\tmp.zip") <> "" Then Kill App.path & "\files\tmp.apk"
-If Dir(App.path & "\files\scene.zip") <> "" Then Kill App.path & "\files\scene.zip"
-If Dir(App.path & "\files\tmp\temp_ec.wav") <> "" Then Kill App.path & "\files\tmp\temp_ec.wav"
+If Dir(apppath & "\files\tmpz.apk") <> "" Then Kill apppath & "\files\tmpz.apk"
+If Dir(apppath & "\files\tmp.apk") <> "" Then Kill apppath & "\files\tmp.apk"
+If Dir(apppath & "\files\tmp.zip") <> "" Then Kill apppath & "\files\tmp.apk"
+If Dir(apppath & "\files\scene.zip") <> "" Then Kill apppath & "\files\scene.zip"
+If Dir(apppath & "\files\tmp\temp_ec.wav") <> "" Then Kill apppath & "\files\tmp\temp_ec.wav"
 
 tell:
 '--------------------------------------------------------------
-objDOS.CommandLine = ("files\7za.exe a files\tmp\_WORLD_MODEL.gltf.ovrscene.zip " & J & BuildPath & "\*" & J)
+objDOS.CommandLine = (apppath & "\files\7za.exe a " & J & apppath & "\files\tmp\_WORLD_MODEL.gltf.ovrscene.zip" & J & " " & J & BuildPath & "\*" & J)
 objDOS.ExecuteCommand
-Name App.path & "\files\tmp\_WORLD_MODEL.gltf.ovrscene.zip" As App.path & "\files\tmp\_WORLD_MODEL.gltf.ovrscene"
-If Dir("files\tmp\_BACKGROUND_LOOP.ogg") = "" Then FileCopy App.path & "\files\silent.ogg", App.path & "\files\tmp\_BACKGROUND_LOOP.ogg"
-objDOS.CommandLine = ("files\7za.exe a files\tmp\scene.zip " & J & App.path & "\files\tmp\_WORLD_MODEL.gltf.ovrscene" & J & " " & J & App.path & "\files\tmp\_BACKGROUND_LOOP.ogg" & J)
+Name apppath & "\files\tmp\_WORLD_MODEL.gltf.ovrscene.zip" As apppath & "\files\tmp\_WORLD_MODEL.gltf.ovrscene"
+If Dir(apppath & "\files\tmp\_BACKGROUND_LOOP.ogg") = "" Then FileCopy apppath & "\files\silent.ogg", apppath & "\files\tmp\_BACKGROUND_LOOP.ogg"
+objDOS.CommandLine = (apppath & "\files\7za.exe a " & J & apppath & "\files\tmp\scene.zip" & J & " " & J & apppath & "\files\tmp\_WORLD_MODEL.gltf.ovrscene" & J & " " & J & apppath & "\files\tmp\_BACKGROUND_LOOP.ogg" & J)
 objDOS.ExecuteCommand
-If Dir(App.path & "\files\tmp\_BACKGROUND_LOOP.ogg") <> "" Then Kill App.path & "\files\tmp\_BACKGROUND_LOOP.ogg"
-Kill App.path & "\files\tmp\_WORLD_MODEL.gltf.ovrscene"
+If Dir(apppath & "\files\tmp\_BACKGROUND_LOOP.ogg") <> "" Then Kill apppath & "\files\tmp\_BACKGROUND_LOOP.ogg"
+Kill apppath & "\files\tmp\_WORLD_MODEL.gltf.ovrscene"
 If fu2 = "1" Then
-   ap = "files\WinterLodge\assets\"
-   ap1 = "files\WinterLodge"
+   ap = apppath & "\files\WinterLodge\assets\"
+   ap1 = apppath & "\files\WinterLodge"
    an = "WinterLodge"
 End If
 If fu2 = "0" Then
-   ap = "files\ClassicHome\assets\"
-   ap1 = "files\ClassicHome"
+   ap = apppath & "\files\ClassicHome\assets\"
+   ap1 = apppath & "\files\ClassicHome"
    an = "ClassicHome"
 End If
 If fu2 = "2" Then
-   ap = "files\SpaceStation\assets\"
-   ap1 = "files\SpaceStation"
+   ap = apppath & "\files\SpaceStation\assets\"
+   ap1 = apppath & "\files\SpaceStation"
    an = "SpaceStation"
 End If
 
 GoTo fastbuild
 
 '----------------------------------------------------------------------------
-FileCopy App.path & "\files\tmp\scene.zip", ap & "scene.zip"
-objDOS.CommandLine = (java & " -Xmx1024m -jar " & J & "files\apktool_2.3.4.jar" & J & " b -f -o " & J & "files\tmp\tmp.apk" & J & " " & J & ap1 & J)
+FileCopy apppath & "\files\tmp\scene.zip", ap & "scene.zip"
+objDOS.CommandLine = (java & " -Xmx1024m -jar " & J & apppath & "\files\apktool_2.3.4.jar" & J & " b -f -o " & J & apppath & "\files\tmp\tmp.apk" & J & " " & J & ap1 & J)
 objDOS.ExecuteCommand
 txtOutputs.Text = txtOutputs.Text & vbNewLine & "Zipalign APK-file" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
-objDOS.CommandLine = ("files\zipalign.exe -f 4 " & J & App.path & "\files\tmp\tmp.apk" & J & " " & J & App.path & "\files\tmp\tmpz.apk" & J)
+objDOS.CommandLine = (apppath & "\files\zipalign.exe -f 4 " & J & apppath & "\files\tmp\tmp.apk" & J & " " & J & apppath & "\files\tmp\tmpz.apk" & J)
 objDOS.ExecuteCommand
 txtOutputs.Text = txtOutputs.Text & vbNewLine & "Sign APK-file" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
-objDOS.CommandLine = (java & " -Xmx1024m -jar " & J & "files\ApkSigner.jar" & J & " sign  --key " & J & "files\apkeasytool.pk8" & J & " --cert " & J & _
-     "files\apkeasytool.pem" & J & " --out " & J & "files\tmp\tmpz.apk" & J & " " & J & "files\tmp\tmpz.apk" & J)
+objDOS.CommandLine = (java & " -Xmx1024m -jar " & J & apppath & "\files\ApkSigner.jar" & J & " sign  --key " & J & apppath & "\files\apkeasytool.pk8" & J & " --cert " & J & _
+     apppath & "\files\apkeasytool.pem" & J & " --out " & J & apppath & "\files\tmp\tmpz.apk" & J & " " & J & apppath & "\files\tmp\tmpz.apk" & J)
 objDOS.ExecuteCommand
 
 MyPath = Dir(BuildPath & "\")
@@ -4532,25 +4651,27 @@ Do Until MyPath = vbNullString
     MyPath = Dir
 Loop
 
-FileCopy App.path & "\files\tmp\tmpz.apk", App.path & "\" & idr & "." & an & ".apk"
+FileCopy apppath & "\files\tmp\tmpz.apk", apppath & "\" & idr & "." & an & ".apk"
 GoTo insta
 '-----------------------------------------------------
 
 fastbuild:
 
-FileCopy App.path & "\files\" & an & ".zip", App.path & "\files\tmp.zip"
-FileCopy App.path & "\files\tmp\scene.zip", App.path & "\files\scene.zip"
-objDOS.CommandLine = ("files\7za.exe a files\tmp.zip files\scene.zip")
+ChDir apppath
+ChDrive Left$(apppath, 2)
+FileCopy apppath & "\files\" & an & ".zip", apppath & "\files\tmp.zip"
+FileCopy apppath & "\files\tmp\scene.zip", apppath & "\files\scene.zip"
+objDOS.CommandLine = (apppath & "\files\7za.exe a " & J & apppath & "\files\tmp.zip" & J & " files\scene.zip")
 objDOS.ExecuteCommand
-objDOS.CommandLine = ("files\7za.exe rn files\tmp.zip files\ assets\")
+objDOS.CommandLine = (apppath & "\files\7za.exe rn " & J & apppath & "\files\tmp.zip" & J & " files\ assets\")
 objDOS.ExecuteCommand
-Name App.path & "\files\tmp.zip" As App.path & "\files\tmp.apk"
+Name apppath & "\files\tmp.zip" As apppath & "\files\tmp.apk"
 txtOutputs.Text = txtOutputs.Text & vbNewLine & "Zipalign APK-file" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
-objDOS.CommandLine = ("files\zipalign.exe -f 4 " & J & App.path & "\files\tmp.apk" & J & " " & J & App.path & "\files\tmpz.apk" & J)
+objDOS.CommandLine = (apppath & "\files\zipalign.exe -f 4 " & J & apppath & "\files\tmp.apk" & J & " " & J & apppath & "\files\tmpz.apk" & J)
 objDOS.ExecuteCommand
 txtOutputs.Text = txtOutputs.Text & vbNewLine & "Sign APK-file" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
-objDOS.CommandLine = (java & " -Xmx1024m -jar " & J & "files\ApkSigner.jar" & J & " sign  --key " & J & "files\apkeasytool.pk8" & J & " --cert " & J & _
-     "files\apkeasytool.pem" & J & " --out " & J & "files\tmpz.apk" & J & " " & J & "files\tmpz.apk" & J)
+objDOS.CommandLine = (java & " -Xmx1024m -jar " & J & apppath & "\files\ApkSigner.jar" & J & " sign  --key " & J & apppath & "\files\apkeasytool.pk8" & J & " --cert " & J & _
+     apppath & "\files\apkeasytool.pem" & J & " --out " & J & apppath & "\files\tmpz.apk" & J & " " & J & apppath & "\files\tmpz.apk" & J)
 objDOS.ExecuteCommand
 MyPath = Dir(BuildPath & "\")
 Do Until MyPath = vbNullString
@@ -4561,24 +4682,24 @@ Do Until MyPath = vbNullString
 Loop
 
 If fu = 1 Then an = an & "_Silent"
-FileCopy App.path & "\files\tmpz.apk", App.path & "\" & idr2 & "." & an & ".apk"
-fin2 = App.path & "\" & idr2 & "." & an & ".apk"
+FileCopy apppath & "\files\tmpz.apk", apppath & "\" & idr2 & "." & an & ".apk"
+fin2 = apppath & "\" & idr2 & "." & an & ".apk"
 insta:
 
-'objDOS.CommandLine = ("files\adb.exe kill-server")
+'objDOS.CommandLine = (apppath & "\files\adb.exe kill-server")
 'objDOS.ExecuteCommand
 
 nex:
 
-If Dir(App.path & "\files\tmp\_WORLD_MODEL.gltf.ovrscene") <> "" Then Kill App.path & "\files\tmp\_WORLD_MODEL.gltf.ovrscene"
-If Dir(App.path & "\files\tmp\scene.zip") <> "" Then Kill App.path & "\files\tmp\scene.zip"
-If Dir(App.path & "\files\scene.zip") <> "" Then Kill App.path & "\files\scene.zip"
-If Dir(App.path & "\files\tmp\_BACKGROUND_LOOP.ogg") <> "" Then Kill App.path & "\files\tmp\_BACKGROUND_LOOP.ogg"
-If Dir(App.path & "\files\tmp\tmpz.apk") <> "" Then Kill App.path & "\files\tmp\tmpz.apk"
-If Dir(App.path & "\files\tmp\tmp.apk") <> "" Then Kill App.path & "\files\tmp\tmp.apk"
-If Dir(App.path & "\files\tmpz.apk") <> "" Then Kill App.path & "\files\tmpz.apk"
-If Dir(App.path & "\files\tmp.apk") <> "" Then Kill App.path & "\files\tmp.apk"
-If Dir(App.path & "\files\tmp.zip") <> "" Then Kill App.path & "\files\tmp.apk"
+If Dir(apppath & "\files\tmp\_WORLD_MODEL.gltf.ovrscene") <> "" Then Kill apppath & "\files\tmp\_WORLD_MODEL.gltf.ovrscene"
+If Dir(apppath & "\files\tmp\scene.zip") <> "" Then Kill apppath & "\files\tmp\scene.zip"
+If Dir(apppath & "\files\scene.zip") <> "" Then Kill apppath & "\files\scene.zip"
+If Dir(apppath & "\files\tmp\_BACKGROUND_LOOP.ogg") <> "" Then Kill apppath & "\files\tmp\_BACKGROUND_LOOP.ogg"
+If Dir(apppath & "\files\tmp\tmpz.apk") <> "" Then Kill apppath & "\files\tmp\tmpz.apk"
+If Dir(apppath & "\files\tmp\tmp.apk") <> "" Then Kill apppath & "\files\tmp\tmp.apk"
+If Dir(apppath & "\files\tmpz.apk") <> "" Then Kill apppath & "\files\tmpz.apk"
+If Dir(apppath & "\files\tmp.apk") <> "" Then Kill apppath & "\files\tmp.apk"
+If Dir(apppath & "\files\tmp.zip") <> "" Then Kill apppath & "\files\tmp.apk"
 
 txtOutputs.Text = txtOutputs.Text & vbNewLine & "Build APK " & fu & "finished! " & Time & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
 create = "1"
@@ -4697,7 +4818,7 @@ Dim tu As String
 On Error Resume Next
 
 tu = Mid$(Label8.Caption, 1, Len(Label8.Caption) - 4) & "_new.apk"
-If ap9 = "files\WinterLodge" Then
+If ap9 = apppath & "\files\WinterLodge" Then
    If InStr(1, LCase(tu), "classic", 0) <> 0 Then
       tu = Replace(tu, "classichome", "WinterLodge", , , vbTextCompare)
       tu = Replace(tu, "classic home", "WinterLodge", , , vbTextCompare)
@@ -4713,7 +4834,7 @@ If ap9 = "files\WinterLodge" Then
       GoTo ren_end
    End If
 End If
-If ap9 = "files\ClassicHome" Then
+If ap9 = apppath & "\files\ClassicHome" Then
    If InStr(1, LCase(tu), "winter", 0) <> 0 Then
       tu = Replace(tu, "WinterLodge", "ClassicHome", , , vbTextCompare)
       tu = Replace(tu, "Winter Lodge", "ClassicHome", , , vbTextCompare)
@@ -4729,7 +4850,7 @@ If ap9 = "files\ClassicHome" Then
       GoTo ren_end
    End If
 End If
-If ap9 = "files\SpaceStation" Then
+If ap9 = apppath & "\files\SpaceStation" Then
    If InStr(1, LCase(tu), "winter", 0) <> 0 Then
       tu = Replace(tu, "WinterLodge", "SpaceStation", , , vbTextCompare)
       tu = Replace(tu, "Winter Lodge", "SpaceStation", , , vbTextCompare)
@@ -4769,22 +4890,22 @@ Private Sub Check13_Click()
 On Error Resume Next
 
 If Check13.Value = False Then
-   RmDir App.path & "\files\texture_tmp"
-   If Dir(App.path & "\files\texture_tmp" & "\*.*") <> "" Then Kill App.path & "\files\texture_tmp" & "\*.*"
+   RmDir apppath & "\files\texture_tmp"
+   If Dir(apppath & "\files\texture_tmp" & "\*.*") <> "" Then Kill apppath & "\files\texture_tmp" & "\*.*"
    Label11.Caption = "ERASED!": Beep
    txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Textures in .\Build deleted!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
    tp = True
    Exit Sub
 End If
-If Dir(App.path & "\files\texture_tmp" & "\*.*") <> "" Then Kill App.path & "\files\texture_tmp" & "\*.*"
+If Dir(apppath & "\files\texture_tmp" & "\*.*") <> "" Then Kill apppath & "\files\texture_tmp" & "\*.*"
 
 Set fsx = CreateObject("Scripting.FileSystemObject")
-If fsx.FolderExists(App.path & "\files\texture_tmp") = False Then MkDir (App.path & "\files\texture_tmp")
-If Dir$(App.path & "\Build" & "\*.*") <> vbNullString Then
-    For Each oFile In fsx.GetFolder(App.path & "\Build" & "").Files
+If fsx.FolderExists(apppath & "\files\texture_tmp") = False Then MkDir (apppath & "\files\texture_tmp")
+If Dir$(apppath & "\Build" & "\*.*") <> vbNullString Then
+    For Each oFile In fsx.GetFolder(apppath & "\Build" & "").Files
         If LCase(fsx.GetExtensionName(oFile.path)) <> "bin" And LCase(fsx.GetExtensionName(oFile.path)) <> "gltf" Then
             fn = fsx.GetFileName(oFile.path)
-            FileCopy BuildPath & "\" & fn, App.path & "\files\texture_tmp\" & fn
+            FileCopy BuildPath & "\" & fn, apppath & "\files\texture_tmp\" & fn
         End If
     Next
     Label11.Caption = "SAVED!": Beep
@@ -4799,9 +4920,9 @@ Private Sub Check15_Click()
 On Error Resume Next
 
 If Check15.Value = True Then
-   PutINISetting "Save", "AutoClear", "1", App.path & "\files\config.ini"
+   PutINISetting "Save", "AutoClear", "1", apppath & "\files\config.ini"
 Else
-   PutINISetting "Save", "AutoClear", "0", App.path & "\files\config.ini"
+   PutINISetting "Save", "AutoClear", "0", apppath & "\files\config.ini"
 End If
 Pause (0.5)
 Command2_Click
@@ -4818,7 +4939,7 @@ Dim r As Long
 If Question("Yes = Open tutorial in Browser" & vbNewLine & "No = Open with Adobe Reader", True) = True Then
    r = ShellExecute(0, "open", "https://documentcloud.adobe.com/link/track?uri=urn:aaid:scds:US:378deebf-9e73-4100-bdb1-40b816baef58", 0, 0, 1)
 Else
-   r = ShellExecute(0, "open", App.path & "\EnviromentConverterBuilder_HowTo.pdf", 0, 0, 1)
+   r = ShellExecute(0, "open", apppath & "\EnviromentConverterBuilder_HowTo.pdf", 0, 0, 1)
 End If
 
 End Sub
@@ -4826,9 +4947,9 @@ End Sub
 Private Sub Check17_Click()
 
 If Check17.Value = True Then
-   PutINISetting "Save", "Pack", "1", App.path & "\files\config.ini"
+   PutINISetting "Save", "Pack", "1", apppath & "\files\config.ini"
 Else
-   PutINISetting "Save", "Pack", "0", App.path & "\files\config.ini"
+   PutINISetting "Save", "Pack", "0", apppath & "\files\config.ini"
 End If
 Pause (0.5)
 Command2_Click

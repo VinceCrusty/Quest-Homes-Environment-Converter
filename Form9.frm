@@ -160,7 +160,7 @@ Begin VB.Form Form9
       Appearance      =   0  '2D
       BackColor       =   &H0025221F&
       BorderStyle     =   1  'Fest Einfach
-      Caption         =   "Environment Converter v1.8.0"
+      Caption         =   "Environment Converter v1.9.3"
       BeginProperty Font 
          Name            =   "Arial"
          Size            =   20.25
@@ -188,7 +188,7 @@ Private storedy As Integer
 
 Private Sub Command4_Click()
 
-Me.Hide
+Me.hide
 
 End Sub
 

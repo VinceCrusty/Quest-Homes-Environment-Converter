@@ -15,6 +15,8 @@ Public gltf1 As String
 Public gltf2 As String
 Public sva As Integer
 Public vp As Integer
+Public renunp As Boolean
+Public apppath As String
 
 '------------------------------------------------------------------
 
@@ -136,6 +138,12 @@ ExtractFile = f$
 
 End Function
 
+Public Function Reset()
+
+ChDrive Left$(apppath, 2)
+ChDir apppath
+
+End Function
 Public Function Message(mesa1 As String, Optional big As Boolean)
 
 On Error Resume Next

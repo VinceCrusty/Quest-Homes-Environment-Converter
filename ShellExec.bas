@@ -124,7 +124,7 @@ Public Function ShellExecuteCapture(sCommandLine As String, Optional bShowWindow
     Call CloseHandle(lhwndWritePipe)
 End Function
 
-Public Function ShellRun(sCmd As String, Timeout As Long) As String
+Public Function ShellRun(sCmd As String, Timeout As Long, Optional hide As Boolean) As String
 
 Dim dStart As String
 Dim sLine As String
@@ -145,6 +145,7 @@ Set oOutput = objExec.StdOut
            Exit Function
         End If
     Wend
+If hide = True Then Exit Function
 Form1.txtOutputs.Text = Form1.txtOutputs.Text & vbNewLine & ShellRun & vbNewLine
 Form1.txtOutputs.SelStart = Len(Form1.txtOutputs.Text)
 

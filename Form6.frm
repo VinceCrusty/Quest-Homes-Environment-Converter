@@ -166,20 +166,41 @@ On Error Resume Next
 Text2.Text = Trim(Text2.Text)
 If Text2.Text = "" Then Text2.Text = "untitled"
 idr2 = Text2.Text
-Me.Hide
+Unload Me
 
 End Sub
 
 Private Sub Form_Load()
 
-On Error Resume Next
+'On Error Resume Next
+
+Dim idt As String
 
 Me.Top = (Form1.Top + (Form1.Height / 2) - (Form3.Height / 2))
 Me.Left = (Form1.Left + (Form1.Width / 2) - (Form3.Width / 2))
 Command4.HoverBackColor = Form1.Command4.HoverBackColor
 Command4.HoverForeColor = Form1.Command4.HoverForeColor
 Command4.ForeColor = Form1.Command4.ForeColor
-Text2.Text = idr2
+
+If renunp = False Then
+   Text2.Text = idr2
+Else
+   idr2 = Replace(Form1.Label8.Caption, "winterlodge", "", 1, , vbTextCompare)
+   idr2 = Replace(idr2, "winter.lodge", "", 1, , vbTextCompare)
+   idr2 = Replace(idr2, "winter lodge", "", 1, , vbTextCompare)
+   idr2 = Replace(idr2, "winter_lodge", "", 1, , vbTextCompare)
+   idr2 = Replace(idr2, "spacestation", "", 1, , vbTextCompare)
+   idr2 = Replace(idr2, "space station", "", 1, , vbTextCompare)
+   idr2 = Replace(idr2, "space.station", "", 1, , vbTextCompare)
+   idr2 = Replace(idr2, "space_station", "", 1, , vbTextCompare)
+   idr2 = Replace(idr2, "classichome", "", 1, , vbTextCompare)
+   idr2 = Replace(idr2, "classic home", "", 1, , vbTextCompare)
+   idr2 = Replace(idr2, "classic_home", "", 1, , vbTextCompare)
+   idr2 = Replace(idr2, "classic.home", "", 1, , vbTextCompare)
+   idr2 = Replace(idr2, ".apk", "", 1, , vbTextCompare)
+   If Mid$(idr2, Len(idr2), 1) = "." Then idr2 = Left$(idr2, Len(idr2) - 1)
+   Text2.Text = idr2
+End If
 Beep
 
 End Sub
