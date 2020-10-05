@@ -755,7 +755,7 @@ End Sub
 
 Private Sub lvButtons_H5_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
 
-Me.Hide
+Me.hide
 
 End Sub
 
@@ -812,10 +812,9 @@ If k = "png" Or k = "jpg" Or k = "peg" Then
       Message "File type '" & k & "' not supported, sorry!"
       Exit Sub
    End If
-   If m_Width > 8400 Then
+   If m_Width > 8193 Then
       MessageBeep (16)
-      Message "Image dimension too big for Quest, sorry!"
-      Exit Sub
+      Message "Warning! Image dimension (" & m_Width & "x" & m_Height & ") might be too large for the Quest!", True
    End If
    If (m_Width / m_Height) <> 2 Then
       MessageBeep (16)
@@ -887,7 +886,7 @@ Open BuildPath & "\pano.gltf" For Output As #1
 Print #1, gltf1 & rota(vp) & gltf2
 Close #1
 start_pano = True
-Me.Hide
+Me.hide
 
 End Sub
 

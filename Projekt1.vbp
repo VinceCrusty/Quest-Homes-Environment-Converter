@@ -1,6 +1,7 @@
 Type=Exe
-Form=Form1.frm
 Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#..\..\..\..\Windows\SysWOW64\stdole2.tlb#OLE Automation
+Reference=*\G{420B2830-E718-11CF-893D-00A0C9054228}#1.0#0#..\..\..\..\Windows\SysWOW64\scrrun.dll#Microsoft Scripting Runtime
+Form=Form1.frm
 Class=DOSOutputs; DOSOutputs.cls
 Form=Form2.frm
 UserControl=lvButtons.ctl
@@ -31,7 +32,7 @@ HelpContextID="0"
 CompatibleMode="0"
 MajorVer=1
 MinorVer=9
-RevisionVer=3
+RevisionVer=5
 AutoIncrementVer=0
 ServerSupportFiles=0
 VersionFileDescription="Converts Oculus Quest Environment"

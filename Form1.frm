@@ -219,7 +219,7 @@ Begin VB.Form Form1
          Width           =   1905
          _ExtentX        =   3360
          _ExtentY        =   900
-         Caption         =   "Create 6 releases with and without Audio"
+         Caption         =   "Create 8 releases with and without Audio"
          CapAlign        =   2
          BackStyle       =   5
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -458,7 +458,7 @@ Begin VB.Form Form1
          Height          =   255
          Left            =   3360
          TabIndex        =   49
-         ToolTipText     =   "Install Build over WiFi"
+         ToolTipText     =   "Compress all Textures in ../Build to KTX when pressing Build"
          Top             =   1200
          Width           =   255
          _ExtentX        =   450
@@ -548,6 +548,55 @@ Begin VB.Form Form1
          Value           =   0   'False
          cBack           =   4210752
       End
+      Begin Projekt1.lvButtons_H Check19 
+         Height          =   255
+         Left            =   1680
+         TabIndex        =   84
+         Top             =   1560
+         Width           =   255
+         _ExtentX        =   450
+         _ExtentY        =   450
+         CapAlign        =   2
+         BackStyle       =   5
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         cFore           =   16777215
+         cFHover         =   16777215
+         cFDown          =   4194368
+         cBhover         =   4194368
+         Focus           =   0   'False
+         LockHover       =   1
+         cGradient       =   4210752
+         Mode            =   1
+         Value           =   0   'False
+         cBack           =   8421504
+      End
+      Begin VB.Label Label31 
+         BackColor       =   &H0025221F&
+         Caption         =   "CyberCity"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00FFFFFF&
+         Height          =   255
+         Left            =   1995
+         TabIndex        =   85
+         Top             =   1560
+         Width           =   1215
+      End
       Begin VB.Label Label25 
          BackColor       =   &H0025221F&
          Caption         =   "Texture Protection"
@@ -570,7 +619,7 @@ Begin VB.Form Form1
       End
       Begin VB.Label Label22 
          BackColor       =   &H0025221F&
-         Caption         =   "WiFi Install Build"
+         Caption         =   "Compress to KTX"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   9.75
@@ -584,7 +633,7 @@ Begin VB.Form Form1
          Height          =   255
          Left            =   3720
          TabIndex        =   50
-         ToolTipText     =   "Install Build over WiFi"
+         ToolTipText     =   "Compress all Textures in ../Build to KTX when pressing Build"
          Top             =   1200
          Width           =   1935
       End
@@ -1371,6 +1420,7 @@ Begin VB.Form Form1
       Left            =   11880
       TabIndex        =   73
       Top             =   3720
+      Visible         =   0   'False
       Width           =   2055
       _ExtentX        =   3625
       _ExtentY        =   926
@@ -1461,6 +1511,7 @@ Begin VB.Form Form1
       Left            =   11880
       TabIndex        =   78
       Top             =   8400
+      Visible         =   0   'False
       Width           =   255
       _ExtentX        =   450
       _ExtentY        =   450
@@ -1658,6 +1709,7 @@ Begin VB.Form Form1
       TabIndex        =   76
       ToolTipText     =   "Automatically connects to the Quest via WiFi when the converter is started"
       Top             =   8400
+      Visible         =   0   'False
       Width           =   3135
    End
    Begin VB.Label Label29 
@@ -2156,6 +2208,10 @@ Option Explicit
 'Freeze wenn WiFi ADB connect lost (MSGBOX noch da?)
 'ogg file encode bug fixed
 'Delete dragged audio (text) Button
+'prüfung ob bei build jpg und ktx gleichzeitig
+'texture protect
+'cyberhome
+'loop install wenn schon ktx im verzeichniss bei autoinstall
 
 'Fertig:
 
@@ -2262,6 +2318,7 @@ Private out_text As Boolean
 Private start_adb As Boolean
 Private wifi_auto As Boolean
 Private apppath As String
+Private comp1 As Boolean
 
 Private Sub Form_Load()
 
@@ -2291,13 +2348,13 @@ If fsx.FolderExists(apppath & "\files") = False Then
    End
 End If
 If Dir(apppath & "\files\SpaceStation.zip") = "" Or Dir(apppath & "\files\WinterLodge.zip") = "" Or _
-   Dir(apppath & "\files\ClassicHome.zip") = "" Or Dir(apppath & "\files\adb.exe") = "" Or _
+   Dir(apppath & "\files\ClassicHome.zip") = "" Or Dir(apppath & "\files\CyberCity.zip") = "" Or Dir(apppath & "\files\adb.exe") = "" Or _
    fsx.FolderExists(apppath & "\files\ClassicHome") = False Or fsx.FolderExists(apppath & "\files\SpaceStation") = False Or _
-   fsx.FolderExists(apppath & "\files\WinterLodge") = False Then
+   fsx.FolderExists(apppath & "\files\WinterLodge") = False Or fsx.FolderExists(apppath & "\files\CyberCity") = False Then
    Timer1.Enabled = False
    Timer2.Enabled = False
    MessageBeep (16)
-   Message "Missing " & apppath & "\files in.\files Folder, Error!"
+   Message "Missing files in ..\files Folder, Error!"
    End
 End If
 If Dir(apppath & "\files\config.ini") = "" Then
@@ -2307,7 +2364,7 @@ If Dir(apppath & "\files\config.ini") = "" Then
    PutINISetting "Paths", "BuildPath", "", apppath & "\files\config.ini"
    PutINISetting "WindowPos", "Left", Form1.Left, apppath & "\files\config.ini"
    PutINISetting "WindowPos", "Top", Form1.Top, apppath & "\files\config.ini"
-   PutINISetting "CheckValue", "Check", "010110", apppath & "\files\config.ini"
+   PutINISetting "CheckValue", "Check", "0101100", apppath & "\files\config.ini"
    PutINISetting "Save", "WindowPos", "1", apppath & "\files\config.ini"
    PutINISetting "Save", "ButtonState", "1", apppath & "\files\config.ini"
    PutINISetting "Save", "TextureDelete", "1", apppath & "\files\config.ini"
@@ -2346,7 +2403,7 @@ End If
 If GetINISetting("Save", "ButtonState", apppath & "\files\config.ini") = "1" Then
    ch = GetINISetting("CheckValue", "Check", apppath & "\files\config.ini")
    Check0.Value = Mid(ch, 1, 1): Check6.Value = Mid(ch, 2, 1): Check7.Value = Mid(ch, 3, 1)
-   Check8.Value = Mid(ch, 4, 1): Check9.Value = Mid(ch, 5, 1): 'Check10.Value = Mid(ch, 6, 1)
+   Check8.Value = Mid(ch, 4, 1): Check9.Value = Mid(ch, 5, 1): Check10.Value = Mid(ch, 6, 1): Check19.Value = Mid(ch, 7, 1)
 Else
    Check12.Value = False
 End If
@@ -2499,98 +2556,100 @@ End Sub
 
 Private Sub Check10_Click()
 
-Dim erme As String
-Dim ipget As Boolean
-
 On Error Resume Next
 
-J = Chr$(34)
-ipget = False
-qip = ""
-
-If adb = 1 Then
-   If Check10.Value = False And wcon = True Then
-      adb = 0
-      Label11.Caption = "ADB Stop!"
-      Label22.ForeColor = vbWhite
-      txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Kill ADB Server!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
-      Pause (0.2)
-      objDOS.CommandLine = (apppath & "\files\adb.exe kill-server")
-      objDOS.ExecuteCommand
-      txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Wireless ADB Disconnected!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
-      wcon = False
-      Message "Wireless ADB Disconnected!"
-      Exit Sub
-   Else
-      txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Kill ADB Server!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
-      Pause (0.2)
-      wcon = False
-      adb = 0
-      objDOS.CommandLine = (apppath & "\files\adb.exe kill-server")
-      objDOS.ExecuteCommand
-      txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "ADB Disconnected!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
-   End If
-End If
-If adb = 1 And wcon = False Then
-   txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Kill old ADB Server!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
-   Pause (0.2)
-   objDOS.CommandLine = (apppath & "\files\adb.exe kill-server")
-   objDOS.ExecuteCommand
-End If
-If GetINISetting("QuestIP", "Adress", apppath & "\files\config.ini") <> "" Then
-   qip = GetINISetting("QuestIP", "Adress", apppath & "\files\config.ini")
-   If (GetRTTAndHopCount(inet_addr(qip), 0, 20, 200) = 1) = True Then
-       ipget = True
-       GoTo conip
-   End If
-End If
-Message "Connect USB-Cable! " & qip & vbNewLine & "(Wake up Quest from StandBy)"
-txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Try to obtain Quest IP... Please Wait or Exit DOS Window when adb is freezed!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
-Label11.Caption = "Wait!"
-Pause (0.2)
-'qip = ShellExecuteCapture(apppath & "\files\adb.exe shell ip route")
-qip = ShellRun(apppath & "\files\adb.exe shell ip route", 6)
-
-conip:
-
-If InStr(1, qip, "src", 0) <> 0 Or ipget = True Then
-   If ipget = False Then qip = Trim(Left$(Mid$(qip, InStr(1, qip, "src", 0) + 4, Len(qip)), Len(Mid$(qip, InStr(1, qip, "src", 0) + 4, Len(qip))) - 2))
-   txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Try to connect to Quest with IP: " & qip & "  Please Wait or Exit DOS Window when adb is freezed!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
-   Label11.Caption = "Wait!"
-   Pause (0.2)
-   erme = ShellRun(apppath & "\files\adb.exe tcpip " & GetINISetting("QuestIP", "Port", apppath & "\files\config.ini"), 4)
-   'erme = ShellExecuteCapture(apppath & "\files\adb.exe tcpip " & GetINISetting("QuestIP", "Port", apppath & "\files\config.ini"))
-   erme = ShellRun(apppath & "\files\adb.exe connect " & qip & ":" & GetINISetting("QuestIP", "Port", apppath & "\files\config.ini"), 5)
-   'erme = ShellExecuteCapture(apppath & "\files\adb.exe connect " & qip & ":" & GetINISetting("QuestIP", "Port", apppath & "\files\config.ini"))
-   If InStr(1, erme, "connected", 0) <> 0 Then
-      If ipget = False Then
-         Beep
-         Message "Connected to " & qip & vbNewLine & "Remove USB-Cable Please!"
-         adb = 1
-         PutINISetting "QuestIP", "Adress", qip, apppath & "\files\config.ini"
-      Else
-         Beep
-         Message "Connected to " & qip
-         adb = 1
-      End If
-      wcon = True
-      Check10.Value = True
-      Label11.Caption = "Connected!"
-      Pause 3
-      Label22.ForeColor = RGB(130, 255, 130)
-   Else
-      MessageBeep (16)
-      'Message "Can´t Connect!" & vbNewLine & "Quest in Deep-StandBy?"
-      Message "Can´t Connect! Quest in Deep-StandBy?" & vbNewLine & "Maybe try to connect with USB-Cable!", True
-      Check10.Value = False
-      Label11.Caption = "Error!"
-   End If
-Else
-   MessageBeep (16)
-   Message "Can´t obtain Quest IP!" & vbNewLine & "Quest in Deep-StandBy?"
-   Check10.Value = False
-   Label11.Caption = "Error!"
-End If
+'Dim erme As String
+'Dim ipget As Boolean
+'
+'On Error Resume Next
+'
+'J = Chr$(34)
+'ipget = False
+'qip = ""
+'
+'If adb = 1 Then
+'   If Check10.Value = False And wcon = True Then
+'      adb = 0
+'      Label11.Caption = "ADB Stop!"
+'      Label22.ForeColor = vbWhite
+'      txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Kill ADB Server!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
+'      Pause (0.2)
+'      objDOS.CommandLine = (apppath & "\files\adb.exe kill-server")
+'      objDOS.ExecuteCommand
+'      txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Wireless ADB Disconnected!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
+'      wcon = False
+'      Message "Wireless ADB Disconnected!"
+'      Exit Sub
+'   Else
+'      txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Kill ADB Server!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
+'      Pause (0.2)
+'      wcon = False
+'      adb = 0
+'      objDOS.CommandLine = (apppath & "\files\adb.exe kill-server")
+'      objDOS.ExecuteCommand
+'      txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "ADB Disconnected!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
+'   End If
+'End If
+'If adb = 1 And wcon = False Then
+'   txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Kill old ADB Server!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
+'   Pause (0.2)
+'   objDOS.CommandLine = (apppath & "\files\adb.exe kill-server")
+'   objDOS.ExecuteCommand
+'End If
+'If GetINISetting("QuestIP", "Adress", apppath & "\files\config.ini") <> "" Then
+'   qip = GetINISetting("QuestIP", "Adress", apppath & "\files\config.ini")
+'   If (GetRTTAndHopCount(inet_addr(qip), 0, 20, 200) = 1) = True Then
+'       ipget = True
+'       GoTo conip
+'   End If
+'End If
+'Message "Connect USB-Cable! " & qip & vbNewLine & "(Wake up Quest from StandBy)"
+'txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Try to obtain Quest IP... Please Wait or Exit DOS Window when adb is freezed!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
+'Label11.Caption = "Wait!"
+'Pause (0.2)
+''qip = ShellExecuteCapture(apppath & "\files\adb.exe shell ip route")
+'qip = ShellRun(apppath & "\files\adb.exe shell ip route", 6)
+'
+'conip:
+'
+'If InStr(1, qip, "src", 0) <> 0 Or ipget = True Then
+'   If ipget = False Then qip = Trim(Left$(Mid$(qip, InStr(1, qip, "src", 0) + 4, Len(qip)), Len(Mid$(qip, InStr(1, qip, "src", 0) + 4, Len(qip))) - 2))
+'   txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Try to connect to Quest with IP: " & qip & "  Please Wait or Exit DOS Window when adb is freezed!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
+'   Label11.Caption = "Wait!"
+'   Pause (0.2)
+'   erme = ShellRun(apppath & "\files\adb.exe tcpip " & GetINISetting("QuestIP", "Port", apppath & "\files\config.ini"), 4)
+'   'erme = ShellExecuteCapture(apppath & "\files\adb.exe tcpip " & GetINISetting("QuestIP", "Port", apppath & "\files\config.ini"))
+'   erme = ShellRun(apppath & "\files\adb.exe connect " & qip & ":" & GetINISetting("QuestIP", "Port", apppath & "\files\config.ini"), 5)
+'   'erme = ShellExecuteCapture(apppath & "\files\adb.exe connect " & qip & ":" & GetINISetting("QuestIP", "Port", apppath & "\files\config.ini"))
+'   If InStr(1, erme, "connected", 0) <> 0 Then
+'      If ipget = False Then
+'         Beep
+'         Message "Connected to " & qip & vbNewLine & "Remove USB-Cable Please!"
+'         adb = 1
+'         PutINISetting "QuestIP", "Adress", qip, apppath & "\files\config.ini"
+'      Else
+'         Beep
+'         Message "Connected to " & qip
+'         adb = 1
+'      End If
+'      wcon = True
+'      Check10.Value = True
+'      Label11.Caption = "Connected!"
+'      Pause 3
+'      Label22.ForeColor = RGB(130, 255, 130)
+'   Else
+'      MessageBeep (16)
+'      'Message "Can´t Connect!" & vbNewLine & "Quest in Deep-StandBy?"
+'      Message "Can´t Connect! Quest in Deep-StandBy?" & vbNewLine & "Maybe try to connect with USB-Cable!", True
+'      Check10.Value = False
+'      Label11.Caption = "Error!"
+'   End If
+'Else
+'   MessageBeep (16)
+'   Message "Can´t obtain Quest IP!" & vbNewLine & "Quest in Deep-StandBy?"
+'   Check10.Value = False
+'   Label11.Caption = "Error!"
+'End If
 
 End Sub
 
@@ -2758,6 +2817,30 @@ lvButtons_H.Caption = Combo1.Text: Form7.lvButtons_H.Caption = Combo1.Text
 
 End Sub
 
+Function check_build() As Boolean ' true is everything is ok
+
+Dim cb1 As Long
+Dim cb2 As Long
+Dim fso As New FileSystemObject
+Dim fil As File
+Dim tkt As String
+
+On Error Resume Next
+
+For Each fil In fso.GetFolder(BuildPath).Files
+  tkt = fso.GetExtensionName(BuildPath & "\" & fil.Name)
+  If tkt = "jpg" Or tkt = "jpeg" Or tkt = "png" Then cb1 = 1
+  If tkt = "ktx" Then cb2 = 1
+Next
+
+If (cb1 + cb2) = 2 Then
+    check_build = False
+Else
+    check_build = True
+End If
+
+End Function
+
 Private Sub Command5_Click()
 
 On Error Resume Next
@@ -2765,7 +2848,7 @@ On Error Resume Next
 Dim es As String
 Dim sa As String
 Dim i As Integer
-Dim fin(6) As String
+Dim fin(8) As String
 Dim MyPath As String
 Dim pathstr As String
 
@@ -2794,14 +2877,17 @@ If create(0, 2) = "0" Then Exit Sub
 fin(5) = fin2
 If create(1, 2) = "0" Then Exit Sub
 fin(6) = fin2
-
-
+If create(0, 3) = "0" Then Exit Sub
+fin(7) = fin2
+If create(1, 3) = "0" Then Exit Sub
+fin(8) = fin2
+comp1 = False
 
 If GetINISetting("Save", "Pack", apppath & "\files\config.ini") = "1" Then
    sa = save2(idr2 & ".zip", apppath)
    If sa = "" Then GoTo ende
    If LCase(Right$(sa, 3)) <> "zip" Then sa = sa & ".zip"
-   objDOS.CommandLine = (apppath & "\files\7za.exe a " & J & sa & J & " " & J & fin(1) & J & " " & J & fin(2) & J & " " & J & fin(3) & J & " " & J & fin(4) & J & " " & J & fin(5) & J & " " & J & fin(6) & J)
+   objDOS.CommandLine = (apppath & "\files\7za.exe a " & J & sa & J & " " & J & fin(1) & J & " " & J & fin(2) & J & " " & J & fin(3) & J & " " & J & fin(4) & J & " " & J & fin(5) & J & " " & J & fin(6) & J & " " & J & fin(7) & J & " " & J & fin(8) & J)
    objDOS.ExecuteCommand
    If InStrRev(sa, "\") > 0 Then
       pathstr = Left$(sa, InStrRev(sa, "\"))
@@ -2814,18 +2900,23 @@ If GetINISetting("Save", "Pack", apppath & "\files\config.ini") = "1" Then
     If Dir(fin(4)) <> "" Then Kill fin(4)
     If Dir(fin(5)) <> "" Then Kill fin(5)
     If Dir(fin(6)) <> "" Then Kill fin(6)
+    If Dir(fin(7)) <> "" Then Kill fin(7)
+    If Dir(fin(8)) <> "" Then Kill fin(8)
 Else
    sa = BrowseForFolder(Me.hwnd, "Select destination Folder" & vbNewLine & "Or choose Cancel for Main App folder")
    If sa <> "" Then
       If sa <> apppath Then
          FileCopy fin(1), sa & "\" & ExtractFile(fin(1)): FileCopy fin(2), sa & "\" & ExtractFile(fin(2)): FileCopy fin(3), sa & "\" & ExtractFile(fin(3))
          FileCopy fin(4), sa & "\" & ExtractFile(fin(4)): FileCopy fin(5), sa & "\" & ExtractFile(fin(5)): FileCopy fin(6), sa & "\" & ExtractFile(fin(6))
+         FileCopy fin(7), sa & "\" & ExtractFile(fin(7)): FileCopy fin(8), sa & "\" & ExtractFile(fin(8))
          If Dir(fin(1)) <> "" Then Kill fin(1)
          If Dir(fin(2)) <> "" Then Kill fin(2)
          If Dir(fin(3)) <> "" Then Kill fin(3)
          If Dir(fin(4)) <> "" Then Kill fin(4)
          If Dir(fin(5)) <> "" Then Kill fin(5)
          If Dir(fin(6)) <> "" Then Kill fin(6)
+         If Dir(fin(7)) <> "" Then Kill fin(7)
+         If Dir(fin(8)) <> "" Then Kill fin(8)
       End If
       pathstr = sa
    Else
@@ -2848,6 +2939,7 @@ Kill apppath & "\files\tmp\tmp.apk"
 Kill apppath & "\files\ClassicHome\assets\scene.zip"
 Kill apppath & "\files\WinterLodge\assets\scene.zip"
 Kill apppath & "\files\SpaceStation\assets\scene.zip"
+Kill apppath & "\files\CyberCity\assets\scene.zip"
 If GetINISetting("Save", "TextureDelete", apppath & "\files\config.ini") = "1" Then
    If Dir(apppath & "\files\texture_tmp\*.*") <> "" Then Kill apppath & "\files\texture_tmp\*.*"
    RmDir apppath & "\files\texture_tmp"
@@ -2881,6 +2973,8 @@ If Dir(fin(3)) <> "" Then Kill fin(3)
 If Dir(fin(4)) <> "" Then Kill fin(4)
 If Dir(fin(5)) <> "" Then Kill fin(5)
 If Dir(fin(6)) <> "" Then Kill fin(6)
+If Dir(fin(7)) <> "" Then Kill fin(7)
+If Dir(fin(8)) <> "" Then Kill fin(8)
 
 End Sub
 
@@ -2910,7 +3004,7 @@ Private Sub Check6_Click()
 On Error Resume Next
 
 If Check6.Value = False Then Check6.Value = True: Form7.lvButtons_H1.Value = True: Exit Sub
-Check7.Value = False: Check0.Value = False
+Check7.Value = False: Check0.Value = False: Check19.Value = False
 Form7.lvButtons_H2.Value = False: Form7.lvButtons_H3.Value = False
 Form7.lvButtons_H1.Value = True
 
@@ -2921,7 +3015,7 @@ Private Sub Check7_Click()
 On Error Resume Next
 
 If Check7.Value = False Then Check7.Value = True: Form7.lvButtons_H2.Value = True: Exit Sub
-Check6.Value = False: Check0.Value = False
+Check6.Value = False: Check0.Value = False: Check19.Value = False
 Form7.lvButtons_H1.Value = False: Form7.lvButtons_H3.Value = False
 Form7.lvButtons_H2.Value = True
 
@@ -2932,11 +3026,69 @@ Private Sub Check0_Click()
 On Error Resume Next
 
 If Check0.Value = False Then Check0.Value = True: Form7.lvButtons_H3.Value = True: Exit Sub
-Check6.Value = False: Check7.Value = False
+Check6.Value = False: Check7.Value = False: Check19.Value = False
 Form7.lvButtons_H1.Value = False: Form7.lvButtons_H2.Value = False
 Form7.lvButtons_H3.Value = True
 
 End Sub
+
+Private Sub Check19_Click()
+
+If Check19.Value = False Then Check19.Value = True: Form7.lvButtons_H3.Value = True: Exit Sub
+Check6.Value = False: Check7.Value = False: Check0.Value = False
+Form7.lvButtons_H1.Value = False: Form7.lvButtons_H2.Value = False
+Form7.lvButtons_H3.Value = True
+
+'
+End Sub
+
+Private Function CompressKTX()
+
+On Error Resume Next
+
+Dim fso As New FileSystemObject
+Dim fil As File
+Dim fpat As String
+Dim tkt As String
+Dim f As Integer
+
+For Each fil In fso.GetFolder(BuildPath).Files
+  'MsgBox fil.Name
+  'MsgBox fso.GetExtensionName(BuildPath & "\" & fil.Name)
+  'MsgBox fso.GetBaseName(BuildPath & "\" & fil.Name)
+  tkt = fso.GetExtensionName(BuildPath & "\" & fil.Name)
+  If tkt = "jpg" Or tkt = "jpeg" Or tkt = "png" Then
+     txtOutputs.Text = txtOutputs.Text & vbNewLine & "Compress Texture File: " & BuildPath & "\" & fil.Name & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
+     'MsgBox apppath & "\files\astcenc.exe -c " & BuildPath & "\" & fil.Name & " " & fso.GetBaseName(BuildPath & "\" & fil.Name) & ".astc" & " 8x8 -veryfast"
+     'objDOS.CommandLine = (apppath & "\files\astcenc.exe -c " & BuildPath & "\" & fil.Name & " " & BuildPath & "\" & fso.GetBaseName(BuildPath & "\" & fil.Name) & ".astc" & " 8x8 -veryfast")
+     'objDOS.ExecuteCommand
+     'MsgBox apppath & "\files\img2ktx.exe -o " & BuildPath & "\" & fso.GetBaseName(BuildPath & "\" & fil.Name) & ".ktx" & " -m -f ASTC8x8 " & BuildPath & "\" & fso.GetBaseName(BuildPath & "\" & fil.Name) & ".astc"
+     objDOS.CommandLine = (apppath & "\files\img2ktx.exe -o " & BuildPath & "\" & fso.GetBaseName(BuildPath & "\" & fil.Name) & ".ktx" & " -m -f ASTC8x8 " & BuildPath & "\" & fil.Name)
+     objDOS.ExecuteCommand
+     'Kill BuildPath & "\" & fso.GetBaseName(BuildPath & "\" & fil.Name & ".astc")
+     'Kill BuildPath & "\" & fso.GetBaseName(BuildPath & "\" & fso.GetExtensionName(BuildPath & "\" & fil.Name))
+     Kill BuildPath & "\" & fil.Name
+  End If
+  If tkt = "gltf" Then
+     f = FreeFile
+     Open BuildPath & "\" & fil.Name For Binary As #f
+         tkt = Space$(LOF(f))
+         Get #f, , tkt
+     Close #f
+     tkt = Replace(tkt, ".jpg", ".ktx")
+     tkt = Replace(tkt, "/jpg", ".ktx")
+     tkt = Replace(tkt, ".jpeg", ".ktx")
+     tkt = Replace(tkt, "/jpg", ".ktx")
+     tkt = Replace(tkt, ".png", ".ktx")
+     tkt = Replace(tkt, "/png", ".ktx")
+     f = FreeFile
+     Open BuildPath & "\" & fil.Name For Output As #f
+          Print #f, tkt
+     Close #f
+  End If
+Next
+
+End Function
 
 Private Sub Command3_Click()
 
@@ -3022,18 +3174,13 @@ If CountFiles(BuildPath & "\*.gltf") > 1 Then
    Message "More than one .glTF file found in .\Build, Error!"
    Exit Sub
 End If
+
 If Dir(apppath & "\files\tmp\_WORLD_MODEL.gltf.ovrscene") <> "" Then Kill apppath & "\files\tmp\_WORLD_MODEL.gltf.ovrscene"
 If Dir(apppath & "\files\tmp\scene.zip") <> "" Then Kill apppath & "\files\tmp\scene.zip"
 If Dir(apppath & "\files\tmp\_BACKGROUND_LOOP.ogg") <> "" Then Kill apppath & "\files\tmp\_BACKGROUND_LOOP.ogg"
 
-If Check13.Value = True Then
-   Set fsx = CreateObject("Scripting.FileSystemObject")
-   If fsx.FolderExists(apppath & "\files\texture_tmp") = False Then GoTo weit3
-   For Each oFile In fsx.GetFolder(apppath & "\files\texture_tmp" & "").Files
-        fn = fsx.GetFileName(oFile.path)
-        FileCopy apppath & "\files\texture_tmp\" & fn, BuildPath & "\" & fn
-   Next
-End If
+If Check10.Value = True Then CompressKTX
+If check_build = False Then Message ".JPG/.PNG and .KTX present in same folder!"
 
 weit3:
 
@@ -3102,6 +3249,11 @@ If Check0.Value = True Then
    ap = apppath & "\files\SpaceStation\assets\"
    ap1 = apppath & "\files\SpaceStation"
    an = "SpaceStation"
+End If
+If Check19.Value = True Then
+   ap = apppath & "\files\CyberCity\assets\"
+   ap1 = apppath & "\files\CyberCity"
+   an = "CyberCity"
 End If
 
 GoTo fastbuild
@@ -4249,6 +4401,10 @@ If pack = "com.oculus.environment.prod.spacestation" Then
    ap = apppath & "\files\SpaceStation\assets\"
    ap1 = apppath & "\files\SpaceStation"
 End If
+If pack = "com.oculus.environment.prod.cyberhome" Then
+   ap = apppath & "\files\CyberCity\assets\"
+   ap1 = apppath & "\files\CyberCity"
+End If
 
 FileCopy apppath & "\files\tmp\scene.zip", ap & "scene.zip"
 objDOS.CommandLine = (java & " -Xmx1024m -jar " & J & apppath & "\files\apktool_2.3.4.jar" & J & " b -f -o " & J & apppath & "\files\tmp\tmp.apk" & J & " " & J & ap1 & J)
@@ -4564,6 +4720,12 @@ If Dir(apppath & "\files\tmp\_WORLD_MODEL.gltf.ovrscene") <> "" Then Kill apppat
 If Dir(apppath & "\files\tmp\scene.zip") <> "" Then Kill apppath & "\files\tmp\scene.zip"
 If Dir(apppath & "\files\tmp\_BACKGROUND_LOOP.ogg") <> "" Then Kill apppath & "\files\tmp\_BACKGROUND_LOOP.ogg"
 
+If Check10.Value = True And comp1 = False Then
+   CompressKTX
+   If check_build = False Then Message ".JPG/.PNG and .KTX present in same folder!"
+   comp1 = True
+End If
+
 'If Check2.Value = "1" Then
 '   FileCopy apppath & "\files\default.ogg", apppath & "\files\tmp\_BACKGROUND_LOOP.ogg"
 '   GoTo tell
@@ -4627,6 +4789,11 @@ If fu2 = "2" Then
    ap = apppath & "\files\SpaceStation\assets\"
    ap1 = apppath & "\files\SpaceStation"
    an = "SpaceStation"
+End If
+If fu2 = "3" Then
+   ap = apppath & "\files\CyberCity\assets\"
+   ap1 = apppath & "\files\CyberCity"
+   an = "CyberCity"
 End If
 
 GoTo fastbuild
@@ -4807,7 +4974,7 @@ Private Function GetCheck() As String
 
 On Error Resume Next
 
-GetCheck = Abs(CInt(Check0.Value)) & Abs(CInt(Check6.Value)) & Abs(CInt(Check7.Value)) & Abs(CInt(Check8.Value)) & Abs(CInt(Check9.Value)) & Abs(CInt(Check10.Value))
+GetCheck = Abs(CInt(Check0.Value)) & Abs(CInt(Check6.Value)) & Abs(CInt(Check7.Value)) & Abs(CInt(Check8.Value)) & Abs(CInt(Check9.Value)) & Abs(CInt(Check10.Value)) & Abs(CInt(Check19.Value))
 
 End Function
 
