@@ -25,10 +25,10 @@ Begin VB.Form Form9
       Left            =   240
       Picture         =   "Form9.frx":0000
       ScaleHeight     =   1095
-      ScaleWidth      =   1125
+      ScaleWidth      =   975
       TabIndex        =   9
       Top             =   1320
-      Width           =   1130
+      Width           =   972
    End
    Begin VB.PictureBox Picture5 
       Appearance      =   0  '2D
@@ -160,7 +160,7 @@ Begin VB.Form Form9
       Appearance      =   0  '2D
       BackColor       =   &H0025221F&
       BorderStyle     =   1  'Fest Einfach
-      Caption         =   "Environment Converter v1.9.5"
+      Caption         =   "Environment Converter v1.9.7"
       BeginProperty Font 
          Name            =   "Arial"
          Size            =   20.25
@@ -195,6 +195,13 @@ End Sub
 Private Sub Form_Load()
 
 On Error Resume Next
+'Picture5.ScaleMode = 3
+'Picture5.AutoRedraw = True
+'Picture5.PaintPicture Picture5.Picture, _
+'0, 0, Picture5.ScaleWidth, Picture5.ScaleHeight, _
+'0, 0, Picture5.Picture.Width / 21.2, _
+'Picture5.Picture.Height / 21.2
+'Picture5.Picture = Picture5.Image
 Label3.Caption = "Special thanks goes to Elin from Quest Homes Discord" & vbNewLine
 Label3.Caption = Label3.Caption & "for many hours of alpha testing, many" & vbNewLine
 Label3.Caption = Label3.Caption & "suggestions and the wonderful tutorial"

@@ -202,6 +202,7 @@ Else
    Text2.Text = idr2
 End If
 Beep
+If Mak = True Then Call Command4_Click
 
 End Sub
 

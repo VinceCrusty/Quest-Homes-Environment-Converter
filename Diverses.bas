@@ -17,6 +17,7 @@ Public sva As Integer
 Public vp As Integer
 Public renunp As Boolean
 Public apppath As String
+Public Mak As Boolean
 
 '------------------------------------------------------------------
 

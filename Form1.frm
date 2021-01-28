@@ -13,6 +13,12 @@ Begin VB.Form Form1
    ScaleHeight     =   9405
    ScaleWidth      =   14415
    StartUpPosition =   3  'Windows-Standard
+   Begin VB.Timer Timer3 
+      Enabled         =   0   'False
+      Interval        =   100
+      Left            =   11400
+      Top             =   6360
+   End
    Begin VB.Timer Timer2 
       Left            =   11880
       Top             =   8760
@@ -27,6 +33,30 @@ Begin VB.Form Form1
       TabIndex        =   45
       Top             =   0
       Width           =   17775
+      Begin Projekt1.lvButtons_H lvButtons_H12 
+         Height          =   375
+         Left            =   9120
+         TabIndex        =   92
+         Top             =   90
+         Width           =   405
+         _ExtentX        =   714
+         _ExtentY        =   661
+         CapAlign        =   2
+         Shape           =   6
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Times New Roman"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Mode            =   1
+         Value           =   -1  'True
+         Image           =   "Form1.frx":1AC21
+         cBack           =   4210752
+      End
       Begin VB.PictureBox Picture6 
          BackColor       =   &H000000FF&
          BorderStyle     =   0  'Kein
@@ -81,7 +111,7 @@ Begin VB.Form Form1
          ForeColor       =   &H80000008&
          Height          =   375
          Left            =   110
-         Picture         =   "Form1.frx":1AC21
+         Picture         =   "Form1.frx":1E72B
          ScaleHeight     =   375
          ScaleWidth      =   375
          TabIndex        =   47
@@ -124,7 +154,7 @@ Begin VB.Form Form1
       Height          =   2775
       Left            =   240
       OLEDropMode     =   1  'Manuell
-      Picture         =   "Form1.frx":1B43B
+      Picture         =   "Form1.frx":1EF45
       ScaleHeight     =   2745
       ScaleWidth      =   2850
       TabIndex        =   19
@@ -272,12 +302,12 @@ Begin VB.Form Form1
          cBack           =   4210752
       End
       Begin Projekt1.lvButtons_H Command3 
-         Height          =   1215
+         Height          =   972
          Left            =   120
          TabIndex        =   15
          ToolTipText     =   "Put your model-files in folder .\Build"
-         Top             =   480
-         Width           =   1455
+         Top             =   360
+         Width           =   1452
          _ExtentX        =   2566
          _ExtentY        =   2143
          Caption         =   "Build and Install Enviroment"
@@ -577,6 +607,37 @@ Begin VB.Form Form1
          Mode            =   1
          Value           =   0   'False
          cBack           =   8421504
+      End
+      Begin Projekt1.lvButtons_H lvButtons_H8 
+         Height          =   372
+         Left            =   120
+         TabIndex        =   86
+         ToolTipText     =   "Put your model-files in folder .\Build"
+         Top             =   1440
+         Width           =   1452
+         _ExtentX        =   2566
+         _ExtentY        =   1508
+         Caption         =   "Reset Audio"
+         CapAlign        =   2
+         BackStyle       =   5
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Arial"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         cFore           =   16777215
+         cFHover         =   16777215
+         cBhover         =   4194368
+         Focus           =   0   'False
+         LockHover       =   1
+         cGradient       =   4210752
+         Mode            =   0
+         Value           =   0   'False
+         cBack           =   4210752
       End
       Begin VB.Label Label31 
          BackColor       =   &H0025221F&
@@ -1269,7 +1330,7 @@ Begin VB.Form Form1
       Height          =   255
       Left            =   11880
       TabIndex        =   60
-      Top             =   4800
+      Top             =   3960
       Width           =   255
       _ExtentX        =   450
       _ExtentY        =   450
@@ -1299,7 +1360,7 @@ Begin VB.Form Form1
       Height          =   255
       Left            =   11880
       TabIndex        =   63
-      Top             =   5400
+      Top             =   4560
       Width           =   255
       _ExtentX        =   450
       _ExtentY        =   450
@@ -1329,7 +1390,7 @@ Begin VB.Form Form1
       Height          =   255
       Left            =   11880
       TabIndex        =   66
-      Top             =   6000
+      Top             =   5160
       Width           =   255
       _ExtentX        =   450
       _ExtentY        =   450
@@ -1359,7 +1420,7 @@ Begin VB.Form Form1
       Height          =   255
       Left            =   11880
       TabIndex        =   69
-      Top             =   6600
+      Top             =   5760
       Width           =   255
       _ExtentX        =   450
       _ExtentY        =   450
@@ -1389,7 +1450,7 @@ Begin VB.Form Form1
       Height          =   255
       Left            =   11880
       TabIndex        =   71
-      Top             =   7200
+      Top             =   6360
       Width           =   255
       _ExtentX        =   450
       _ExtentY        =   450
@@ -1419,7 +1480,7 @@ Begin VB.Form Form1
       Height          =   525
       Left            =   11880
       TabIndex        =   73
-      Top             =   3720
+      Top             =   10560
       Visible         =   0   'False
       Width           =   2055
       _ExtentX        =   3625
@@ -1480,7 +1541,7 @@ Begin VB.Form Form1
       Height          =   255
       Left            =   11880
       TabIndex        =   77
-      Top             =   7800
+      Top             =   6960
       Width           =   255
       _ExtentX        =   450
       _ExtentY        =   450
@@ -1510,7 +1571,7 @@ Begin VB.Form Form1
       Height          =   255
       Left            =   11880
       TabIndex        =   78
-      Top             =   8400
+      Top             =   9480
       Visible         =   0   'False
       Width           =   255
       _ExtentX        =   450
@@ -1570,8 +1631,9 @@ Begin VB.Form Form1
    End
    Begin Projekt1.lvButtons_H lvButtons_H4 
       Height          =   375
-      Left            =   6840
+      Left            =   4560
       TabIndex        =   80
+      ToolTipText     =   "Unpack APK to Build folder"
       Top             =   1680
       Width           =   2055
       _ExtentX        =   3625
@@ -1601,11 +1663,12 @@ Begin VB.Form Form1
    End
    Begin Projekt1.lvButtons_H lvButtons_H5 
       Height          =   375
-      Left            =   4560
+      Left            =   8160
       TabIndex        =   81
+      Tag             =   "Install APK"
       Top             =   1680
-      Width           =   2055
-      _ExtentX        =   3625
+      Width           =   1455
+      _ExtentX        =   2566
       _ExtentY        =   661
       Caption         =   "Only install APK"
       CapAlign        =   2
@@ -1632,11 +1695,12 @@ Begin VB.Form Form1
    End
    Begin Projekt1.lvButtons_H lvButtons_H6 
       Height          =   375
-      Left            =   9120
+      Left            =   9720
       TabIndex        =   82
+      Tag             =   "Uninstall APK"
       Top             =   1680
-      Width           =   2055
-      _ExtentX        =   3625
+      Width           =   1455
+      _ExtentX        =   2566
       _ExtentY        =   661
       Caption         =   "Uninstall APK"
       CapAlign        =   2
@@ -1691,6 +1755,138 @@ Begin VB.Form Form1
       Value           =   0   'False
       cBack           =   4210752
    End
+   Begin Projekt1.lvButtons_H lvButtons_H9 
+      Height          =   255
+      Left            =   11880
+      TabIndex        =   87
+      Top             =   9960
+      Width           =   255
+      _ExtentX        =   450
+      _ExtentY        =   450
+      CapAlign        =   2
+      BackStyle       =   5
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      cFore           =   16777215
+      cFHover         =   16777215
+      cFDown          =   4194368
+      cBhover         =   4194368
+      Focus           =   0   'False
+      LockHover       =   1
+      cGradient       =   4210752
+      Mode            =   1
+      Value           =   -1  'True
+      cBack           =   8421504
+   End
+   Begin Projekt1.lvButtons_H lvButtons_H10 
+      Height          =   375
+      Left            =   6720
+      TabIndex        =   89
+      ToolTipText     =   "Convert all ktx textures to png in Build folder"
+      Top             =   1680
+      Width           =   1335
+      _ExtentX        =   2355
+      _ExtentY        =   661
+      Caption         =   "PNG Convert"
+      CapAlign        =   2
+      BackStyle       =   5
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Arial"
+         Size            =   9
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      cFore           =   16777215
+      cFHover         =   16777215
+      cBhover         =   4194368
+      Focus           =   0   'False
+      LockHover       =   1
+      cGradient       =   4210752
+      Mode            =   0
+      Value           =   0   'False
+      Enabled         =   0   'False
+      cBack           =   4210752
+   End
+   Begin Projekt1.lvButtons_H lvButtons_H11 
+      Height          =   255
+      Left            =   11880
+      TabIndex        =   90
+      Top             =   7560
+      Width           =   255
+      _ExtentX        =   450
+      _ExtentY        =   450
+      CapAlign        =   2
+      BackStyle       =   5
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      cFore           =   16777215
+      cFHover         =   16777215
+      cFDown          =   4194368
+      cBhover         =   4194368
+      Focus           =   0   'False
+      LockHover       =   1
+      cGradient       =   4210752
+      Mode            =   1
+      Value           =   -1  'True
+      cBack           =   8421504
+   End
+   Begin VB.Label Label33 
+      BackColor       =   &H0025221F&
+      Caption         =   "Auto Reset Audio after Build Install"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00FFFFFF&
+      Height          =   495
+      Left            =   12240
+      TabIndex        =   91
+      ToolTipText     =   "Stres the state of all check boxes/Buttons"
+      Top             =   7440
+      Width           =   1935
+   End
+   Begin VB.Label Label32 
+      BackColor       =   &H0025221F&
+      Caption         =   "Mipmapping KTX"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00FFFFFF&
+      Height          =   255
+      Left            =   12240
+      TabIndex        =   88
+      ToolTipText     =   "Stres the state of all check boxes/Buttons"
+      Top             =   9960
+      Width           =   3135
+   End
    Begin VB.Label Label30 
       BackColor       =   &H0025221F&
       Caption         =   "WiFi Auto Connect"
@@ -1708,7 +1904,7 @@ Begin VB.Form Form1
       Left            =   12240
       TabIndex        =   76
       ToolTipText     =   "Automatically connects to the Quest via WiFi when the converter is started"
-      Top             =   8400
+      Top             =   9480
       Visible         =   0   'False
       Width           =   3135
    End
@@ -1729,7 +1925,7 @@ Begin VB.Form Form1
       Left            =   12240
       TabIndex        =   75
       ToolTipText     =   "Untick if you don´t want to zip the releases"
-      Top             =   7680
+      Top             =   6840
       Width           =   1695
    End
    Begin VB.Label Label28 
@@ -1749,7 +1945,7 @@ Begin VB.Form Form1
       Left            =   12240
       TabIndex        =   72
       ToolTipText     =   "Useful if you want to save time and keep the adb connection"
-      Top             =   7080
+      Top             =   6240
       Width           =   1695
    End
    Begin VB.Label Label27 
@@ -1768,7 +1964,7 @@ Begin VB.Form Form1
       Height          =   495
       Left            =   12240
       TabIndex        =   70
-      Top             =   6480
+      Top             =   5640
       Width           =   1695
    End
    Begin VB.Label Label26 
@@ -1788,7 +1984,7 @@ Begin VB.Form Form1
       Left            =   12240
       TabIndex        =   67
       ToolTipText     =   "Delete folder with protected textures (only for builder)"
-      Top             =   5880
+      Top             =   5040
       Width           =   1695
    End
    Begin VB.Label Label24 
@@ -1808,7 +2004,7 @@ Begin VB.Form Form1
       Left            =   12240
       TabIndex        =   62
       ToolTipText     =   "Stres the state of all check boxes/Buttons"
-      Top             =   5400
+      Top             =   4560
       Width           =   3135
    End
    Begin VB.Label Label23 
@@ -1827,7 +2023,7 @@ Begin VB.Form Form1
       Height          =   495
       Left            =   12240
       TabIndex        =   61
-      Top             =   4680
+      Top             =   3840
       Width           =   1695
    End
    Begin VB.Label Label20 
@@ -2287,6 +2483,13 @@ End Type
 Private Declare Function ChooseColor Lib "comdlg32.dll" Alias "ChooseColorA" (lpChoosecolor As ChooseColorStruct) As Long
 Private Declare Function OleTranslateColor Lib "oleaut32.dll" (ByVal lOleColor As Long, ByVal lHPalette As Long, lColorRef As Long) As Long
 
+Private Declare Function SetWindowPos Lib "user32" (ByVal hwnd As Long, ByVal hWndInsertAfter As Long, _
+  ByVal x As Long, ByVal y As Long, ByVal cx As Long, ByVal cy As Long, ByVal wFlags As Long) As Long
+Private Const HWND_TOPMOST = -1
+Private Const HWND_NOTOPMOST = -2
+Private Const SWP_NOMOVE = &H2
+Private Const SWP_NOSIZE = &H1
+
 Private WithEvents Combo1 As ComboBox
 Attribute Combo1.VB_VarHelpID = -1
                          
@@ -2319,6 +2522,9 @@ Private start_adb As Boolean
 Private wifi_auto As Boolean
 Private apppath As String
 Private comp1 As Boolean
+Private fowi As Long
+Private sour As String
+Private dest As String
 
 Private Sub Form_Load()
 
@@ -2333,12 +2539,20 @@ Dim t2 As String
 Dim bt As Boolean
 
 Form1.Width = 11520
+'Picture1.ScaleMode = 3
+'Picture1.AutoRedraw = True
+'Picture1.PaintPicture Picture1.Picture, _
+'0, 0, Picture1.ScaleWidth, Picture1.ScaleHeight, _
+'0, 0, Picture1.Picture.Width / 21.2, _
+'Picture1.Picture.Height / 21.2
+'Picture1.Picture = Picture1.Image
 'Form7.lvButtons_H.Enabled = False
 wcon = False
 za2 = 1
 start_adb = True
 start_pano = False
 apppath = App.path
+Call SetWindowPos(Form1.hwnd, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE Or SWP_NOSIZE)
 Set fsx = CreateObject("Scripting.FileSystemObject")
 If fsx.FolderExists(apppath & "\files") = False Then
    Timer1.Enabled = False
@@ -2373,7 +2587,9 @@ If Dir(apppath & "\files\config.ini") = "" Then
    PutINISetting "Save", "ADBKill", "1", apppath & "\files\config.ini"
    PutINISetting "Save", "Pack", "1", apppath & "\files\config.ini"
    PutINISetting "Save", "WiFiAuto", "0", apppath & "\files\config.ini"
+   PutINISetting "Save", "AudioReset", "0", apppath & "\files\config.ini"
 End If
+If GetINISetting("Save", "AudioReset", apppath & "\files\config.ini") = "" Then PutINISetting "Save", "AudioReset", "0", apppath & "\files\config.ini"
 If GetINISetting("Save", "WiFiAuto", apppath & "\files\config.ini") = "" Then PutINISetting "Save", "WiFiAuto", "0", apppath & "\files\config.ini"
 If GetINISetting("Save", "ADBKill", apppath & "\files\config.ini") = "" Then PutINISetting "Save", "ADBKill", "1", apppath & "\files\config.ini"
 If GetINISetting("QuestIP", "Port", apppath & "\files\config.ini") = "" Then PutINISetting "QuestIP", "Port", "5555", apppath & "\files\config.ini"
@@ -2393,6 +2609,11 @@ If GetINISetting("Save", "AutoClear", apppath & "\files\config.ini") = "1" Then
    Check15.Value = True
 Else
    Check15.Value = False
+End If
+If GetINISetting("Save", "AudioReset", apppath & "\files\config.ini") = "1" Then
+   lvButtons_H11.Value = True
+Else
+   lvButtons_H11.Value = False
 End If
 If GetINISetting("Save", "WindowPos", apppath & "\files\config.ini") = "1" Then
    Form1.Left = GetINISetting("WindowPos", "Left", apppath & "\files\config.ini")
@@ -2454,6 +2675,15 @@ For Each ctrl In Form7
        End If
     End If
 Next
+lvButtons_H12.CheckDownColor = HTC(GetINISetting("Color", "TitleBarColor", apppath & "\files\config.ini"))
+
+If Command1.BackColor = HTC(GetINISetting("Color", "TitleBarColor", apppath & "\files\config.ini")) Then
+   lvButtons_H12.BackColor = RGB(110, 110, 110)
+Else
+   lvButtons_H12.BackColor = Command1.BackColor
+End If
+lvButtons_H12.Enabled = False
+lvButtons_H12.Enabled = True
 Form7.Check4.Enabled = False
 Form7.Check1.Enabled = False
 Form7.lvButtons_H.Enabled = False
@@ -2490,6 +2720,8 @@ If Dir$(BuildPath & "\*.*") = vbNullString Then
    Label17.Enabled = False
    Label22.Enabled = False
    Label25.Enabled = False
+   Label31.Enabled = False
+   Check19.Enabled = False
 Else
    Check10.Enabled = True
    Check13.Enabled = True
@@ -2509,6 +2741,7 @@ Option2.Value = True
 Check4.Enabled = False
 Label10.Enabled = False
 Command1.Enabled = False
+fowi = Form1.Width
 If Dir(apppath & "\files\Java64\bin\java.exe") <> "" Then
    java = Chr$(34) & apppath & "\files\Java64\bin\java.exe" & Chr$(34)
 Else
@@ -2525,6 +2758,77 @@ If GetINISetting("Save", "Splash", apppath & "\files\config.ini") = "" Then
    PutINISetting "Save", "Splash", "1", apppath & "\files\config.ini"
    Call Form9.Show(vbModal)
 End If
+
+If Command = "" Then Exit Sub
+
+Open apppath & "\batch.txt" For Input As #1
+  Line Input #1, dest
+  Line Input #1, dest
+Close #1
+If Right$(dest, 1) <> "\" Then dest = dest & "\"
+Timer3.Enabled = True
+
+
+End Sub
+
+Private Sub lvButtons_H10_Click()
+
+On Error Resume Next
+
+Dim fso As New FileSystemObject
+Dim fil As File
+Dim fpat As String
+Dim tkt As String
+Dim f As Integer
+
+For Each fil In fso.GetFolder(BuildPath).Files
+  tkt = fso.GetExtensionName(BuildPath & "\" & fil.Name)
+  If tkt = "ktx" Then
+     txtOutputs.Text = txtOutputs.Text & vbNewLine & "Convert KTX-Texture File to JPG: " & BuildPath & "\" & fil.Name & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
+     'PVRTexToolCLI -i 1.ktx -f r8g8b8a8 -d 2.png
+     objDOS.CommandLine = (apppath & "\files\PVRTexToolCLI.exe -i " & J & BuildPath & "\" & fil.Name & J & " -f r8g8b8a8 -d " & J & BuildPath & "\" & fso.GetBaseName(BuildPath & "\" & fil.Name) & ".png" & J)
+     objDOS.ExecuteCommand
+     Kill BuildPath & "\" & fso.GetBaseName(BuildPath & "\" & fil.Name) & ".pvr"
+     Kill BuildPath & "\" & fil.Name
+  End If
+  If tkt = "gltf" Then
+     f = FreeFile
+     Open BuildPath & "\" & fil.Name For Binary As #f
+         tkt = Space$(LOF(f))
+         Get #f, , tkt
+     Close #f
+     tkt = Replace(tkt, ".ktx", ".png")
+     tkt = Replace(tkt, "/ktx", ".png")
+     f = FreeFile
+     Open BuildPath & "\" & fil.Name For Output As #f
+          Print #f, tkt
+     Close #f
+  End If
+Next
+Beep
+txtOutputs.Text = txtOutputs.Text & vbNewLine & "Done Convert!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
+
+End Sub
+
+Private Sub lvButtons_H12_Click()
+
+If lvButtons_H12.Value = False Then
+   Call SetWindowPos(Form1.hwnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE Or SWP_NOSIZE)
+Else
+   Call SetWindowPos(Form1.hwnd, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE Or SWP_NOSIZE)
+End If
+
+End Sub
+
+Private Sub Timer3_Timer()
+
+Drag (Command)
+'Pause 0.3
+Call lvButtons_H4_Click
+Mak = True
+Call Command5_Click
+Tod
+Timer3.Enabled = False
 
 End Sub
 
@@ -2829,7 +3133,7 @@ On Error Resume Next
 
 For Each fil In fso.GetFolder(BuildPath).Files
   tkt = fso.GetExtensionName(BuildPath & "\" & fil.Name)
-  If tkt = "jpg" Or tkt = "jpeg" Or tkt = "png" Then cb1 = 1
+  If tkt = "jpg" Or tkt = "jpeg" Or tkt = "png" Or tkt = "bmp" Then cb1 = 1
   If tkt = "ktx" Then cb2 = 1
 Next
 
@@ -2884,7 +3188,11 @@ fin(8) = fin2
 comp1 = False
 
 If GetINISetting("Save", "Pack", apppath & "\files\config.ini") = "1" Then
-   sa = save2(idr2 & ".zip", apppath)
+      If Command = "" Then
+      sa = save2(idr2 & ".zip", apppath)
+   Else
+      sa = dest & idr2 & ".zip"
+   End If
    If sa = "" Then GoTo ende
    If LCase(Right$(sa, 3)) <> "zip" Then sa = sa & ".zip"
    objDOS.CommandLine = (apppath & "\files\7za.exe a " & J & sa & J & " " & J & fin(1) & J & " " & J & fin(2) & J & " " & J & fin(3) & J & " " & J & fin(4) & J & " " & J & fin(5) & J & " " & J & fin(6) & J & " " & J & fin(7) & J & " " & J & fin(8) & J)
@@ -2903,7 +3211,11 @@ If GetINISetting("Save", "Pack", apppath & "\files\config.ini") = "1" Then
     If Dir(fin(7)) <> "" Then Kill fin(7)
     If Dir(fin(8)) <> "" Then Kill fin(8)
 Else
-   sa = BrowseForFolder(Me.hwnd, "Select destination Folder" & vbNewLine & "Or choose Cancel for Main App folder")
+   If Command = "" Then
+      sa = BrowseForFolder(Me.hwnd, "Select destination Folder" & vbNewLine & "Or choose Cancel for Main App folder")
+   Else
+      sa = dest
+   End If
    If sa <> "" Then
       If sa <> apppath Then
          FileCopy fin(1), sa & "\" & ExtractFile(fin(1)): FileCopy fin(2), sa & "\" & ExtractFile(fin(2)): FileCopy fin(3), sa & "\" & ExtractFile(fin(3))
@@ -2926,7 +3238,7 @@ End If
 txtOutputs.Text = txtOutputs.Text & vbNewLine & "Create Release finished! " & Time & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
 Label11.Caption = "DONE!": Beep
 snd = PlaySound(apppath & "\files\gong.wav", ByVal 0&, &H20000 Or &H1)
-ShellExecute hwnd, "open", pathstr, vbNullString, vbNullString, 1
+If Command = "" Then ShellExecute hwnd, "open", pathstr, vbNullString, vbNullString, 1
 'Timer1.Enabled = False
 'Command1.Enabled = False
 'Command3.Enabled = False
@@ -3057,13 +3369,18 @@ For Each fil In fso.GetFolder(BuildPath).Files
   'MsgBox fso.GetExtensionName(BuildPath & "\" & fil.Name)
   'MsgBox fso.GetBaseName(BuildPath & "\" & fil.Name)
   tkt = fso.GetExtensionName(BuildPath & "\" & fil.Name)
-  If tkt = "jpg" Or tkt = "jpeg" Or tkt = "png" Then
+  If tkt = "jpg" Or tkt = "jpeg" Or tkt = "png" Or tkt = "bmp" Then
      txtOutputs.Text = txtOutputs.Text & vbNewLine & "Compress Texture File: " & BuildPath & "\" & fil.Name & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
      'MsgBox apppath & "\files\astcenc.exe -c " & BuildPath & "\" & fil.Name & " " & fso.GetBaseName(BuildPath & "\" & fil.Name) & ".astc" & " 8x8 -veryfast"
      'objDOS.CommandLine = (apppath & "\files\astcenc.exe -c " & BuildPath & "\" & fil.Name & " " & BuildPath & "\" & fso.GetBaseName(BuildPath & "\" & fil.Name) & ".astc" & " 8x8 -veryfast")
      'objDOS.ExecuteCommand
      'MsgBox apppath & "\files\img2ktx.exe -o " & BuildPath & "\" & fso.GetBaseName(BuildPath & "\" & fil.Name) & ".ktx" & " -m -f ASTC8x8 " & BuildPath & "\" & fso.GetBaseName(BuildPath & "\" & fil.Name) & ".astc"
-     objDOS.CommandLine = (apppath & "\files\img2ktx.exe -o " & BuildPath & "\" & fso.GetBaseName(BuildPath & "\" & fil.Name) & ".ktx" & " -m -f ASTC8x8 " & BuildPath & "\" & fil.Name)
+     
+     If lvButtons_H9.Value = True Then
+        objDOS.CommandLine = (apppath & "\files\img2ktx.exe -o " & BuildPath & "\" & fso.GetBaseName(BuildPath & "\" & fil.Name) & ".ktx" & " -m -f ASTC8x8 " & BuildPath & "\" & fil.Name)
+     Else
+        objDOS.CommandLine = (apppath & "\files\img2ktx.exe -o " & BuildPath & "\" & fso.GetBaseName(BuildPath & "\" & fil.Name) & ".ktx" & " -f ASTC8x8 " & BuildPath & "\" & fil.Name)
+     End If
      objDOS.ExecuteCommand
      'Kill BuildPath & "\" & fso.GetBaseName(BuildPath & "\" & fil.Name & ".astc")
      'Kill BuildPath & "\" & fso.GetBaseName(BuildPath & "\" & fso.GetExtensionName(BuildPath & "\" & fil.Name))
@@ -3081,6 +3398,7 @@ For Each fil In fso.GetFolder(BuildPath).Files
      tkt = Replace(tkt, "/jpg", ".ktx")
      tkt = Replace(tkt, ".png", ".ktx")
      tkt = Replace(tkt, "/png", ".ktx")
+     tkt = Replace(tkt, "/bmp", ".ktx")
      f = FreeFile
      Open BuildPath & "\" & fil.Name For Output As #f
           Print #f, tkt
@@ -3203,12 +3521,12 @@ If Label9.Caption = "" And Check2.Value = False And Check3.Value = False Then Go
 If Check1.Value = True Then
    txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Encode Audio File..." & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
    Pause (0.2)
-   objDOS.CommandLine = (apppath & "\files\sox.exe -S " & J & aud & J & " -C 3 " & J & apppath & "\files\tmp\_BACKGROUND_LOOP.ogg" & J & " vol -" & lvButtons_H.Caption & " dB speed 0.92")
+   objDOS.CommandLine = (apppath & "\files\sox.exe -S " & J & aud & J & " -C 3 " & J & apppath & "\files\tmp\_BACKGROUND_LOOP.ogg" & J & " vol -" & lvButtons_H.Caption & " dB")
    objDOS.ExecuteCommand
 Else
    txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Encode Audio File..." & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
    Pause (0.2)
-   objDOS.CommandLine = (apppath & "\files\sox.exe -S " & J & aud & J & " -C 3 " & J & apppath & "\files\tmp\_BACKGROUND_LOOP.ogg" & J & " speed 0.92")
+   objDOS.CommandLine = (apppath & "\files\sox.exe -S " & J & aud & J & " -C 3 " & J & apppath & "\files\tmp\_BACKGROUND_LOOP.ogg" & J)
    objDOS.ExecuteCommand
 End If
 
@@ -3346,6 +3664,7 @@ If ie = True Then
       Message "Error: USB-Cable Connected!" & vbNewLine & "Please Remove USB-Cable!"
    End If
 Else
+   If lvButtons_H11.Value = True Then lvButtons_H8_Click
    Label11.Caption = "Done!"
    snd = PlaySound(apppath & "\files\gong.wav", ByVal 0&, &H20000 Or &H1)
 End If
@@ -3660,6 +3979,21 @@ Reset
 
 End Sub
 
+Private Sub lvButtons_H8_Click()
+
+txtOutputs.Text = txtOutputs.Text & vbNewLine & "Delete cache and initalize sound on new environments" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
+objDOS.CommandLine = (apppath & "\files\adb.exe shell pm clear com.oculus.vrshell")
+objDOS.ExecuteCommand
+txtOutputs.Text = txtOutputs.Text & vbNewLine & "Restart Oculus Shell" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
+objDOS.CommandLine = (apppath & "\files\adb.exe shell pm clear com.oculus.vrshell.desktop")
+objDOS.ExecuteCommand
+txtOutputs.Text = txtOutputs.Text & vbNewLine & "Done!" & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
+Label11.Caption = "Done!"
+snd = PlaySound(apppath & "\files\gong.wav", ByVal 0&, &H20000 Or &H1)
+adb = 1
+
+End Sub
+
 Private Sub Picture2_DblClick()
 
 On Error Resume Next
@@ -3728,9 +4062,31 @@ If adb = 0 Then End
 If Check16.Value = False Then End
 objDOS.CommandLine = (apppath & "\files\adb.exe kill-server")
 objDOS.ExecuteCommand
-End
 
 End Sub
+
+Private Function Tod()
+
+On Error Resume Next
+
+Kill apppath & "\files\tmp\scene.zip"
+Kill apppath & "\files\tmp\tmp.apk"
+Kill apppath & "\files\ClassicHome\assets\scene.zip"
+Kill apppath & "\files\WinterLodge\assets\scene.zip"
+Kill apppath & "\files\SpaceStation\assets\scene.zip"
+If GetINISetting("Save", "TextureDelete", apppath & "\files\config.ini") = "1" Then
+   If Dir(apppath & "\files\texture_tmp\*.*") <> "" Then Kill apppath & "\files\texture_tmp\*.*"
+   RmDir apppath & "\files\texture_tmp"
+End If
+PutINISetting "WindowPos", "Left", Form1.Left, apppath & "\files\config.ini"
+PutINISetting "WindowPos", "Top", Form1.Top, apppath & "\files\config.ini"
+PutINISetting "CheckValue", "Check", GetCheck, apppath & "\files\config.ini"
+If adb = 0 Then End
+If Check16.Value = False Then End
+objDOS.CommandLine = (apppath & "\files\adb.exe kill-server")
+objDOS.ExecuteCommand
+
+End Function
 
 Private Sub Picture3_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 
@@ -3969,6 +4325,7 @@ With Data
      Next intFile
 End With
 
+pat = Replace(pat, Chr$(34), "")
 tw = False
 u = ExtractFile(pat)
 k = LCase(Right$(u, 3))
@@ -3976,6 +4333,7 @@ If k = "apk" Then
    lvButtons_H6.Enabled = True
    lvButtons_H5.Enabled = True
    lvButtons_H4.Enabled = True
+   lvButtons_H10.Enabled = True
    If Option1.Value = True Then
       Command1.Enabled = True
    Else
@@ -4061,12 +4419,14 @@ Dim tme As String
 Dim ff As String
 Dim tw As Boolean
 
+pat = Replace(pat, Chr$(34), "")
 tw = False
 u = ExtractFile(pat)
 k = LCase(Right$(u, 3))
 If k = "apk" Then
    lvButtons_H5.Enabled = True
    lvButtons_H4.Enabled = True
+   lvButtons_H10.Enabled = True
    If Option1.Value = True Then
       Command1.Enabled = True
    Else
@@ -4263,6 +4623,7 @@ If Dir$(BuildPath & "\*.*") = vbNullString Then
    Check9.Enabled = False
    Check10.Enabled = False
    Check13.Enabled = False
+   Check19.Enabled = False
    Command3.Enabled = False
    Command5.Enabled = False
    Label13.Enabled = False
@@ -4272,6 +4633,7 @@ If Dir$(BuildPath & "\*.*") = vbNullString Then
    Label17.Enabled = False
    Label22.Enabled = False
    Label25.Enabled = False
+   Label31.Enabled = False
 Else
    If Dir$(BuildPath & "\*.gltf") <> "" Then
       Check6.Enabled = True
@@ -4281,6 +4643,7 @@ Else
       Check9.Enabled = True
       Check10.Enabled = True
       Check13.Enabled = True
+      Check19.Enabled = True
       Command3.Enabled = True
       Command5.Enabled = True
       Label13.Enabled = True
@@ -4290,6 +4653,7 @@ Else
       Label17.Enabled = True
       Label22.Enabled = True
       Label25.Enabled = True
+      Label31.Enabled = True
       If qw = 1 Then
          qw = 0
          txtOutputs.Text = txtOutputs.Text & vbNewLine & "Found gltf-model in .\Build" & vbNewLine & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
@@ -4373,12 +4737,12 @@ End If
 If Check1.Value = True Then
    txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Encode Audio File..." & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
    Pause (0.2)
-   objDOS.CommandLine = (apppath & "\files\sox.exe -S " & J & aud & J & " -C 3 " & J & apppath & "\files\tmp\_BACKGROUND_LOOP.ogg" & J & " vol -" & lvButtons_H.Caption & " dB speed 0.92")
+   objDOS.CommandLine = (apppath & "\files\sox.exe -S " & J & aud & J & " -C 3 " & J & apppath & "\files\tmp\_BACKGROUND_LOOP.ogg" & J & " vol -" & lvButtons_H.Caption & " dB")
    objDOS.ExecuteCommand
 Else
    txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Encode Audio File..." & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
    Pause (0.2)
-   objDOS.CommandLine = (apppath & "\files\sox.exe -S " & J & aud & J & " -C 3 " & J & apppath & "\files\tmp\_BACKGROUND_LOOP.ogg" & J & " speed 0.92")
+   objDOS.CommandLine = (apppath & "\files\sox.exe -S " & J & aud & J & " -C 3 " & J & apppath & "\files\tmp\_BACKGROUND_LOOP.ogg" & J)
    objDOS.ExecuteCommand
 End If
 
@@ -4463,12 +4827,12 @@ End If
 If Check1.Value = True Then
    txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Encode Audio File..." & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
    Pause (0.2)
-   objDOS.CommandLine = (apppath & "\files\sox.exe -S " & J & aud & J & " -C 3 " & J & apppath & "\files\tmp\_BACKGROUND_LOOP.ogg" & J & " vol -" & lvButtons_H.Caption & " dB speed 0.92")
+   objDOS.CommandLine = (apppath & "\files\sox.exe -S " & J & aud & J & " -C 3 " & J & apppath & "\files\tmp\_BACKGROUND_LOOP.ogg" & J & " vol -" & lvButtons_H.Caption & " dB")
    objDOS.ExecuteCommand
 Else
    txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Encode Audio File..." & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
    Pause (0.2)
-   objDOS.CommandLine = (apppath & "\files\sox.exe -S " & J & aud & J & " -C 3 " & J & apppath & "\files\tmp\_BACKGROUND_LOOP.ogg" & J & " speed 0.92")
+   objDOS.CommandLine = (apppath & "\files\sox.exe -S " & J & aud & J & " -C 3 " & J & apppath & "\files\tmp\_BACKGROUND_LOOP.ogg" & J)
    objDOS.ExecuteCommand
 End If
 
@@ -4560,7 +4924,7 @@ Private Sub Command2_Click()
 
 On Error Resume Next
 
-If Form1.Width = 11520 Or Form1.Width = 11430 Then
+If Form1.Width = 11520 Or Form1.Width = 11430 Or Form1.Width = 11448 Or Form1.Width = fowi Then
    Form1.Width = 14280
 Else
    Form1.Width = 11430
@@ -4748,12 +5112,12 @@ If Label9.Caption = "" And Check2.Value = False And Check3.Value = False Then Go
 If Check1.Value = True Then
    txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Encode Audio File..." & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
    Pause (0.2)
-   objDOS.CommandLine = (apppath & "\files\sox.exe -S " & J & aud & J & " -C 3 " & J & apppath & "\files\tmp\_BACKGROUND_LOOP.ogg" & J & " vol -" & lvButtons_H.Caption & " dB speed 0.92")
+   objDOS.CommandLine = (apppath & "\files\sox.exe -S " & J & aud & J & " -C 3 " & J & apppath & "\files\tmp\_BACKGROUND_LOOP.ogg" & J & " vol -" & lvButtons_H.Caption & " dB")
    objDOS.ExecuteCommand
 Else
    txtOutputs.Text = txtOutputs.Text & vbNewLine & vbNewLine & "Encode Audio File..." & vbNewLine: txtOutputs.SelStart = Len(txtOutputs.Text)
    Pause (0.2)
-   objDOS.CommandLine = (apppath & "\files\sox.exe -S " & J & aud & J & " -C 3 " & J & apppath & "\files\tmp\_BACKGROUND_LOOP.ogg" & J & " speed 0.92")
+   objDOS.CommandLine = (apppath & "\files\sox.exe -S " & J & aud & J & " -C 3 " & J & apppath & "\files\tmp\_BACKGROUND_LOOP.ogg" & J)
    objDOS.ExecuteCommand
 End If
 
@@ -5123,4 +5487,15 @@ Command2_Click
 
 End Sub
 
+Private Sub lvButtons_H11_Click()
+
+If lvButtons_H11.Value = True Then
+   PutINISetting "Save", "AudioReset", "1", apppath & "\files\config.ini"
+Else
+   PutINISetting "Save", "AudioReset", "0", apppath & "\files\config.ini"
+End If
+Pause (0.5)
+Command2_Click
+
+End Sub
 
